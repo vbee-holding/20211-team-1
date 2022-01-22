@@ -4,30 +4,39 @@ import Header from "./Header";
 import Navbar from "./NavBar";
 import Section from "./Section";
 
-export default function Layout({children}){
-    return(
-        <div className="grid grid-cols-12 gap-3">
+export default function Layout({ children }) {
+    return (
+        <div className="">
+            <div className="flex justify-center">
+                <header className="w-body mt-5 mb-5">
+                    <Header />
+                </header>
+            </div>
 
-            <header className="mt-20 mb-10 col-start-2 col-end-12">
-                <Header/>
-            </header>
-            <nav className="col-start-2 col-end-12">
-                <Navbar />
-            </nav>
+            <div className="flex justify-center bg-black  sticky top-0 z-10">
+                <nav className=" w-body border-white border-x">
+                    <Navbar />
+                </nav>
+            </div>
+            <div className="flex justify-center">
+                <div className="w-body grid grid-cols-3 gap-4">
+                    <main className="col-start-1 col-end-3">
+                        {children}
+                    </main>
 
-            <main className="col-start-2 col-end-9">
-                {children}
-            </main>
-
-            <aside className="col-start-9 col-end-12">
-                <Aside/>
-            </aside>
-            <section className="col-start-1 col-end-13">
-                <Section/>
+                    <aside className="col-start-3 col-end-4">
+                        <Aside />
+                    </aside>
+                </div>
+            </div>
+            <section className="">
+                <Section />
             </section>
-            <footer className="grid justify-items-center col-start-1 col-end-13">
-                <Footer/>
-            </footer>
+            <div className="flex justify-center bg-black mt-1">
+                <footer className=" w-body grid justify-items-center">
+                    <Footer />
+                </footer>
+            </div>
 
         </div>
     )

@@ -1,42 +1,75 @@
-export default function Category(){
-    return(
+import TopTitle from "../components/TopTitle";
+
+export default function Category() {
+    return (
         <div className="mt-10">
-            <h4 className="mb-5 text-xl font-bold text-red-500">Category</h4>
-            <hr className=" border-2 border-black mb-5"/>
+            <TopTitle title={"Category"} />
             <div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Covid-19</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Covid-19</a>
+                    </div>
+                    <div className="inline-block bg-red-500 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Giải trí</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Giải trí</a>
+                    </div>
+                    <div className="inline-block bg-purple-600 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Thể thao</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Thể thao</a>
+                    </div>
+                    <div className="inline-block bg-pink-500 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Công nghệ</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Công nghệ</a>
+                    </div>
+                    <div className="inline-block bg-blue-600 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Video</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Video</a>
+                    </div>
+                    <div className="inline-block bg-blue-400 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Khám phá Việt Nam</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Khám phá Việt Nam</a>
+                    </div>
+                    <div className="inline-block bg-pink-500 p-1 text-white">50</div>
                 </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Khám phá thế giới</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
-                </div>
-                <div className="flex justify-between mb-5 text-lg font-bold">
-                    <a href="#" className="inline-block"><i>icon</i>Năng lượng tích cực</a>
-                    <div className="inline-block bg-red-500 p-2 text-white">50</div>
+                <div className="flex justify-between mb-4 text-base font-bold">
+                    <div className="flex align-top">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 align-middle flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <a href="#" className="block ml-4">Khám phá thế giới</a>
+                    </div>
+                    <div className="inline-block bg-blue-400 p-1 text-white">50</div>
                 </div>
             </div>
+            <hr className="border-black mb-5 bg-black" />
         </div>
     )
 }
