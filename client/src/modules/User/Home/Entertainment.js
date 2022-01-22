@@ -17,7 +17,7 @@ export default function Entertainment() {
                     ))
                 }
             </div>
-            <SeeMore />
+            <SeeMore path="/category/entertainment"/>
         </div>
     )
 }

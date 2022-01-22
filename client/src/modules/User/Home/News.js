@@ -23,7 +23,7 @@ export default function News() {
                     }
                 </div>
             </div>
-            <SeeMore />
+            <SeeMore path="/category/new"/>
         </div>
     )
 }

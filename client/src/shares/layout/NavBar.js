@@ -1,40 +1,42 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
     return (
         <ul className="flex justify-between bg-gray-900 text-white text-base font-medium">
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href="#" >
+                <Link to="/" >
                     <span className="hover:border-b-2 border-white ">Trang chủ</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href="#">
+                <Link to="/category/hot">
                     <span className="hover:border-b-2 border-white ">Tin nóng</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href=" #">
+                <Link to="/category/new">
                     <span className="hover:border-b-2 border-white ">Tin mới</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href=" #">
+                <Link to="/category/video">
                     <span className="hover:border-b-2 border-white ">Video</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href=" #">
+                <Link to="/category/sport">
                     <span className="hover:border-b-2 border-white ">Thể thao</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href=" #">
+                <Link to="/category/technology">
                     <span className="hover:border-b-2 border-white ">Công nghệ</span>
-                </a>
+                </Link>
             </li>
             <li className="hover:bg-red-500 px-2 py-3">
-                <a href=" #">
+                <Link to="/">
                     <span className="hover:border-b-2 border-white ">Chủ đề khác</span>
-                </a>
+                </Link>
             </li>
             <li className="border-l-2 border-white">
                 <div className="flex align-middle">

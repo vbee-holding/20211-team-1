@@ -23,7 +23,7 @@ export default function Sports(){
                     }
                 </div>
             </div>
-            <SeeMore/>
+            <SeeMore path="/category/sport"/>
         </div>
     )
 }

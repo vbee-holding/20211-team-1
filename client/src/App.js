@@ -1,13 +1,8 @@
-import Category from "./pages/User/Category";
-import Home from "./pages/User/Home";
-import Layout from "./shares/layout/Layout";
+import React from "react";
+import { useRoutes } from "react-router-dom";
+import { routes } from "./routes/UserRoutes";
 
 export default function App() {
-  return (
-    <div>
-      <Layout>
-        <Home />
-      </Layout>
-    </div>
-  )
+  let element = useRoutes(routes);
+  return <div>{element}</div>;
 }

@@ -29,7 +29,7 @@ export default function Technology(){
                     </div>
                 </div>
             </div>
-            <SeeMore/>
+            <SeeMore path="/category/technology"/>
         </div>
     )
 }

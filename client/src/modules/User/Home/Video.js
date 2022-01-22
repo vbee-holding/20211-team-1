@@ -17,7 +17,7 @@ export default function Video(){
                     ))
                 }
             </div>
-            <SeeMore/>
+            <SeeMore path="/category/video"/>
         </div>
     )
 }
