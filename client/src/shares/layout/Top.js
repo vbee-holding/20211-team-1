@@ -1,11 +1,12 @@
-import SubNew from "../components/SubNew"
+import SeeMore from "../components/SeeMore"
+import SubNew from "../components/SubNews"
 
 export default function Top() {
     return (
         <div>
             {/* Navigation */}
             <div>
-                <ul className="flex justify-between mb-3 text-lg font-semibold">
+                <ul className="flex justify-between mb-2 text-lg font-semibold">
                     <li>
                         <a href="#">
                             <span>Recent</span>
@@ -22,25 +23,20 @@ export default function Top() {
                         </a>
                     </li>
                 </ul>
-                <hr className="mb-6 border-2 border-black"/>
+                <hr className="mb-3 border-black border-1 bg-black" />
             </div>
             <div>
                 {
                     [1, 2, 3, 4, 5, 6, 7].map((data) => {
                         return (
-                            <div>
+                            <div key={data}>
                                 <SubNew data={data} />
-                                <hr className="border-b-2 mb-3"/>
                             </div>
                         )
                     })
                 }
             </div>
-            <div className="flex justify-end text-red-400 font-semibold">
-                <div>
-                    <button className="border-b-2 border-red-400">See more ...</button>
-                </div>
-            </div>
+            <SeeMore />
         </div>
     )
 }

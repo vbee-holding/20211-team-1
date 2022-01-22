@@ -1,7 +1,9 @@
+import MainNews from "../../../shares/components/MainNews";
+
 export default function WorldCategory(){
     return(
         <div>
-            World Category
+            <MainNews/>
         </div>
     )
 }
