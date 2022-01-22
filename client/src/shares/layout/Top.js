@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import SeeMore from "../components/SeeMore"
 import SubNew from "../components/SubNews"
 
@@ -8,19 +9,19 @@ export default function Top() {
             <div>
                 <ul className="flex justify-between mb-2 text-lg font-semibold">
                     <li>
-                        <a href="#">
+                        <Link to="/">
                             <span>Recent</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/">
                             <span>Trending</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/">
                             <span>Most Views</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
                 <hr className="mb-3 border-black border-1 bg-black" />
@@ -36,7 +37,7 @@ export default function Top() {
                     })
                 }
             </div>
-            <SeeMore />
+            <SeeMore path="/category/top"/>
         </div>
     )
 }

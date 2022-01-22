@@ -17,7 +17,7 @@ export default function HotNewsCategory(){
                 ))
 }
             </div>
-                <SeeMore/>
+                <SeeMore path="/category/hot"/>
         </div>
     )
 }
