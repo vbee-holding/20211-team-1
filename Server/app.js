@@ -1,25 +1,29 @@
 require("dotenv").config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-const db = require ('./config/db/connect')
-
+const createError = require('http-errors');
+const express = require('express');
+const swaggerJsDoc = require("swagger-jsdoc")
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const swaggerUI = require("swagger-ui-express")
+const swaggerOptions = require('./swagger.json')
+const db = require('./config/db/connect')
 const articlesRouter = require('./routes/Articles');
 const categoriesRouter = require('./routes/Categories');
-const sourcesRouter = require ('./routes/Sources');
-const adminRouter = require ('./routes/Admin');
-
+const sourcesRouter = require('./routes/Sources');
+const adminRouter = require('./routes/Admin');
 const cors = require("cors");
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
+
+const specs = swaggerJsDoc(swaggerOptions);
+const app = express();
+const corsOptions = {
+  origin: '*',
+  credentials: true,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
 }
 
 db.connect();
-const app = express();
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,12 +36,12 @@ app.use('/api/v1/sources', sourcesRouter);
 app.use('/api/v1/admin', adminRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
