@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function SeeMore({ path }) {
-    console.log(path)
     return (
         <div className="flex justify-end text-red-400 font-semibold">
             <div>

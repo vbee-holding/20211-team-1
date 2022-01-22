@@ -10,9 +10,9 @@ export default function Sports(){
             <div className="grid grid-cols-2 gap-5">
                 <div className="grid gap-5">
                     {
-                        [1,2].map(()=>(
-                            <MainNewsV3/>
-                        ))
+                        // [1,2].map(()=>(
+                        //     // <MainNewsV3/>
+                        // ))
                     }
                 </div>
                 <div>
