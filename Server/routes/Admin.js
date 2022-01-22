@@ -23,7 +23,7 @@ const router = express.Router();
  *           description: The admin password
  *       example:
  *         email: admin@gmail.com
- *         password: 123456
+ *         password: "123456"
  */
 
 /**
