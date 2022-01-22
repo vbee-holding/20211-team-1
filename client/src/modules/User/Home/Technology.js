@@ -9,7 +9,7 @@ export default function Technology(){
             <TopTitle title="Công nghệ"/>
             <div className="grid grid-cols-2 gap-5">
                 <div>
-                    <MainNewsV3/>
+                    {/* <MainNewsV3/> */}
                     <div className="mt-5">
                         {
                             [1,2].map((data)=>(
@@ -19,7 +19,7 @@ export default function Technology(){
                     </div>
                 </div>
                 <div>
-                    <MainNewsV3/>
+                    {/* <MainNewsV3/> */}
                     <div className="mt-5">
                         {
                             [1,2].map((data)=>(
