@@ -1,6 +1,3 @@
-import MainNew from '../../assets/images/main-news.png'
-import Source from '../../assets/images/source.png'
-import Category from '../../assets/images/i-2.png'
 export default function MainNewsV2({ data }) {
     const { thumbnail, link, title, source, releaseTime } = data;
     return (

@@ -11,7 +11,6 @@ export default function Video() {
     useEffect(() => {
         getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.video.id)
             .then((result) => {
-                console.log(result);
                 setArticles(result);
             })
             .catch(err => {

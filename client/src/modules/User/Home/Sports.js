@@ -11,7 +11,6 @@ export default function Sports() {
     useEffect(() => {
         getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.sport.id)
             .then((result) => {
-                console.log(result);
                 setArticles(result);
             })
             .catch(err => {

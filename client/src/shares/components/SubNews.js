@@ -1,6 +1,5 @@
 export default function SubNews({ data }) {
     const { thumbnail, link, title, source, releaseTime } = data;
-    console.log(data)
     return (
         <div>
             <div className='flex mb-3 gap-5 overflow-hidden'>

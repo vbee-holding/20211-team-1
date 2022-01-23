@@ -1,4 +1,3 @@
-const { json } = require("express");
 const Article = require("../models/Article");
 const Category = require("../models/Category");
 

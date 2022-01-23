@@ -8,6 +8,5 @@ export const getAllArticleAPI = async () => {
 
 export const getArticlesByCategoryIdAPI = async (id) => {
   const result = await axios.get(url + id);
-  console.log(result)
   return result.data;
 }

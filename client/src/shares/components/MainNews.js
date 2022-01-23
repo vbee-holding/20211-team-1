@@ -1,6 +1,5 @@
 export default function MainNews({ data }){
     const { thumbnail, link, title, source, releaseTime } = data;
-    console.log(data)
     return (
         <div className='relative'>
             <div className=' overflow-hidden'>

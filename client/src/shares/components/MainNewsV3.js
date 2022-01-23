@@ -1,4 +1,3 @@
-
 export default function MainNewsV3({ data }) {
     const { thumbnail, link, title, source, releaseTime } = data;
     return (

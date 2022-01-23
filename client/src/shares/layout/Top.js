@@ -10,7 +10,6 @@ export default function Top() {
     useEffect(() => {
         getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.covid_19.id)
             .then((result) => {
-                console.log(result);
                 setArticles(result);
             })
             .catch(err => {
