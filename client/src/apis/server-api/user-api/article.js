@@ -1,13 +1,13 @@
 import axios from "axios"
-const url = "https://sever-news.herokuapp.com/api/v1/articles/";
+const url = "http://localhost:4000/api/v1/user/articles/"
 
 export const getAllArticleAPI = async () => {
-    const result = await axios.get(url)
-    return result.data;
+  const result = await axios.get(url)
+  return result.data;
 }
 
-export const getArticleByIdAPI= async(id)=>{
-  const result= await axios.get(url+id);
+export const getArticlesByCategoryIdAPI = async (id) => {
+  const result = await axios.get(url + id);
   console.log(result)
   return result.data;
 }

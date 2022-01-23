@@ -1,15 +1,17 @@
-import Thumbnail from '../../assets/images/thumbnail.png'
-import Source from '../../assets/images/source.png'
 export default function SubNews({ data }) {
+    const { thumbnail, link, title, source, releaseTime } = data;
+    console.log(data)
     return (
         <div>
             <div className='flex mb-3 gap-5 overflow-hidden'>
-                <img src={Thumbnail} alt="" className='max-w-mi-4 max-h-mi-4 rounded'/>
+                <img src={thumbnail} alt="" className='max-w-mi-4 max-h-mi-4 rounded'/>
                 <div>
-                    <span className='text-base'>Báo Thái Lan tin đội nhà sẽ làm điều chưa ai làm được trước tuyển Việt Nam</span>
+                <span className='text-base hover:text-red-300'>
+                    <a href={link}>{title}</a>
+                </span>
                     <div className='flex gap-2'>
-                        <img src={Source} alt="" className='max-h-4' />
-                        <span className='text-xs text-gray-400'>{data} giờ</span>
+                        <img src={source.logo} alt="" className='max-h-4' />
+                        <span className='text-xs text-gray-400'>{releaseTime} giờ</span>
                     </div>
                 </div>
             </div>

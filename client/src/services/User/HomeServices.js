@@ -1,6 +1,6 @@
 // Dùng để xử lý logic ở đây, nó chỉ bao gồm các hàm 
 
-import { getArticleByIdAPI } from "../../apis/server-api/user-api/article";
+import { getArticlesByCategoryIdAPI } from "../../apis/server-api/user-api/article";
 import { getSourceByIdAPI } from "../../apis/server-api/user-api/source-api";
 
 export async function getAllArticle() {
@@ -13,26 +13,12 @@ export async function getAllArticle() {
 }
 
 
-export async function getArticleById(id) {
+export async function getArticlesByCategoryId(id) {
     try {
-        const articleResult = await getArticleByIdAPI(id);
+        const articleResult = await getArticlesByCategoryIdAPI(id);
         if (articleResult.success) {
-            const article = articleResult.data;
-            const sourceResult = await getSourceByIdAPI(article.sourceId);
-            if(sourceResult.success){
-                const source = sourceResult.data;
-                return {
-                    thumbnail: article.thumbnail,
-                    link: article.link,
-                    title: article.title,
-                    timeShift: article.releaseTime,
-                    logoSource: source.logo,
-                }
-            }else{
-                console.log("Failed to fetch source");
-                return null;
-            }
-            
+            const articles = articleResult.data.articles; 
+            return articles;
         } else {
             console.log("Failed to fetch article");
             return null;

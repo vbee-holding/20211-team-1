@@ -1,6 +1,6 @@
 
 export default function MainNewsV3({ data }) {
-    const { thumbnail, link, title, logoSource, timeShift } = data;
+    const { thumbnail, link, title, source, releaseTime } = data;
     return (
         <div className='relative'>
             <div className='overflow-hidden'>
@@ -12,8 +12,8 @@ export default function MainNewsV3({ data }) {
                 </span>
             </div>
             <div className=' bg-white flex gap-2 align-middle p-1 rounded-lg absolute top-0 left-0 mt-2 ml-2'>
-                <img src={logoSource} alt="" className='max-h-4' />
-                <span className='inline-block text-xs text-gray-400 truncate'>{timeShift} giờ</span>
+                <img src={source.logo} alt="" className='max-h-4' />
+                <span className='inline-block text-xs text-gray-400 truncate'>{releaseTime} giờ</span>
             </div>
         </div>
     )

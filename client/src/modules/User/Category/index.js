@@ -5,7 +5,7 @@ export default function CategoryContainer(){
     return(
         <div>
             <div className="mt-10">
-            <MainNews/>
+            {/* <MainNews/> */}
             </div>
             <div className="mt-10">
             <ListNews/>
