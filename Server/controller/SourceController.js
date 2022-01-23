@@ -1,4 +1,4 @@
-const Source = require('./models/Source');
+const Source = require('../models/Source');
 
 class SourceRouter   {
     async getSources(req, res, next) {
