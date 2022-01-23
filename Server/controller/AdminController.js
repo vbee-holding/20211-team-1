@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
-const Admin = require("./models/Admin");
+const Admin = require("../models/Admin");
 
 class AdminRouter {
   async getAdmins(req, res, next) {
