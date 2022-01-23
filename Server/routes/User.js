@@ -1,4 +1,5 @@
 const express = require('express');
+const crawlerController = require('../controller/CrawlerController');
 const userController = require('../controller/userController');
 const router = express.Router();
 
@@ -39,7 +40,7 @@ const router = express.Router();
  *                          
  */
 
-router.get('/articles', userController.getAllArticles);
+router.get('/articles', crawlerController.crawlData);
 
 /**
  * @swagger
@@ -69,28 +70,28 @@ router.get('/articles/:categoryId', userController.getArticlesByCategoryID);
 
 /**
  * @swagger
- * /api/v1/admin:
+ * /api/v1/user/articles:
  *   post:
  *     summary: Create a new admin
- *     tags: [Admins]
+ *     tags: [Admin]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Admin'
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
  *         description: The book was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Admin'
+ *               $ref: '#/components/schemas/User'
  *       500:
  *         description: Some server error
  */
 
-// router.post('/', AdminController.postAdmin);
+ //router.post('/articles/', crawlerController.crawlData);
 
 /**
  * @swagger
