@@ -9,7 +9,7 @@ import TopTitle from "../../../shares/components/TopTitle";
 export default function News() {
     const [articles, setArticles] = useState(null)
     useEffect(() => {
-        getArticlesByCategoryId("61ecba95f22c94553517798d")
+        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.new.id)
             .then((result) => {
                 setArticles(result);
             })
@@ -26,7 +26,7 @@ export default function News() {
     return (
         <div>
             <TopTitle title="Tin mới" />
-            <div className="grid grid-cols-2 gap-5">
+            <div className="sm:grid sm:grid-cols-2 gap-5">
                 <div className="grid gap-5">
                     {
                         articles.slice(0, 2).map((article) => (
@@ -34,9 +34,9 @@ export default function News() {
                         ))
                     }
                 </div>
-                <div>
+                <div className="mt-5 sm:mt-0">
                     {
-                        articles.slice(3, 8).map((article) => (
+                        articles.slice(3, 10).map((article) => (
                             article && <SubNews data={article} key={article._id} />
                         ))
                     }

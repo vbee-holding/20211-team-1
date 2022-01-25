@@ -3,11 +3,11 @@ import Image from '../../assets/images/image-gallery.png'
 
 export default function Footer() {
     return (
-        <div className="text-white text-base bg-black pt-8 pb-8">
-            <div className="grid grid-cols-4 gap-10">
+        <div className="text-white font-text text-base bg-black pt-8 pb-8 md:pl-5 pl-1 pr-1">
+            <div className="sm:grid sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-3">
                 {/* Thông tin liên hệ */}
-                <div className="">
-                    <img src={FooterLogo} alt="Logo" />
+                <div className="grid justify-center col-start-1 col-end-3 md:col-span-1">
+                    <img src={FooterLogo} alt="Logo" className='w-5/6' />
                     <div className='mt-6'>
                         <span className='block'>Liên hệ: Báo newcast</span>
                         <span className='block'>Địa chỉ: Số 3 đường Lê Thanh Nghị Phường
@@ -92,10 +92,10 @@ export default function Footer() {
 
                 {/* Bộ sưu tập hình ảnh */}
 
-                <div className=''>
+                <div className=' col-start-1 col-end-3 md:col-span-1'>
                     <h3 className='mb-2'>Hình ảnh</h3>
                     <hr className='mb-4' />
-                    <div className='grid grid-cols-3 gap-2'>
+                    <div className='grid justify-items-center grid-cols-6 gap-2 p-1 md:grid-cols-3'>
                         <img src={Image} alt="" />
                         <img src={Image} alt="" />
                         <img src={Image} alt="" />
@@ -110,18 +110,18 @@ export default function Footer() {
                 <div className=''>
                     <h3 className='mb-2'>Chủ đề</h3>
                     <hr className=' mb-4' />
-                    <div >
-                        <div className='flex justify-between'>
-                        <button className='p-1 w-1/3 inline-block text-sm bg-pink-500'>Thể thao</button>
-                        <button className='p-1 w-1/3 inline-block text-sm bg-purple-600 ml-1'>Giải trí</button>
-                        <button className='p-1 w-1/3 inline-block text-sm bg-blue-400 ml-1'>Video</button>
+                    <div className=' grid justify-center'>
+                        <div className='flex w-64 md:w-full justify-between'>
+                        <button className='p-1 w-1/3 inline-block text-xs bg-pink-500'>Thể thao</button>
+                        <button className='p-1 w-1/3 inline-block text-xs bg-purple-600 ml-1'>Giải trí</button>
+                        <button className='p-1 w-1/3 inline-block text-xs bg-blue-400 ml-1'>Video</button>
                         </div>
                         <div className='flex justify-between mt-2'>
                         <button className='p-1 w-1/3 inline-block text-xs bg-blue-600'>Công nghệ</button>
-                        <button className='p-1 w-2/3 inline-block text-sm bg-pink-500 ml-1'>Khám phá Việt Nam</button>
+                        <button className='p-1 w-2/3 inline-block text-xs bg-pink-500 ml-1'>Khám phá Việt Nam</button>
                         </div>
                         <div className='flex justify-between mt-2'>
-                        <button className='p-1 w-2/3 inline-block text-sm bg-blue-400 '>Khám phá thế giới</button>
+                        <button className='p-1 w-2/3 inline-block text-xs bg-blue-400 '>Khám phá thế giới</button>
                         <button className='w-1/3 inline-block text-xs bg-red-500 ml-1'>Covid-19</button>
                         </div>
                     </div>
@@ -134,8 +134,12 @@ export default function Footer() {
                     <hr className='mb-4' />
                     <div>
                         <span className='text-sm'>Để không bỏ lỡ bất kì thông tin nóng hổi nào hãy đăng kí với chúng tôi</span>
+                        <div className='grid justify-center'>
+                        <div className='w-64 md:w-full'>
                         <input type="text" placeholder="Địa chỉ email của bạn" className='w-full mt-5 h-10 p-2' />
                         <button className='w-full bg-red-500 text-white mt-5 h-10'>Đăng kí</button>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

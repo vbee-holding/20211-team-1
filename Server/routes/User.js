@@ -40,7 +40,7 @@ const router = express.Router();
  *                          
  */
 
-router.get('/articles', crawlerController.crawlData);
+router.get('/articles', crawlerController.crawlSportData);
 
 /**
  * @swagger

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArticlesByCategoryId } from "../../../services/User/HomeServices";
 import MainNews from "../../../shares/components/MainNews";
+import TopTitle from "../../../shares/components/TopTitle";
 import ListNews from "./ListNews";
 
 export default function CategoryContainer({ id }) {
@@ -34,7 +35,8 @@ export default function CategoryContainer({ id }) {
 
     return (
         <div>
-            <div className="mt-10">
+            <TopTitle title="Tin chính" />
+            <div className="">
                 {
                     articles.slice(0, 1).map((article) => (
                         article && <MainNews data={article} key={article._id} />
@@ -43,7 +45,7 @@ export default function CategoryContainer({ id }) {
             </div>
             {
                 articleGroups.map((articleGroup, index) => (
-                    <div className="mt-10" key={index}>
+                    <div className="mt-5" key={index}>
                         <ListNews articles={articleGroup}/>
                     </div>
                 ))

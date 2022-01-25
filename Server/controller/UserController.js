@@ -6,11 +6,10 @@ exports.getAllArticles = async (req, res, next) => {
     const articles = await Article.find({isShow:true})
       .populate("category")
       .populate("source");
-    console.log(articles);
     res.json({
       success: true,
       count: articles.length,
-      data: articles,
+      data: {...articles},
     });
   } catch (err) {
     res.json({

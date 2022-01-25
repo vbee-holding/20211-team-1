@@ -32,8 +32,8 @@ export default function HotNewsCategory() {
                     ))
                 }
             </div>
-            <hr className="border-gray-300 mb-2 mt-5 bg-black" />
-            <div className="grid grid-cols-2 gap-5 ">
+            <hr className="border-gray-300 mb-2 mt-2 bg-black" />
+            <div className="sm:grid sm:grid-cols-2 gap-3 ">
             {
                     articles.slice(2, 6).map((article) => (
                         article && <SubNews data={article} key={article._id} />

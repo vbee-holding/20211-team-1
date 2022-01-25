@@ -4,6 +4,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens:{
+        'mobile':'320px'
+      },
+      fontFamily: {
+        display: ['Nunito Sans', "sans-serif"],
+        text:['Varela Round', "cursive"]
+      },
       maxHeight: {
         '128': '32rem',
         'mi-1': '340px',
@@ -20,7 +27,7 @@ module.exports = {
         'mi-5': '300px'
       },
       width: {
-        'body': '974px',
+        'body': '990px',
         'i-1': '625px',
         'i-5': '300px',
         'i-2': '198px',

@@ -8,7 +8,7 @@ import SubNew from "../components/SubNews"
 export default function Top() {
     const [articles, setArticles] = useState(null)
     useEffect(() => {
-        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.covid_19.id)
+        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.top.id)
             .then((result) => {
                 setArticles(result);
             })
@@ -25,7 +25,7 @@ export default function Top() {
         <div>
             {/* Navigation */}
             <div>
-                <ul className="flex justify-between mb-2 text-lg font-semibold">
+                <ul className="flex justify-between text-red-300 text-lg font-semibold">
                     <li>
                         <Link to="/">
                             <span>Recent</span>
@@ -42,7 +42,7 @@ export default function Top() {
                         </Link>
                     </li>
                 </ul>
-                <hr className="mb-3 border-black border-1 bg-black" />
+                <hr className="mb-3 border-gray-400 border-1 bg-gray-400" />
             </div>
             <div>
                 {

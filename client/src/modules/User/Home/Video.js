@@ -9,7 +9,7 @@ import TopTitle from "../../../shares/components/TopTitle";
 export default function Video() {
     const [articles, setArticles] = useState(null)
     useEffect(() => {
-        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.video.id)
+        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.world_travel.id)
             .then((result) => {
                 setArticles(result);
             })
@@ -32,7 +32,7 @@ export default function Video() {
                     ))
                 }
             </div>
-            <div className="grid grid-cols-3 gap-10 mt-10">
+            <div className="sm:grid sm:grid-cols-3 mt-4 sm:gap-2 lg:gap-7">
                 {
                     articles.slice(2,5).map((article) => (
                        article && <MainNewsV2 data={article} key={article._id}/>

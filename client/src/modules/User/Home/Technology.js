@@ -25,7 +25,7 @@ export default function Technology(){
     return (
         <div>
             <TopTitle title="Công nghệ"/>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="sm:grid grid-col-1 sm:grid-cols-2  sm:gap-1 lg:gap-5">
                 <div>
                     {
                         articles.slice(0, 1).map((article) => (
@@ -40,7 +40,7 @@ export default function Technology(){
                     }
                     </div>
                 </div>
-                <div>
+                <div className="mt-3 sm:mt-0">
                 {
                         articles.slice(5, 6).map((article) => (
                             article && <MainNewsV3 data={article} key={article._id} />

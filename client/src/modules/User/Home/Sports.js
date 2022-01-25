@@ -25,7 +25,7 @@ export default function Sports() {
     return (
         <div>
             <TopTitle title={"Thể thao"} />
-            <div className="grid grid-cols-2 gap-5">
+            <div className="sm:grid sm:grid-cols-2 sm:gap-5">
                 <div className="grid gap-5">
                     {
                         articles.slice(0, 2).map((article) => (
@@ -33,9 +33,9 @@ export default function Sports() {
                         ))
                     }
                 </div>
-                <div>
+                <div className="mt-5 sm: mt-0" >
                     {
-                        articles.slice(3, 8).map((article) => (
+                        articles.slice(3, 9).map((article) => (
                             article && <SubNews data={article} key={article._id} />
                         ))
                     }

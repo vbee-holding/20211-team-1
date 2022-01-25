@@ -8,22 +8,22 @@ import Video from "./Video";
 export default function HomeContainer() {
     return (
         <div>
-            <div className="mt-1">
+            <div className="">
                 <HotNewsCategory />
             </div>
-            <div className="mt-10">
+            <div className="">
                 <News />
             </div>
-            <div className="mt-10">
+            <div className="">
                 <Entertainment />
             </div>
-            <div className="mt-10">
+            <div className="">
                 <Sports />
             </div>
-            <div className="mt-10">
+            <div className="">
                 <Technology />
             </div>
-            <div className="mt-10">
+            <div className="">
                 <Video />
             </div>
         </div>

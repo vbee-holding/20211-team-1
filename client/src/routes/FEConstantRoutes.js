@@ -1,11 +1,11 @@
 export const FE_CATEGORY_CONSTANT_ROUTES = {
     "top":{
-        "id": "1234",
+        "id": "61f0017e804821068b64f1ac",
         "name": "Tin mới",
         "path": "/category/top"
     },
     "hot":{
-        "id":"12346",
+        "id":"61f00169804821068b64f1a8",
         "name":"Tin nóng",
         "path": "/category/hot"
     },

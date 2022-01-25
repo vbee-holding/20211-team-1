@@ -34,9 +34,9 @@ export default function Entertainment() {
                     ))
                 }
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-10">
+            <div className="sm:grid sm:grid-cols-2 gap-3 mt-5">
                 {
-                    articles.slice(2, 4).map((article) => (
+                    articles.slice(2, 6).map((article) => (
                         article && <SubNews data={article} key={article._id} />
                     ))
                 }

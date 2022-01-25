@@ -1,18 +1,24 @@
-export default function MainNews({ data }){
+import { convertTime } from "../utils/convertTime";
+
+export default function MainNews({ data }) {
     const { thumbnail, link, title, source, releaseTime } = data;
     return (
-        <div className='relative'>
-            <div className=' overflow-hidden'>
-            <img src={thumbnail} alt="" className='w-mi-1 h-mi-1 object-cover  rounded' />
-            </div>
-            <div className='text-3xl mt-3'>
-                <span>
-                    <a href={link}>{title}</a>
-                </span>
-            </div>
-            <div className=' bg-white flex gap-2 align-middle p-1 shadow-2xl rounded-lg absolute top-0 left-0 mt-2 ml-2'>
-                <img src={source.logo} alt="" className='max-h-4' />
-                <span className='text-xs text-gray-400'>{releaseTime} giờ</span>
+        <div>
+            <div className='gap-5 overflow-hidden'>
+                <a href={link}>
+                    <img src={thumbnail} alt="" className='h-44 sm:h-56 max-h-mi-1 w-full md:h-i-1 lg:h-i-1 object-cover rounded'  />
+                </a>
+
+                <div>
+                    <div className='flex gap-1 mt-1 items-end overflow-hidden'>
+                        <img src={source.logo} alt="" className='max-h-5' />
+                        <span className='text-xs block font-medium font-text text-gray-400'>{convertTime(Date.now() - releaseTime)}</span>
+                    </div>
+                    <span className='text-xl sm:text-2xl md:text-4xl font-semibold font-text hover:text-blue-400'>
+                        <a href={link}>{title}</a>
+                    </span>
+
+                </div>
             </div>
         </div>
     )

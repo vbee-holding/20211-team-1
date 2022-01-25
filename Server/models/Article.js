@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const Article = {
   thumbnail: { type: String },
-  link: { type: String },
+  link: { type: String, unique:true },
   title: { type: String },
-  releaseTime: { type: Date, default: Date.now() },
+  releaseTime: { type: Number, default: Date.now() },
   isShow: { type: Boolean },
   category: {
     type: mongoose.Schema.Types.ObjectId,
