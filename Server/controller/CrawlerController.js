@@ -247,7 +247,6 @@ exports.crawlSportData = (req, res) => {
   ];
   let data = [];
   for (let i = 0; i < SOURCE.length; i++) {
-    console.log(SOURCE[i].url)
     var options = {
       uri: SOURCE[i].url,
       transform: function (body) {
@@ -258,7 +257,6 @@ exports.crawlSportData = (req, res) => {
     rp(options)
       .then(($) => {
         $(SOURCE[i].parent_tag).each((index, el) => {
-          console.log(SOURCE[i].url)
           const thumbnail = $(el).find(SOURCE[i].thumbnail_tag).attr(SOURCE[i].thumbnail_attr);
           const link =
             SOURCE[i].true_url + $(el).find(SOURCE[i].link_tag).attr(SOURCE[i].link_attr);
@@ -273,9 +271,20 @@ exports.crawlSportData = (req, res) => {
               category: SOURCE[i].category,
               source: SOURCE[i].source,
             });
-            data.push(article);
-            article.save();
-            console.log(article);
+            Article.findOne({ link: link }).
+              then((result) => {
+                if (!result) {
+                  data.push(article);
+                  article.save();
+                  console.log(article);
+                } else {
+                  console.log("Da ton tai");  
+                }
+              })
+              .catch((error)=>{
+                console.log(error)
+              })
+
           }
         });
 

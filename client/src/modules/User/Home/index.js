@@ -3,7 +3,7 @@ import HotNewsCategory from "./HotNewsCategory";
 import News from "./News";
 import Sports from "./Sports";
 import Technology from "./Technology";
-import Video from "./Video";
+import Video from "./World";
 
 export default function HomeContainer() {
     return (

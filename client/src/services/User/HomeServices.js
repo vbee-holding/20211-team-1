@@ -1,7 +1,8 @@
 // Dùng để xử lý logic ở đây, nó chỉ bao gồm các hàm 
 
-import { getArticlesByCategoryIdAPI } from "../../apis/server-api/user-api/article";
+import { getArticlesByCategoryIdAPI } from "../../apis/server-api/user-api/user-article-api";
 import { getSourceByIdAPI } from "../../apis/server-api/user-api/source-api";
+import { updateArticleByIdAPI } from "../../apis/server-api/user-api/article-api";
 
 export async function getAllArticle() {
     try {
@@ -25,6 +26,21 @@ export async function getArticlesByCategoryId(id) {
         }
 
     } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+export async function updateArticles(id, data){
+    try{
+        const articleResult= await updateArticleByIdAPI(id, data);
+        if(articleResult.success){
+            console.log("Update successful!");
+            console.log(articleResult.data)
+        }else{
+            console.log("Failed to update");
+        }
+    }catch(error){
         console.log(error);
         return null;
     }

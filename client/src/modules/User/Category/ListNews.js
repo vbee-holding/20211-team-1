@@ -1,5 +1,5 @@
-import MainNewsV2 from "../../../shares/components/MainNewsV2";
-import SubNewsV2 from "../../../shares/components/SubNewsV2";
+import MainNewsV2 from "../../../shared/components/MainNewsV2";
+import SubNewsV2 from "../../../shared/components/SubNewsV2";
 
 export default function ListNews({articles}) {
     return (

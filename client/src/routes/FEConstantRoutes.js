@@ -1,16 +1,11 @@
 export const FE_CATEGORY_CONSTANT_ROUTES = {
-    "top":{
-        "id": "61f0017e804821068b64f1ac",
-        "name": "Tin mới",
-        "path": "/category/top"
-    },
     "hot":{
         "id":"61f00169804821068b64f1a8",
         "name":"Tin nóng",
         "path": "/category/hot"
     },
     "new":{
-        "id":"13223",
+        "id":"61f0017e804821068b64f1ac",
         "name": "Tin mới",
         "path": "/category/new"
     },
@@ -33,11 +28,6 @@ export const FE_CATEGORY_CONSTANT_ROUTES = {
         "id": "61ecba67f22c945535177981",
         "name": "Công nghệ",
         "path": "/category/technology"
-    },
-    "video": {
-        "id": "61ecba77f22c945535177985",
-        "name": "Video",
-        "path": "/category/video"
     },
     "vietnam_travel": {
         "id": "61ecba81f22c945535177989",

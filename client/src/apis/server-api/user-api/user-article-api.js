@@ -10,3 +10,4 @@ export const getArticlesByCategoryIdAPI = async (id) => {
   const result = await axios.get(url + id);
   return result.data;
 }
+

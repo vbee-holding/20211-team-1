@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { getArticlesByCategoryId } from "../../../services/User/HomeServices";
-import MainNews from "../../../shares/components/MainNews";
-import TopTitle from "../../../shares/components/TopTitle";
+import Loading from "../../../shared/components/Loading";
+import MainNews from "../../../shared/components/MainNews";
+import TopTitle from "../../../shared/components/TopTitle";
 import ListNews from "./ListNews";
 
 export default function CategoryContainer({ id }) {
     const NUMBER_OF_ARTICLE_IN_GROUP = 9;
     const [articles, setArticles] = useState(null);
-    const [articleGroups,setArticleGroups] = useState([]);
+    const [articleGroups, setArticleGroups] = useState([]);
     const pagination = (group) => {
         let startIndex = 0;
-        let temp=[];
+        let temp = [];
         for (let i = 0; i <= group.length / NUMBER_OF_ARTICLE_IN_GROUP; i++) {
             temp.push(group.slice(startIndex + 1, startIndex + NUMBER_OF_ARTICLE_IN_GROUP));
             startIndex += NUMBER_OF_ARTICLE_IN_GROUP;
@@ -18,6 +19,7 @@ export default function CategoryContainer({ id }) {
         setArticleGroups(temp)
     }
     useEffect(() => {
+        window.scrollTo({ behavior: 'smooth', top: '0px' });
         getArticlesByCategoryId(id)
             .then((result) => {
                 setArticles(result);
@@ -29,7 +31,7 @@ export default function CategoryContainer({ id }) {
     }, [id])
     if (articles == null) {
         return (
-            <div>Loading</div>
+            <Loading/>
         )
     }
 
@@ -46,7 +48,7 @@ export default function CategoryContainer({ id }) {
             {
                 articleGroups.map((articleGroup, index) => (
                     <div className="mt-5" key={index}>
-                        <ListNews articles={articleGroup}/>
+                        <ListNews articles={articleGroup} />
                     </div>
                 ))
             }

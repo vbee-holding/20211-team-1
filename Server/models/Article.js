@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Article = {
   thumbnail: { type: String },
-  link: { type: String, unique:true },
+  link: { type: String },
   title: { type: String },
   releaseTime: { type: Number, default: Date.now() },
   isShow: { type: Boolean },
@@ -15,6 +15,7 @@ const Article = {
     type: mongoose.Schema.Types.ObjectId,
     ref: "source"
   },
+  numOfViews:{type: Number, default: 0}
 };
 
 module.exports = mongoose.model("article", Article);
