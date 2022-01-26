@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const AdminController = require('../controller/AdminController');
 const router = express.Router();
@@ -159,5 +160,19 @@ router.put('/:adminId', AdminController.putAdmin);
  */
 
 router.delete('/:adminId', AdminController.deleteAdmin);
+=======
+const express = require("express");
+const AdminController = require("../controller/AdminController");
+const router = express.Router();
+
+router.get("/", AdminController.getAdmins);
+router.post("/", AdminController.postAdmin);
+
+router.get("/:adminId", AdminController.getAdmin);
+router.put("/:adminId", AdminController.putAdmin);
+router.delete("/:adminId", AdminController.deleteAdmin);
+
+router.post("/login", AdminController.login);
+>>>>>>> 56c6445 (add crawl data)
 
 module.exports = router;
