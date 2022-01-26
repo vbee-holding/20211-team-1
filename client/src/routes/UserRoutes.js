@@ -1,6 +1,7 @@
 import Category from "../pages/User/Category";
 import Home from "../pages/User/Home";
-import Layout from "../shares/layout/Layout";
+import Layout from "../shared/layout/Layout";
+import { FE_CATEGORY_CONSTANT_ROUTES } from "./FEConstantRoutes";
 export const routes = [
   {
     path: "/",
@@ -9,22 +10,18 @@ export const routes = [
       { index: true, element: <Home /> },
       {
         path: "/category",
-        element: <Category />,
         children: [
-          { index: true, element: <Category /> },
-          { path: "/category/top", element: <Category /> },
-          { path: "/category/hot", element: <Category /> },
-          { path: "/category/new", element: <Category /> },
-          { path: "/category/covid-19", element: <Category /> },
-          { path: "/category/entertainment", element: <Category /> },
-          { path: "/category/sport", element: <Category /> },
-          { path: "/category/technology", element: <Category /> },
-          { path: "/category/video", element: <Category /> },
-          { path: "/category/vietnam-travel", element: <Category /> },
-          { path: "/category/world-travel", element: <Category /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.hot.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.hot.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.new.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.new.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.covid_19.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.covid_19.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.entertainment.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.entertainment.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.sport.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.sport.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.technology.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.technology.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.vietnam_travel.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.vietnam_travel.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.world_travel.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.world_travel.id} /> },
         ],
       },
-      { path: "*", element: <Category /> },
+      { path: "*", element: <Home /> },
     ],
   },
 ];
