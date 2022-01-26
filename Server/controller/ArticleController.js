@@ -1,4 +1,4 @@
-const Article = require("./models/Article");
+const Article = require("../models/Article");
 
 class ArticleRouter {
   async getArticles(req, res, next) {

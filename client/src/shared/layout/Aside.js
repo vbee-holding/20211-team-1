@@ -6,7 +6,7 @@ import Category from "./Category";
 export default function Aside() {
     return (
         <div>
-            <div className="mt-1">
+            <div className="">
                 <Top />
             </div>
             <div>

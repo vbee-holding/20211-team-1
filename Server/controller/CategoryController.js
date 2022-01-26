@@ -1,4 +1,4 @@
-const Category = require("./models/Category");
+const Category = require("../models/Category");
 
 class CategoryRouter {
   async getCategories(req, res, next) {

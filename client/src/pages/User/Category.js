@@ -1,5 +1,5 @@
 import CategoryContainer from "../../modules/User/Category";
 
-export default function Category(){
-    return <CategoryContainer/>
+export default function Category({id}) {
+    return <CategoryContainer id={id} />
 }

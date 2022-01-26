@@ -1,20 +1,20 @@
-import MainNewsV2 from "../../../shares/components/MainNewsV2";
-import SubNewsV2 from "../../../shares/components/SubNewsV2";
+import MainNewsV2 from "../../../shared/components/MainNewsV2";
+import SubNewsV2 from "../../../shared/components/SubNewsV2";
 
-export default function ListNews() {
+export default function ListNews({articles, reload}) {
     return (
         <div>
-            <div className="grid grid-cols-3 gap-5">
-                {[1, 2, 3].map((data) => (
-                    <MainNewsV2 />
+            <div className="sm:grid sm:grid-cols-3 sm:gap-5">
+                {articles.slice(0,3).map((article) => (
+                    <MainNewsV2 data={article} key={article._id} reload={reload} />
                 ))
                 }
             </div>
-            <hr className="border-black mt-5 bg-black"  />
-            <div className="mt-10">
+            <hr className="border-gray-300 bg-gray-300"  />
+            <div className="mt-3">
                 {
-                    [1,2,3,4,5].map((data)=>(
-                        <SubNewsV2 data={data}/>
+                   articles.slice(4,9).map((article)=>(
+                        <SubNewsV2 data={article} key={article._id} reload={reload}/>
                     ))
                 }
             </div>
