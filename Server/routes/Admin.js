@@ -1,6 +1,8 @@
 const express = require('express');
 const AdminController = require('../controller/AdminController');
+const Admin = require('../models/Admin');
 const router = express.Router();
+const Verify = require('../util/Verify');
 
 /**
  * @swagger
@@ -76,7 +78,7 @@ router.get('/', AdminController.getAdmins);
  *         description: The admin was not found
  */
 
-router.get('/:adminId', AdminController.getAdmin);
+//router.get('/:adminId', AdminController.getAdmin);
 
 /**
  * @swagger
@@ -101,7 +103,7 @@ router.get('/:adminId', AdminController.getAdmin);
  *         description: Some server error
  */
 
-router.post('/', AdminController.postAdmin);
+//router.post('/', AdminController.postAdmin);
 
 /**
  * @swagger
@@ -135,7 +137,7 @@ router.post('/', AdminController.postAdmin);
  *        description: Some error happened
  */
 
-router.put('/:adminId', AdminController.putAdmin);
+//router.put('/:adminId', AdminController.putAdmin);
 
 /**
  * @swagger
@@ -158,6 +160,12 @@ router.put('/:adminId', AdminController.putAdmin);
  *         description: The admin was not found
  */
 
-router.delete('/:adminId', AdminController.deleteAdmin);
+//router.delete('/:adminId', AdminController.deleteAdmin);
 
+router.post('/login', AdminController.logIn);
+router.post('/logout', Verify.verify, AdminController.logOut);
+router.post('/refresh', AdminController.refreshToken);
+router.post('/', Verify.verify, AdminController.postAdmin);
+router.put('/:adminId', Verify.verify, AdminController.putAdmin);
+router.delete('/:adminId', Verify.verify, AdminController.deleteAdmin);
 module.exports = router;
