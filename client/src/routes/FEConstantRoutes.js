@@ -40,3 +40,26 @@ export const FE_CATEGORY_CONSTANT_ROUTES = {
         "path": "/category/world-travel"
     }
 }
+
+export const FE_ADMIN_CONSTANT_ROUTES = {
+    "login": {
+        "name": "Login",
+        "path": "/admin/login"
+    },
+    "articles": {
+        "name": "Articles",
+        "path": "/admin/articles"
+    },
+    "categories": {
+        "name": "Categories",
+        "path": "/admin/categories"
+    },
+    "sources": {
+        "name": "Sources",
+        "path": "/admin/sources"
+    },
+    "reset_password": {
+        "name": "Reset password",
+        "path": "/admin/reset-password"
+    }
+}
