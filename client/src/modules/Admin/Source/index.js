@@ -1,5 +1,5 @@
-import SideBar from "../../../shares/layout/Admin/SideBar";
-import Header from "../../../shares/layout/Admin/Header"
+import SideBar from "../../../shared/layout/Admin/SideBar";
+import Header from "../../../shared/layout/Admin/Header"
 import SourceList from "./SourceList"
 import SourceTableHeader from "./SourceTableHeader"
 import { useState } from "react";

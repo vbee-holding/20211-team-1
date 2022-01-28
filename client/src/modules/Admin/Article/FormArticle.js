@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import SourceAPI from "../../../apis/SourceAPI"
-import CategoryAPI from "../../../apis/CategoryAPI"
-import ArticleAPI from "../../../apis/ArticleAPI"
+import useArticleAPI from "../../../apis/server-api/admin-api/article-api"
+import useSourceAPI from "../../../apis/server-api/admin-api/source-api"
+import useCategoryAPI from "../../../apis/server-api/admin-api/category-api"
 
 const FormArticle = (props) => {
 
@@ -9,9 +9,9 @@ const FormArticle = (props) => {
         thumbnail: "",
         link: "",
         title: "",
-        releaseTime: "2021-08-09T00:00:00.000Z",
+        releaseTime: "",
         sapo: "",
-        status: "",
+        isShow: true,
         sourceId: "",
         categoryId: ""
     });
@@ -19,6 +19,10 @@ const FormArticle = (props) => {
     const [sources, setSources] = useState([]);
     const [categories, setCategories] = useState([]);
     const mounted = useRef(false);
+
+    const SourceAPI = useSourceAPI();
+    const CategoryAPI = useCategoryAPI();
+    const ArticleAPI = useArticleAPI();
 
     useEffect(()=> {
         mounted.current = true;
@@ -52,6 +56,9 @@ const FormArticle = (props) => {
     }
 
     const onSubmit = async () => {
+        if(article.releaseTime) {
+            article.releaseTime = Date.parse(article.releaseTime);
+        }
         if(article.categoryId && article.sourceId) {
             if(props.purpose === "Add") {
                 await ArticleAPI.postArticle(article);
@@ -65,7 +72,8 @@ const FormArticle = (props) => {
             props.setFormOriginalData({});  
             props.setFormState(false);
         }
-        else alert ("Source và Category không thể để trống");   
+        else alert ("Source và Category không thể để trống"); 
+
     }
 
     return (
@@ -113,7 +121,7 @@ const FormArticle = (props) => {
                                     name="title">
                                 </input>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <label htmlFor="" className="block font-bold mb-1">Sapo</label>
                                 <input 
                                     type="text" 
@@ -122,7 +130,7 @@ const FormArticle = (props) => {
                                     value={article.sapo}
                                     name="sapo">
                                 </input>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="space-y-6 basis-1/3 px-16">
                             <div>
@@ -131,7 +139,7 @@ const FormArticle = (props) => {
                                     type="datetime-local" 
                                     className="px-4 py-2 w-full rounded-xl border border-gray-400" 
                                     onChange={handleInputChange}
-                                    //value={article.releaseTime}
+                                    //value={new Date(article.releaseTime)}
                                     name="releaseTime">
                                 </input>
                             </div>

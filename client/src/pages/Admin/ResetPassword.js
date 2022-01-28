@@ -1,7 +1,7 @@
 import ResetPasswordContainer from "../../modules/Admin/ResetPassword";
 
 const ResetPassword = () => {
-    return <ResetPasswordContainer/>
+    return <ResetPasswordContainer />
 }
 
 export default ResetPassword;

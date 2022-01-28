@@ -1,4 +1,4 @@
-import useAxois from '../services/Admin/useAxios'
+import useAxois from '../../../services/Admin/useAxios'
 
 const useCategoryAPI = () => {
     const privateAxois = useAxois();
@@ -6,7 +6,6 @@ const useCategoryAPI = () => {
     const getCategories = async () => {
         try {
             const res = await privateAxois.get('categories/');
-            console.log("getArrticlesPrivate");
             return res.data;
         }
         catch (err) {
@@ -17,7 +16,6 @@ const useCategoryAPI = () => {
     const getCategory = async (categoryId) => {
         try {
             const res = await privateAxois.get('categories/' + categoryId);
-            console.log("getArrticle");
             return res.data;
         }
         catch (err) {
@@ -28,7 +26,6 @@ const useCategoryAPI = () => {
     const postCategory = async (category) => {
         try {
             const res = await privateAxois.post('categories/', category);
-            console.log("postArrticle");
             return res.data;
         }
         catch (error) {
@@ -39,7 +36,6 @@ const useCategoryAPI = () => {
     const putCategory = async (categoryId, category) => {
         try {
             const res = await privateAxois.put('categories/' + categoryId, category);
-            console.log("putArrticle");
             return res.data;
         }
         catch (error) {
@@ -50,7 +46,6 @@ const useCategoryAPI = () => {
     const deleteCategory = async (categoryId) => {
         try {
             const res = await privateAxois.delete('categories/' + categoryId);
-            console.log("deleteArrticle");
             return res.data;
         }
         catch (error) {

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import SourceAPI from "../../../apis/SourceAPI"
+import useSourceAPI from "../../../apis/server-api/admin-api/source-api"
 
 const FormSource= (props) => {
     const [source, setSource] = useState(props.formOriginalData);
+
+    const SourceAPI = useSourceAPI();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

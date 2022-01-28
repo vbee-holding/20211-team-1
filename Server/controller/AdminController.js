@@ -139,14 +139,26 @@ class AdminRouter {
         });
     }
 
-    putAdmin = async (req, res, next) => {
-        const newAdmin = req.body;
-        const { adminId } = req.params;
+    resetPassword = async (req, res, next) => {
+        const { password, newPassword, email } = req.body;
         try {
-            await Admin.findByIdAndUpdate( adminId , newAdmin);
-            res.json({
-                success : true,
-                data : newAdmin,
+            const admin =  await Admin.find({
+                email : email,
+                password : password
+            });
+            if(admin.length >= 1) {
+                const admin = await Admin.findOneAndUpdate( email , {
+                    email : email,
+                    password : newPassword,
+                });
+                res.json({
+                    success: true,
+                    data: admin,
+                });
+            }
+            else res.json({
+                success: false,
+                message: "Sai mật khẩu"
             })
         }
         catch (err) {
@@ -158,23 +170,6 @@ class AdminRouter {
 
     }
 
-    postAdmin = async (req, res, next) => {
-        const newAdmin = req.body;
-        try {
-            await Admin.create(newAdmin);
-            res.json({
-                success : true,
-                data : newAdmin,
-            })
-        }
-        catch (err) {
-            res.status(400).json({
-                success: false,
-                error : err,
-            })
-        }
-
-    }
 
   // async getAdmin(req, res, next) {
   //   const { adminId } = req.params;
