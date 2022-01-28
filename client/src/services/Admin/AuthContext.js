@@ -8,7 +8,7 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState(()=> localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : null);
     const [refreshToken, setRefreshToken] = useState(()=> localStorage.getItem('refreshToken') ? JSON.parse(localStorage.getItem('refreshToken')) : null);
-    const [isLogIn, setIsLogIn] = useState(false);
+    const [isLogIn, setIsLogIn] = useState(JSON.parse(localStorage.getItem('refreshToken')) !== null);
 
     const logIn = (res) => {
         localStorage.setItem('accessToken', JSON.stringify(res.data.accessToken));

@@ -1,5 +1,5 @@
 import searchIcon from '../../../assets/images/search-icon.png'
-import useAdminAPI from '../../../apis/server-api/admin-api/';
+import AdminAPI from '../../../apis/server-api/admin-api/admin-api';
 import { useState } from 'react'
 import { useNavigate } from 'react-router';
 
@@ -7,8 +7,6 @@ const Header = (props) => {
 
     const [isOptinonMenu, setIsOptinMenu] = useState(false);
     const navigate = useNavigate();
-    
-    const AdminAPI = useAdminAPI();
 
     const onClickAdd = () => {
         props.setFormState(true);

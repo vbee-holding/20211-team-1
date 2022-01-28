@@ -1,10 +1,12 @@
 import SourceItem from "./SourceItem"
-import SourceAPI from "../../../../apis/SourceAPI"
+import useSourceAPI from "../../../../apis/server-api/admin-api/source-api"
 import { useEffect, useState, useRef } from "react";
 
 const List = (props) => {
     const [sources, setSources] = useState([]); 
     const mounted = useRef(false); 
+
+    const SourceAPI = useSourceAPI();
 
     useEffect(() => {
         mounted.current = true;

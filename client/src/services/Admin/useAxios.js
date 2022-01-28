@@ -18,10 +18,8 @@ const useAxios= () => {
     PrivateAxios.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if(config.headers.authentication){
-            console.log("authen : " + config.headers.authentication.split(" ")[1]);
             const decodedToken = jwt_decode(config.headers.authentication.split(" ")[1]);
             if(decodedToken.exp *1000 < currentDate.getTime()) {
-                console.log("na");
                 const res = await AdminAPI.refreshToken();
                 setToken(res.data.accessToken, res.data.refreshToken);
                 config.headers.authentication = `Bearer ${res.data.accessToken}`;

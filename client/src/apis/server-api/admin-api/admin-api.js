@@ -7,7 +7,6 @@ class AdminAPI {
     logIn = async (admin) => {
         try {
             const res = await axios.post(this.url + "login", admin);
-            console.log("Login");
             return res.data;
         }
         catch (error) {
@@ -26,7 +25,6 @@ class AdminAPI {
                     authentication : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
                 }
             });
-            console.log("Logout");
             return res.data;
         }
         catch (err) {
@@ -39,7 +37,6 @@ class AdminAPI {
             const res = await axios.post(this.url + "refresh", {
                 refreshToken : JSON.parse(localStorage.getItem('refreshToken')),
             });
-            console.log("refreshToken");
             return res.data;
         }
         catch (err) {
@@ -47,13 +44,22 @@ class AdminAPI {
         }
     }
 
-    ressetPassword = async (adminId, admin) => {
+    ressetPassword = async (password) => {
         try {
-            const res = await axios.put(this.url + adminId, admin);
+            const body = {
+                password : password.password,
+                newPassword : password.newPassword,
+                email : JSON.parse(localStorage.getItem('userEmail')),
+            }
+            const res = await axios.post(this.url + "reset-password", body, {
+                headers : {
+                    authentication : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
+                }
+            });
             return res.data;
         }
-        catch (error) {
-            console.error(error)
+        catch (err) {
+            console.error(err);
         }
     }
 

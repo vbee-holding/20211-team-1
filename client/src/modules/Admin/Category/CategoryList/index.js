@@ -1,11 +1,13 @@
 import CategoryItem from "./CategoryItem"
-import CategoryAPI from "../../../../apis/CategoryAPI"
+import useCategoryAPI from "../../../../apis/server-api/admin-api/category-api"
 import { useEffect, useState, useRef } from "react";
 
 const List = () => {
     
     const [categories, setCategories] = useState([]); 
     const mounted = useRef(false);
+
+    const CategoryAPI = useCategoryAPI();
 
     useEffect(() => {
         mounted.current = true;
