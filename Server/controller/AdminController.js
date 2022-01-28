@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const Admin = require("../models/Admin");
 
@@ -25,7 +25,7 @@ class AdminRouter {
 
     generateAccessToken (admin) {
         try{
-            return jwt.sign({_id : admin._id, email : admin.email}, "mySecretKey", {expiresIn : "15m"});
+            return jwt.sign({_id : admin._id, email : admin.email}, process.env.SECRET_KEY_TOKEN, {expiresIn : "15m"});
         }
         catch (err) {
             console.log(err);
@@ -34,7 +34,7 @@ class AdminRouter {
  
     generateRefreshToken (admin) {
         try{
-            return jwt.sign({_id : admin._id, email : admin.email}, "myRefreshSecretKey", {expiresIn : "30d"});
+            return jwt.sign({_id : admin._id, email : admin.email}, process.env.SECRET_KEY_REFRESHTOKEN, {expiresIn : "30d"});
         }
         catch (err) {
             console.log(err);
