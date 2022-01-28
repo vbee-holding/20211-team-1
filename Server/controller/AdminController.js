@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../models/Admin");
 
 class AdminRouter {
+    
+    constructor() {
+        this.refreshTokens = [];
+    }
+
   async getAdmins(req, res, next) {
     try {
       const admins = await Admin.find();
@@ -18,10 +23,6 @@ class AdminRouter {
       });
     }
   }
-
-    constructor() {
-        this.refreshTokens = [];
-    }
 
     generateAccessToken (admin) {
         try{
@@ -41,33 +42,40 @@ class AdminRouter {
         }
     }
 
-
     logIn = async (req, res, next) => {
-        const { email, password } = req.body;
+      
         try {
-            const admin =  await Admin.find({
-                email : email,
-                password : password
-            });
-            if(admin.length >= 1) {
-                const accessToken = this.generateAccessToken(admin);
-                const refreshToken = this.generateRefreshToken(admin);
- 
-                this.refreshTokens.push(refreshToken);
-                res.json({
-                    success : true,
-                    data : {
-                        accessToken : accessToken,
-                        refreshToken : refreshToken,
-                    },
-                });
+            const { email, password } = req.body;
+            const admin = await Admin.findOne({ email: email });
+
+            if (admin) {
+                if(password === admin.password) {
+                    const accessToken = this.generateAccessToken(admin);
+                    const refreshToken = this.generateRefreshToken(admin);
+     
+                    this.refreshTokens.push(refreshToken);
+                    res.json({
+                        success : true,
+                        data : {
+                            accessToken : accessToken,
+                            refreshToken : refreshToken,
+                        },
+                    });
+                }
+                else {
+                    res.json({
+                        success : false,
+                        message : "Password is incorrect",
+                    });
+                }
             }
             else {
                 res.json({
                     success : false,
-                    error : "email or password incorrect",
+                    message : "Email is incorrect",
                 });
             }
+            
         }
         catch (err) {
             console.log(err);
@@ -77,6 +85,17 @@ class AdminRouter {
             })
         }
 
+    }
+
+    logOut = async (req, res, next) => {
+        const { refreshToken } = req.body;
+        this.refreshTokens = this.refreshTokens.filter(token => token !== refreshToken);
+        res.json({
+            success : true,
+            data : {
+                message : "You loged out succesfully"
+            },
+        });
     }
 
     refreshToken = async (req, res, next) => {
@@ -127,41 +146,31 @@ class AdminRouter {
         }
     }
 
-    
-    logOut = async (req, res, next) => {
-        const { refreshToken } = req.body;
-        this.refreshTokens = this.refreshTokens.filter(token => token !== refreshToken);
-        res.json({
-            success : true,
-            data : {
-                message : "You loged out succesfully"
-            },
-        });
-    }
-
     resetPassword = async (req, res, next) => {
         const { password, newPassword, email } = req.body;
         try {
-            const admin =  await Admin.find({
-                email : email,
-                password : password
-            });
-            if(admin.length >= 1) {
-                const admin = await Admin.findOneAndUpdate( email , {
-                    email : email,
-                    password : newPassword,
-                });
-                res.json({
-                    success: true,
-                    data: admin,
-                });
+            const admin = await Admin.findOne({ email: email });
+            if (admin) {
+                if(password === admin.password) {
+                    
+                    const admin = await Admin.findOneAndUpdate( email , {
+                        email : email,
+                        password : newPassword,
+                    });
+                    res.json({
+                        success: true,
+                        data: admin,
+                    });
+                }
+                else res.json({
+                    success: false,
+                    message: "Sai mật khẩu"
+                })
             }
-            else res.json({
-                success: false,
-                message: "Sai mật khẩu"
-            })
         }
         catch (err) {
+            
+            console.log(err);
             res.status(400).json({
                 success: false,
                 error : err,
@@ -232,12 +241,12 @@ class AdminRouter {
   // // SignUp
   // async postAdmin(req, res, next) {
   //   var admin = req.body;
+/*
+     const saltRounds = 10;
+     const salt = bcrypt.genSaltSync(saltRounds);
 
-  //   const saltRounds = 10;
-  //   const salt = bcrypt.genSaltSync(saltRounds);
-
-  //   admin.password = bcrypt.hashSync(admin.password, salt);
-
+     admin.password = bcrypt.hashSync(admin.password, salt);
+*/
   //   try {
   //     await Admin.create(admin);
 

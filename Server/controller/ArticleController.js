@@ -34,17 +34,32 @@ class ArticleRouter {
   }
 
   async postArticle(req, res, next) {
-    const article = req.body;
     try {
-      await Article.create(article);
-      res.json({
-        success: true,
-        data: article,
-      });
+      const article = req.body;
+      if(!article.category || !article.source) {
+        res.json({
+          success : false,
+          message : "category or source is null",
+        });
+      }
+      if(await Article.findOne({ link : article.link })) {
+        res.json({
+          success : false,
+          message : "Article exists"
+        });
+      }
+      else {
+        await Article.create(article);
+        res.json({
+          success: true,
+          data: article,
+        });
+      }
     } catch (err) {
       res.status(400).json({
         success: false,
         error: err,
+        message : "Đã có lỗi xảy ra",
       });
       console.log(err);
     }

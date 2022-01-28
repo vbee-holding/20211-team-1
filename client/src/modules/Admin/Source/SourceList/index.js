@@ -22,7 +22,7 @@ const List = (props) => {
     return (
         <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
            {
-                sources.map((source, index) => {
+                sources && sources.map((source, index) => {
                     return (
                         <SourceItem 
                             item={source} 

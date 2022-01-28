@@ -28,21 +28,35 @@ const ResetPassword = (props) => {
         setPassword(Object.assign({}, curentPassword, propertyUpdate));
     }
 
-    const onBack = () => {
-        props.setIsVerify(true);
-    }
+    // const onBack = () => {
+    //     props.setIsVerify(true);
+    // }
 
     const onSubmit = async () => {
-        if(password.password.length >= passwordMinSize && password.newPassword === password.retypePassword) {
-            const res = await AdminAPI.ressetPassword(password);
-            if(res.success) {
-                navigate("/admin/login");
+        if(isLogIn) {
+            if(password.newPassword.length >= passwordMinSize && password.newPassword === password.retypePassword) {
+                try {
+                    setIsError(false);
+                    const res = await AdminAPI.ressetPassword(password);
+                        if(res.success) {
+                        navigate("/admin/login");
+                    }
+                    else {
+                        setIsError(true);
+                        setMessage(res.message);
+                        return;
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+                
             }
-            else setMessage(res.message);
-        }
-        else {
-            setIsCorrectLenth(password.password.length >= passwordMinSize);
-            setIsCorrect(password.password === password.retypePassword);
+            else {
+                setIsCorrectLenth(password.newPassword.length >= passwordMinSize);
+                setIsCorrect(password.newPassword === password.retypePassword);
+                setIsError(false);
+            }
         }
     }
 
@@ -66,7 +80,7 @@ const ResetPassword = (props) => {
                                         className="font-semibold px-4 py-2 w-full rounded-xl border border-purple-700 focus:outline-violet-500"  >
                                     </input>
                                     {
-                                        !isCorrectLenth && <label className=" font-semibold mb-1 text-red-500" >Mật khẩu phải ít nhất 6 ký tự</label>
+                                        isError && <p className="text-red-600 font-semibold">{message}</p>
                                     }
                                 </div>
                         }
@@ -96,12 +110,9 @@ const ResetPassword = (props) => {
                                 !isCorrect && <label className=" font-semibold mb-1 text-red-500" >Mật khẩu không trùng khớp</label>
                             }
                         </div>
-                        {
-                            !isError && <p className="text-red-600 pl-4 font-semibold">{message}</p>
-                        }
                         <div className="flex flex-row justify-between">
-                            <button className="bg-white text-purple-600 hover:text-purple-700 ml-4 font-bold " onClick={onBack}>Back</button>
-                            <button className="bg-purple-600 hover:bg-purple-700 rounded-2xl text-white py-2 w-1/4 shadow-lg hover:shadow-xl" onClick={onSubmit}>Xác nhận</button>
+                            {/* <button className="bg-white text-purple-600 hover:text-purple-700 ml-4 font-bold " onClick={onBack}>Back</button> */}
+                            <button className="bg-purple-600 hover:bg-purple-700 rounded-2xl text-white py-2 w-1/4 shadow-lg hover:shadow-xl ml-auto" onClick={onSubmit}>Xác nhận</button>
                         </div>
                         
                     </div>

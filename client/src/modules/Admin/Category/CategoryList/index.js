@@ -23,7 +23,7 @@ const List = () => {
     return (
         <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
            {
-                categories.map((category, index) => {
+                categories && categories.map((category, index) => {
                     return (
                         <CategoryItem item={category} index={index} key={index}></CategoryItem>
                     )

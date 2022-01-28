@@ -35,7 +35,8 @@ const List = (props) => {
     return (
         <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
             {
-                articles.map((article, index) => {
+                articles ? 
+                    articles.map((article, index) => {
                     const source = sources.find(source => source._id === article.source);
                     return (
                         <ArticleItem 
@@ -50,6 +51,7 @@ const List = (props) => {
                         </ArticleItem>
                     )
                 })
+                : <h1>Sever is not respons</h1>
             }
         </div>
       

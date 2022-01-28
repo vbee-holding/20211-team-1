@@ -30,13 +30,16 @@ const LogIn = (props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        setIsCorrect(true);
         const res = await AdminAPI.logIn(admin);
         if(res.success) {
             logIn(res);
             localStorage.setItem('userEmail', JSON.stringify(admin.email));
             navigate("/admin/articles");
         }
-        else setIsCorrect(false);
+        else {
+            setIsCorrect(false);
+        }
     }
 
     return (
