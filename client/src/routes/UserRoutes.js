@@ -1,8 +1,20 @@
 import Category from "../pages/User/Category";
 import Home from "../pages/User/Home";
 import Layout from "../shared/layout/Layout";
-import { FE_CATEGORY_CONSTANT_ROUTES } from "./FEConstantRoutes";
+import LogIn from "../pages/Admin/Login"
+import { FE_CATEGORY_CONSTANT_ROUTES, FE_ADMIN_CONSTANT_ROUTES } from "./FEConstantRoutes";
+
 export const routes = [
+  {
+    path: "/admin",
+    children:[
+      { path: FE_ADMIN_CONSTANT_ROUTES.login.path, element: <LogIn title="Báo mới nà"/>},
+      { path: FE_ADMIN_CONSTANT_ROUTES.reset_password.path, element: <h1>reset_password</h1>},
+      { path: FE_ADMIN_CONSTANT_ROUTES.articles.path, element: <h1>articles</h1>},
+      { path: FE_ADMIN_CONSTANT_ROUTES.categories.path, element: <h1>categories</h1>},
+      { path: FE_ADMIN_CONSTANT_ROUTES.sources.path, element: <h1>sources</h1>},
+    ]
+  },
   {
     path: "/",
     element: <Layout />,
