@@ -12,8 +12,8 @@ const FormArticle = (props) => {
         releaseTime: "",
         sapo: "",
         isShow: true,
-        sourceId: "",
-        categoryId: ""
+        source: "",
+        category: ""
     });
     
     const [sources, setSources] = useState([]);
@@ -59,9 +59,13 @@ const FormArticle = (props) => {
         if(article.releaseTime) {
             article.releaseTime = Date.parse(article.releaseTime);
         }
-        if(article.categoryId && article.sourceId) {
+        if(article.category && article.source) {
             if(props.purpose === "Add") {
-                await ArticleAPI.postArticle(article);
+                const res = await ArticleAPI.postArticle(article);
+                if(!res.success) {
+                    alert(res.message);
+                    return;
+                }
             }
             else if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
@@ -89,8 +93,8 @@ const FormArticle = (props) => {
                             </button>
                         </div>
                     </div>
-                    <div className="flex flex-row justify-between mt-4 h-96">
-                        <div className="space-y-4 basis-2/3 px-16">
+                    <div className= {props.purpose === "Add" ? "flex flex-row justify-between mt-4 h-96" : "flex flex-row justify-between mt-4 h-80"} >
+                        <div className="space-y-6 basis-2/3 px-16">
                             <div className="">
                                 <label htmlFor="" className="block font-bold mb-1">Thumbnail URL</label>
                                 <input 
@@ -121,18 +125,8 @@ const FormArticle = (props) => {
                                     name="title">
                                 </input>
                             </div>
-                            {/* <div className="">
-                                <label htmlFor="" className="block font-bold mb-1">Sapo</label>
-                                <input 
-                                    type="text" 
-                                    className="px-4 py-2 w-full rounded-xl border border-gray-400" 
-                                    onChange={handleInputChange}
-                                    value={article.sapo}
-                                    name="sapo">
-                                </input>
-                            </div> */}
                         </div>
-                        <div className="space-y-6 basis-1/3 px-16">
+                        <div className="space-y-4 basis-1/3 px-16">
                             <div>
                                 <label className="block font-bold mb-1">Release Time</label>
                                 <input 
@@ -143,27 +137,30 @@ const FormArticle = (props) => {
                                     name="releaseTime">
                                 </input>
                             </div>
-                            <div >
-                                <label className="block font-bold mb-1 mr-10" >Status</label>
-                                <select 
-                                    className="w-full" 
-                                    onChange={handleInputChange} 
-                                    name="isShow"
-                                    value={article.status}>
-                                        <option value={true} >Ẩn</option>
-                                        <option value={false} >Hiện</option>
-                                </select>
-                            </div>
+                            {
+                                props.purpose === "Add" && 
+                                    <div >
+                                        <label className="block font-bold mb-1 mr-10" >Status</label>
+                                        <select 
+                                            className="w-full" 
+                                            onChange={handleInputChange} 
+                                            name="isShow"
+                                            value ={article.isShow}>
+                                                <option value={true} >Hiện</option>
+                                                <option value={false} >Ẩn</option>
+                                        </select>
+                                    </div>
+                            }
 
                             <div className="">
                                 <label className="block font-bold mb-1 mr-10" >Category Id</label>
                                 <select 
                                     className="w-full" 
                                     onChange={handleInputChange} 
-                                    name="categoryId"
-                                    value={article.categoryId}>
+                                    name="category"
+                                    value={article.category}>
                                     {
-                                        categories.map((category, index) => {
+                                        categories && categories.map((category, index) => {
                                             return (
                                                 <option value={category._id} key={index}>{category.name}</option>
                                             )
@@ -177,10 +174,10 @@ const FormArticle = (props) => {
                                 <select 
                                     className="w-full" 
                                     onChange={handleInputChange} 
-                                    name="sourceId"
-                                    value={article.sourceId}>
+                                    name="source"
+                                    value={article.source}>
                                     {
-                                        sources.map((source, index) => {
+                                        sources && sources.map((source, index) => {
                                             return (
                                                 <option value={source._id} key={index} >{source.name}</option>
                                             )

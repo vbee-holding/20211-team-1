@@ -39,8 +39,9 @@ const Item = (props) => {
                 <p className="m-auto text-xl font-bold w-full text-center">{props.index + 1 + "."}</p>
             </div>
             <div className="flex flex-col my-auto basis-1/12 mx-7 h-24 overflow-hidden">
-                <img className="m-auto text-lg font-medium w-full h-8" src={props.source.logo} alt=""></img>
-                
+                {
+                    props.source && <img className="m-auto text-lg font-medium w-full h-8" src={props.source.logo} alt=""></img>
+                }
             </div>
             <div className="flex flex-col my-auto basis-2/12 mx-7 h-14 overflow-hidden max-w-sm">
                 <a className="m-auto text-lg font-medium w-full h-full " href={props.item.link}>{props.item.link}</a>

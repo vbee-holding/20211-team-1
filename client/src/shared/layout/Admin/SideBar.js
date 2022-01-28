@@ -14,19 +14,19 @@ const NavBar = () => {
             <div className="mx-10 mt-10">
                 <NavLink className="flex flex-row py-4" to="/admin/articles" >
                     <img src={hommeIcon} alt=""></img>
-                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300">Dashboard</p>
+                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300 hover:text-2xl hover:text-slate-700 ">Dashboard</p>
                 </NavLink>
                 <NavLink className="flex flex-row py-4" to="/admin/articles" >
                     <img src={articleIcon} alt=""></img>
-                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300">Articles</p>
+                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300 hover:text-2xl hover:text-slate-700 ">Articles</p>
                 </NavLink>
                 <NavLink className="flex flex-row py-4" to="/admin/categories" >
                     <img src={categoryIcon} alt=""></img>
-                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300">Categories</p>
+                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300 hover:text-2xl hover:text-slate-700 ">Categories</p>
                 </NavLink>
                 <NavLink className="flex flex-row py-4" to="/admin/sources" >
                     <img src={sourceIcon} alt=""></img>
-                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300">Source</p>
+                    <p className="text-xl font-bold mt-1 ml-8 text-slate-300 hover:text-2xl hover:text-slate-700 ">Source</p>
                 </NavLink>
                 
             </div>   
