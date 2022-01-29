@@ -2,7 +2,7 @@ const axios = require('axios');
 
 class AdminAPI {
     
-    url = 'http://localhost:4000/api/v1/admin/';
+    url = process.env.REACT_APP_BE_HOST + 'api/v1/admin/';
 
     logIn = async (admin) => {
         try {

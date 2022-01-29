@@ -4,7 +4,7 @@ import AuthContext from "./AuthContext";
 import { useContext, useState } from "react";
 import AdminAPI from "../../apis/server-api/admin-api/admin-api"
 
-const baseURL = 'http://localhost:4000/api/v1/';
+const baseURL = process.env.REACT_APP_BE_HOST + 'api/v1/';
     
 const useAxios= () => {
 
