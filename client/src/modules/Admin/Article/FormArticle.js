@@ -60,11 +60,13 @@ const FormArticle = (props) => {
     }
 
     const onSubmit = async () => {
-        if(article.releaseTime !== releaseTime) {
-            article.releaseTime = Date.parse(article.releaseTime);
+        // if(article.releaseTime !== releaseTime) {
+        //     article.releaseTime = Date.parse(article.releaseTime);
+        // }
+        // else article.releaseTime = releaseTime;
+        if(props.purpose === "Add"){
+            article.releaseTime = Date.parse(new Date());
         }
-        else article.releaseTime = releaseTime;
-
         if(article.category && article.source && article.thumbnail && article.link && article.title) {
             if(props.purpose === "Add") {
                 const res = await ArticleAPI.postArticle(article);
@@ -143,7 +145,7 @@ const FormArticle = (props) => {
                             </div>
                         </div>
                         <div className="space-y-4 basis-1/3 px-16">
-                            <div>
+                            {/* <div>
                                 <label className="block font-bold mb-1">Release Time</label>
                                 <input 
                                     type="datetime-local" 
@@ -152,7 +154,7 @@ const FormArticle = (props) => {
                                     value={article.releaseTime}
                                     name="releaseTime">
                                 </input>
-                            </div>
+                            </div> */}
                             {
                                 props.purpose === "Add" && 
                                     <div >
