@@ -1,7 +1,6 @@
 import MainNewsV2 from "../../../shared/components/MainNewsV2";
 import SubNewsV2 from "../../../shared/components/SubNewsV2";
 import LazyLoad from 'react-lazyload'
-import Loading from "../../../shared/components/LoadingV1";
 import LoadingV1 from "../../../shared/components/LoadingV1";
 import LoadingV2 from "../../../shared/components/LoadingV2";
 export default function ListNews({ articles, reload }) {
