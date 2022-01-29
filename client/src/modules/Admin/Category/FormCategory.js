@@ -32,10 +32,13 @@ const FormCategory= (props) => {
         {
             if(props.purpose === "Add") {
                 const res = await CategoryAPI.postCategory(category);
-                if(res) {
+                if(res.success) {
                     alert("Thêm chuyên mục thành công"); 
                 }
-                else alert("Chuyên mục đã tồn tại");
+                else {
+                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                    return;
+                }
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
@@ -43,7 +46,10 @@ const FormCategory= (props) => {
                     if(res.success) {
                         alert("Sửa đổi thành công"); 
                     }
-                    else alert("Có lỗi xảy ra hãy thử lại");
+                    else {
+                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                        return;
+                    }
                 }
                 else return;
             }

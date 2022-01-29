@@ -9,12 +9,13 @@ const FormArticle = (props) => {
         thumbnail: "",
         link: "",
         title: "",
-        releaseTime: "",
+        releaseTime: 0,
         sapo: "",
         isShow: true,
         source: "",
         category: ""
     });
+    const [releaseTime, setReleaseTime] = useState();
     
     const [sources, setSources] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -26,7 +27,10 @@ const FormArticle = (props) => {
 
     useEffect(()=> {
         mounted.current = true;
-        if(props.purpose === "Update") { setArticle(props.formOriginalData); }
+        if(props.purpose === "Update") { 
+            setArticle(props.formOriginalData);
+            setReleaseTime(props.formOriginalData.releaseTime);
+        }
         loadData();
         return () => {
             mounted.current = false;
@@ -43,7 +47,7 @@ const FormArticle = (props) => {
     }  
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
         let curentArticle = article;
         let propertyUpdate = {
             [name] : value,
@@ -56,16 +60,21 @@ const FormArticle = (props) => {
     }
 
     const onSubmit = async () => {
-        if(article.releaseTime) {
+        if(article.releaseTime !== releaseTime) {
             article.releaseTime = Date.parse(article.releaseTime);
         }
+        else article.releaseTime = releaseTime;
+
         if(article.category && article.source && article.thumbnail && article.link && article.title) {
             if(props.purpose === "Add") {
                 const res = await ArticleAPI.postArticle(article);
                 if(res.success) {
-                    alert(res.message); 
+                    alert("Thêm thành công"); 
                 }
-                else alert("Có lỗi xảy ra hãy thử lại");
+                else {
+                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                    return;
+                }
             }
             else if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
@@ -73,9 +82,11 @@ const FormArticle = (props) => {
                     if(res.success) {
                         alert("Sửa đổi thành công"); 
                     }
-                    else alert("Có lỗi xảy ra hãy thử lại");
+                    else {
+                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                        return;
+                    }
                 }
-                
                 else return;
             }
             props.setFormOriginalData({});  
@@ -138,7 +149,7 @@ const FormArticle = (props) => {
                                     type="datetime-local" 
                                     className="px-4 py-2 w-full rounded-xl border border-gray-400" 
                                     onChange={handleInputChange}
-                                    //value={new Date(article.releaseTime)}
+                                    // value={article.releaseTime}
                                     name="releaseTime">
                                 </input>
                             </div>

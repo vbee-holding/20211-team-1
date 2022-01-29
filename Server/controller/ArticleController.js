@@ -39,13 +39,13 @@ class ArticleRouter {
       if(!article.category || !article.source || !article.thumbnail || !article.link || !article.title ) {
         res.json({
           success : false,
-          message : "category or source is null",
+          message : "category và source là bắt buộc",
         });
       }
       else if(await Article.findOne({ link : article.link })) {
         res.json({
           success : false,
-          message : "Article exists"
+          message : "Bài báo đã tồn tại"
         });
       }
       else {
@@ -69,15 +69,25 @@ class ArticleRouter {
     const updatedFields = req.body;
     const { articleId } = req.params;
     try {
-      const updatedArticle = await Article.findByIdAndUpdate(
-        articleId,
-        updatedFields,
-        { new: true }
-      );
-      res.json({
-        success: true,
-        data: updatedArticle,
-      });
+      const check = await Article.findOne({ link : updatedFields.link })
+      if(check && (check._id.toString() !== articleId)){
+          res.json({
+              success : false,
+              message : "Link bài báo đã tồn tại"
+          });
+          return;
+      }
+      else{
+        const updatedArticle = await Article.findByIdAndUpdate(
+          articleId,
+          updatedFields,
+          { new: true }
+        );
+        res.json({
+          success: true,
+          data: updatedArticle,
+        });
+      }
     } catch (err) {
       res.status(400).json({
         success: false,

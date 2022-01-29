@@ -1,15 +1,18 @@
 import useCategoryAPI from "../../../../apis/server-api/admin-api/category-api"; 
 import useArticleAPI from "../../../../apis/server-api/admin-api/article-api"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 const Item = (props) => {
     
     const CategoryAPI = useCategoryAPI();
     const ArticleAPI = useArticleAPI ();
     const [numberArrticle , setNumberArrticle] = useState(0);
+    const mounted = useRef(false);
 
     useEffect(() => {
+        mounted.current = true;
         loadData();
-    }, [])
+        return () => {mounted.current = false; }
+    }, [props])
 
     const loadData = async () => {
         const res = await ArticleAPI.getArticles();
@@ -19,7 +22,7 @@ const Item = (props) => {
                 if(article.category === props.item._id) count ++;
             })
         }
-        setNumberArrticle(count);
+        if(mounted.current) setNumberArrticle(count);
     }
 
     const onClickUpdate = () => {

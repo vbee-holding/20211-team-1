@@ -38,9 +38,9 @@ class CategoryRouter {
     try {
       let check = await Category.findOne({ name: category.name });
       if (check) {
-        res.status(400).json({
+        res.json({
           success: false,
-          message: "categories exists",
+          message: "Tồn tại chuyên mục khác có cùng tên",
         });
       } 
       else {
@@ -63,16 +63,27 @@ class CategoryRouter {
   async putCategory(req, res, next) {
     const updatedFields = req.body;
     const { categoryId } = req.params;
+
     try {
-      const updatedCategory = await Category.findByIdAndUpdate(
-        categoryId,
-        updatedFields,
-        { new: true }
-      );
-      res.json({
-        success: true,
-        data: updatedCategory,
-      });
+      const check = await Category.findOne({ name : updatedFields.name })
+      if(check && (check._id.toString() !== categoryId)){
+          res.json({
+              success : false,
+              message : "Tồn tại chuyên mục khác có cùng tên"
+          });
+          return;
+      }
+      else{
+        const updatedCategory = await Category.findByIdAndUpdate(
+          categoryId,
+          updatedFields,
+          { new: true }
+        );
+        res.json({
+          success: true,
+          data: updatedCategory,
+        });
+      }
     } catch (err) {
       res.status(400).json({
         success: false,
