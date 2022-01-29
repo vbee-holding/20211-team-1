@@ -7,17 +7,18 @@ import FormSource from "./FormSource"
 const Source = () => {
     const [formState, setFormState] = useState(false);
     const [formOriginalData, setFormOriginalData] = useState({});
+    const [formPurpose, setFormPurpose] = useState("Add");
 
     return (
         <div className="flex h-screen" >
             <SideBar/>
             {
-                formState && <FormSource setFormState={setFormState} formOriginalData={formOriginalData} setFormOriginalData={setFormOriginalData}/>
+                formState && <FormSource setFormState={setFormState} purpose={formPurpose} formOriginalData={formOriginalData} setFormOriginalData={setFormOriginalData}/>
             }
             <div className="flex flex-col bg-slate-200 basis-5/6 " >
-                <Header canAdd={false} title="Danh sách các nguồn báo"/>
+                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách các nguồn báo"/>
                 <SourceTableHeader/>
-                <SourceList formState={formState} setFormState={setFormState} setFormOriginalData={setFormOriginalData} />
+                <SourceList formState={formState} setFormState={setFormState} setFormPurpose={setFormPurpose} setFormOriginalData={setFormOriginalData}/>
             </div>  
         </div>      
     )

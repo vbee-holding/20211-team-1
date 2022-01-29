@@ -9,12 +9,13 @@ const FormArticle = (props) => {
         thumbnail: "",
         link: "",
         title: "",
-        releaseTime: "",
+        releaseTime: 0,
         sapo: "",
         isShow: true,
         source: "",
         category: ""
     });
+    const [releaseTime, setReleaseTime] = useState();
     
     const [sources, setSources] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -26,7 +27,10 @@ const FormArticle = (props) => {
 
     useEffect(()=> {
         mounted.current = true;
-        if(props.purpose === "Update") { setArticle(props.formOriginalData); }
+        if(props.purpose === "Update") { 
+            setArticle(props.formOriginalData);
+            setReleaseTime(props.formOriginalData.releaseTime);
+        }
         loadData();
         return () => {
             mounted.current = false;
@@ -43,7 +47,7 @@ const FormArticle = (props) => {
     }  
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
         let curentArticle = article;
         let propertyUpdate = {
             [name] : value,
@@ -56,27 +60,39 @@ const FormArticle = (props) => {
     }
 
     const onSubmit = async () => {
-        if(article.releaseTime) {
+        if(article.releaseTime !== releaseTime) {
             article.releaseTime = Date.parse(article.releaseTime);
         }
-        if(article.category && article.source) {
+        else article.releaseTime = releaseTime;
+
+        if(article.category && article.source && article.thumbnail && article.link && article.title) {
             if(props.purpose === "Add") {
                 const res = await ArticleAPI.postArticle(article);
-                if(!res.success) {
-                    alert(res.message);
+                if(res.success) {
+                    alert("Thêm thành công"); 
+                }
+                else {
+                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
                     return;
                 }
             }
             else if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
-                    await ArticleAPI.putArticle(article._id, article);
+                    const res = await ArticleAPI.putArticle(article._id, article);
+                    if(res.success) {
+                        alert("Sửa đổi thành công"); 
+                    }
+                    else {
+                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                        return;
+                    }
                 }
                 else return;
             }
             props.setFormOriginalData({});  
             props.setFormState(false);
         }
-        else alert ("Source và Category không thể để trống"); 
+        else alert ("Thumbnail, Title, Link, Source và Category không thể để trống"); 
 
     }
 
@@ -133,7 +149,7 @@ const FormArticle = (props) => {
                                     type="datetime-local" 
                                     className="px-4 py-2 w-full rounded-xl border border-gray-400" 
                                     onChange={handleInputChange}
-                                    //value={new Date(article.releaseTime)}
+                                    // value={article.releaseTime}
                                     name="releaseTime">
                                 </input>
                             </div>
@@ -159,13 +175,14 @@ const FormArticle = (props) => {
                                     onChange={handleInputChange} 
                                     name="category"
                                     value={article.category}>
-                                    {
-                                        categories && categories.map((category, index) => {
-                                            return (
-                                                <option value={category._id} key={index}>{category.name}</option>
-                                            )
-                                        })
-                                    }
+                                        <option selected hidden>Choose here</option>
+                                        {
+                                            categories && categories.map((category, index) => {
+                                                return (
+                                                    <option value={category._id} key={index}>{category.name}</option>
+                                                )
+                                            })
+                                        }
                                 </select>
                             </div>
 
@@ -176,13 +193,14 @@ const FormArticle = (props) => {
                                     onChange={handleInputChange} 
                                     name="source"
                                     value={article.source}>
-                                    {
-                                        sources && sources.map((source, index) => {
-                                            return (
-                                                <option value={source._id} key={index} >{source.name}</option>
-                                            )
-                                        })
-                                    }
+                                        <option selected hidden>Choose here</option>
+                                        {
+                                            sources && sources.map((source, index) => {
+                                                return (
+                                                    <option value={source._id} key={index} >{source.name}</option>
+                                                )
+                                            })
+                                        }
                                 </select>
                             </div>
                             <button className="bg-indigo-500 rounded-2xl font-semibold text-white w-20 h-10 text-sm hover:bg-indigo-500" onClick={onSubmit}>Submit</button>

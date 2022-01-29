@@ -37,8 +37,16 @@ class SourceRouter   {
 
     async postSource (req, res, next) {
         const source = req.body;
+
         try {
-            await Source.create(source);
+            if(await Source.findOne({ url : source.url })) {
+                res.json({
+                  success : false,
+                  message : "Tồn tại trang web khác có cùng url"
+                });
+                return;
+            }
+            else await Source.create(source);
             res.json({
                 success : true,
                 data : source,
@@ -58,17 +66,29 @@ class SourceRouter   {
         const updatedFields = req.body;
         const { sourceId } = req.params;
         try {
-            const updatedSource = await Source.findByIdAndUpdate( sourceId , updatedFields, { new: true });
-            res.json({
-                success : true,
-                data : updatedSource,
-            })
+            const check = await Source.findOne({ url : updatedFields.url })
+            if(check && (check._id.toString() !== sourceId)){
+                res.json({
+                    success : false,
+                    message : "Tồn tại trang web khác có cùng url"
+                });
+                return;
+            }
+            else{
+                const updatedSource = await Source.findByIdAndUpdate( sourceId , updatedFields, { new: true });
+                res.json({
+                    success : true,
+                    data : updatedSource,
+                })
+            }
         }
         catch (err) {
+            console.log(err);
             res.status(400).json({
                 success: false,
                 error : err,
             })
+
         }
 
     }

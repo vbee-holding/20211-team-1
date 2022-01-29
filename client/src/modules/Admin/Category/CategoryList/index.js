@@ -2,9 +2,10 @@ import CategoryItem from "./CategoryItem"
 import useCategoryAPI from "../../../../apis/server-api/admin-api/category-api"
 import { useEffect, useState, useRef } from "react";
 
-const List = () => {
+const List = (props) => {
     
     const [categories, setCategories] = useState([]); 
+    const [update, setUpdate] = useState(true);
     const mounted = useRef(false);
 
     const CategoryAPI = useCategoryAPI();
@@ -13,11 +14,14 @@ const List = () => {
         mounted.current = true;
         loadData();
         return () => {mounted.current = false};
-    },[])
+    },[props, update])
 
     const loadData = async () => {
         const response = await CategoryAPI.getCategories();
         if(mounted.current) setCategories(response.data);
+    }
+    const updateFromChild  = () => {
+        setUpdate(!update);
     }
 
     return (
@@ -25,7 +29,15 @@ const List = () => {
            {
                 categories && categories.map((category, index) => {
                     return (
-                        <CategoryItem item={category} index={index} key={index}></CategoryItem>
+                        <CategoryItem 
+                            item={category} 
+                            index={index} 
+                            key={index}
+                            setFormState={props.setFormState} 
+                            setFormPurpose={props.setFormPurpose}
+                            updateFromChild={updateFromChild}
+                            setFormOriginalData={props.setFormOriginalData}>
+                        </CategoryItem>
                     )
                 })
             }

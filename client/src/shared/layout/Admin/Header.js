@@ -59,9 +59,7 @@ const Header = (props) => {
                 <div className="flex items-center h-16">
                     <h1 className="text-4xl font-mono font-bold h-8">{props.title}</h1>
                 </div>
-                {
-                    props.canAdd &&  <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-40 h-16 text-2xl mr-10" onClick={onClickAdd} >Thêm mới</button>
-                }
+                <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-40 h-16 text-2xl mr-10" onClick={onClickAdd} >Thêm mới</button>
             </div>
            
         </div>

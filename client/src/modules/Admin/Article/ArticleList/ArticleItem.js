@@ -16,7 +16,11 @@ const Item = (props) => {
         if(props.item.isShow) updatedField.isShow = false;
         else updatedField.isShow = true;
 
-        await ArticleAPI.putArticle(updatedField._id, updatedField);
+        const res = await ArticleAPI.putArticle(updatedField._id, updatedField);
+        if(res && !res.success) {
+            alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+            return;
+        }
         if(mounted.current) props.updateFromChild();
     } 
 
@@ -29,7 +33,11 @@ const Item = (props) => {
 
     const onClickDelete = async () => {
         if(window.confirm("Bạn có chắc chắn muốn xóa bài báo này")) {
-            await ArticleAPI.deleteArticle(props.item._id);
+            const res = await ArticleAPI.deleteArticle(props.item._id);
+            if(res.success) {
+                alert("Xóa bài báo thành công"); 
+            }
+            else alert("Có lỗi xảy ra hãy thử lại");
             props.updateFromChild();
         }
     }
