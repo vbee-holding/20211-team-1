@@ -14,9 +14,7 @@ export default function HomeContainer() {
     return (
         <div>
             <div>
-                
-                    <HotNewsCategory />
-                
+                <HotNewsCategory />
             </div>
             <div>
                 <LazyLoad placeholder={<Loading />}>
