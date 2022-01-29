@@ -1,29 +1,28 @@
 import { useEffect, useState } from "react";
 import { FE_CATEGORY_CONSTANT_ROUTES } from "../../../routes/FEConstantRoutes";
 import { getCategoryDetailsByID } from "../../../services/User/HomeServices";
-import Loading from "../../../shared/components/Loading";
 import MainNews from "../../../shared/components/MainNews";
 import SeeMore from "../../../shared/components/SeeMore";
 import SubNews from "../../../shared/components/SubNews";
 import TopTitle from "../../../shared/components/TopTitle";
-
+import LazyLoad from 'react-lazyload'
+import LoadingV1 from "../../../shared/components/LoadingV1";
+import LoadingV2 from "../../../shared/components/LoadingV2";
 export default function Entertainment() {
     const [articles, setArticles] = useState(null)
     const [needReload, setNeedReload] = useState(1)
     useEffect(() => {
-        window.scrollTo({ behavior: 'smooth', top: '0px' });
         getCategoryDetailsByID(FE_CATEGORY_CONSTANT_ROUTES.entertainment.id)
             .then((result) => {
-                console.log(result);
                 setArticles(result);
             })
             .catch(err => {
                 console.log(err);
             });
-    }, [needReload])
+    }, [])
     if (articles == null) {
         return (
-            <Loading/>
+            <LoadingV1 />
         )
     }
 
@@ -33,14 +32,21 @@ export default function Entertainment() {
             <div>
                 {
                     articles.slice(0, 1).map((article) => (
-                        article && <MainNews data={article} key={article._id} reload={() => setNeedReload(needReload + 1)} />
+
+                        article &&
+                        <LazyLoad placeholder={<LoadingV1 />} key={article._id}>
+                            <MainNews data={article}  reload={() => setNeedReload(needReload + 1)} />
+                        </LazyLoad>
                     ))
                 }
             </div>
             <div className="sm:grid sm:grid-cols-2 gap-3 mt-5">
                 {
                     articles.slice(2, 6).map((article) => (
-                        article && <SubNews data={article} key={article._id} reload={() => setNeedReload(needReload + 1)} />
+                        article &&
+                        <LazyLoad placeholder={<LoadingV2 />} key={article._id}>
+                            <SubNews data={article}  reload={() => setNeedReload(needReload + 1)} />
+                        </LazyLoad>
                     ))
                 }
             </div>

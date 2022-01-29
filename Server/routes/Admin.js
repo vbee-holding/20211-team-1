@@ -141,26 +141,14 @@ router.get('/', AdminController.getAdmins);
 
 /**
  * @swagger
- * /api/v1/admin/{id}:
- *   delete:
- *     summary: Remove the admin by id
+ * /api/v1/admin/crawl:
+ *   get:
+ *     summary: Crawl the article
  *     tags: [Admins]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The admin id
- * 
- *     responses:
- *       200:
- *         description: The admin was deleted
- *       404:
- *         description: The admin was not found
+ *   
  */
 
-//router.delete('/:adminId', AdminController.deleteAdmin);
+router.get('/crawl', AdminController.crawlData);
 
 router.post('/login', AdminController.logIn);
 router.post('/logout', Verify.verify, AdminController.logOut);

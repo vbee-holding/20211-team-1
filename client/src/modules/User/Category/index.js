@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCategoryDetailsByID } from "../../../services/User/HomeServices";
-import Loading from "../../../shared/components/Loading";
 import MainNews from "../../../shared/components/MainNews";
 import TopTitle from "../../../shared/components/TopTitle";
 import ListNews from "./ListNews";
-
+import LazyLoad from 'react-lazyload'
+import LoadingV1 from "../../../shared/components/LoadingV1";
 export default function CategoryContainer({ id }) {
     const [needReload, setNeedReload] = useState(1)
     const NUMBER_OF_ARTICLE_IN_GROUP = 9;
@@ -32,24 +32,29 @@ export default function CategoryContainer({ id }) {
     }, [id, needReload])
     if (articles == null) {
         return (
-            <Loading/>
+            <LoadingV1 />
         )
     }
 
     return (
         <div>
             <TopTitle title="Tin chính" />
-            <div className="">
+            <div>
                 {
                     articles.slice(0, 1).map((article) => (
-                        article && <MainNews data={article} key={article._id} reload={() => setNeedReload(needReload + 1)} />
+                        article &&
+                        <LazyLoad placeholder={<LoadingV1 />}  key={article._id}>
+                            <MainNews data={article} reload={() => setNeedReload(needReload + 1)} />
+                        </LazyLoad>
                     ))
                 }
             </div>
             {
                 articleGroups.map((articleGroup, index) => (
                     <div className="mt-5" key={index}>
-                        <ListNews articles={articleGroup} reload={() => setNeedReload(needReload + 1)}/>
+                        <LazyLoad placeholder={<LoadingV1 />}>
+                            <ListNews articles={articleGroup} reload={() => setNeedReload(needReload + 1)} />
+                        </LazyLoad>
                     </div>
                 ))
             }

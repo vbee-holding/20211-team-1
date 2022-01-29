@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { FE_CATEGORY_CONSTANT_ROUTES } from "../../routes/FEConstantRoutes"
 import { getCategoryDetailsByID } from "../../services/User/HomeServices"
-import Loading from "../components/Loading"
+import LoadingV2 from "../components/LoadingV2"
 import SeeMore from "../components/SeeMore"
 import SubNew from "../components/SubNews"
-
+import LazyLoad from 'react-lazyload'
 export default function Top() {
     const [articles, setArticles] = useState(null)
     const [needReload, setNeedReload] = useState(0)
@@ -20,7 +20,7 @@ export default function Top() {
     }, [needReload])
     if (articles == null) {
         return (
-            <Loading />
+            <LoadingV2 />
         )
     }
     return (
@@ -36,9 +36,10 @@ export default function Top() {
             <div>
                 {
                     articles.slice(0, 7).map((article) => (
-                        article && (<div key={article._id}>
+                        article &&
+                        <LazyLoad placeholder={<LoadingV2 />} key={article._id}>
                             <SubNew data={article} reload={() => setNeedReload(needReload + 1)} />
-                        </div>)
+                        </LazyLoad>
                     ))
                 }
             </div>

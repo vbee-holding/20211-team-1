@@ -70,4 +70,5 @@ router.get("/details", CategoryController.getAllCategoryDetail)
  */
 router.get("/details/:categoryId", CategoryController.getCategoryDetailByID)
 
+
 module.exports = router;

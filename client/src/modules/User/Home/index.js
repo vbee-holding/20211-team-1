@@ -3,28 +3,45 @@ import HotNewsCategory from "./HotNewsCategory";
 import News from "./News";
 import Sports from "./Sports";
 import Technology from "./Technology";
-import Video from "./World";
-
+import LazyLoad from 'react-lazyload'
+import World from "./World";
+import Loading from "../../../shared/components/LoadingV1";
+import { useEffect } from "react";
 export default function HomeContainer() {
+    useEffect(()=>{
+        window.scrollTo({ behavior: 'smooth', top: '0px' });
+    },[])
     return (
         <div>
-            <div className="">
-                <HotNewsCategory />
+            <div>
+                
+                    <HotNewsCategory />
+                
             </div>
-            <div className="">
-                <News />
+            <div>
+                <LazyLoad placeholder={<Loading />}>
+                    <News />
+                </LazyLoad>
             </div>
-            <div className="">
-                <Entertainment />
+            <div>
+                <LazyLoad placeholder={<Loading />}>
+                    <Entertainment />
+                </LazyLoad>
             </div>
-            <div className="">
-                <Sports />
+            <div>
+                <LazyLoad placeholder={<Loading />}>
+                    <Sports />
+                </LazyLoad>
             </div>
-            <div className="">
-                <Technology />
+            <div>
+                <LazyLoad placeholder={<Loading />}>
+                    <Technology />
+                </LazyLoad>
             </div>
-            <div className="">
-                <Video />
+            <div>
+                <LazyLoad placeholder={<Loading />}>
+                    <World />
+                </LazyLoad>
             </div>
         </div>
     )

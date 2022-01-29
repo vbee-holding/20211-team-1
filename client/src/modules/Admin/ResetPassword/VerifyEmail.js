@@ -34,7 +34,7 @@ const VerifyEmail = (props) => {
                 </section>   
                 <section className="mt-4"> 
                     <div className="space-y-4">
-                        <div className="">
+                        <div >
                             <label className="block font-bold" >Email</label>
                             <input 
                                 type="text" 
@@ -52,7 +52,7 @@ const VerifyEmail = (props) => {
                         </div>
                         
                         
-                        <div className="">
+                        <div >
                             <label className="block font-bold mb-1" >Mã xác nhận</label>
                             <p className="text-gray-600 pt-2 font-semibold">Điền mã 6 chữ số đã được gửi vào email của bạn </p>
                             <input 

@@ -113,7 +113,7 @@ const FormArticle = (props) => {
                     </div>
                     <div className= {props.purpose === "Add" ? "flex flex-row justify-between mt-4 h-96" : "flex flex-row justify-between mt-4 h-80"} >
                         <div className="space-y-6 basis-2/3 px-16">
-                            <div className="">
+                            <div >
                                 <label htmlFor="" className="block font-bold mb-1">Thumbnail URL</label>
                                 <input 
                                     type="text" 
@@ -123,7 +123,7 @@ const FormArticle = (props) => {
                                     name="thumbnail">
                                 </input>
                             </div>
-                            <div className="">
+                            <div >
                                 <label htmlFor="" className="block font-bold mb-1">Articel link</label>
                                 <input 
                                     type="text" 
@@ -133,7 +133,7 @@ const FormArticle = (props) => {
                                     name="link">
                                 </input>
                             </div>
-                            <div className="">
+                            <div >
                                 <label htmlFor="" className="block font-bold mb-1">Title</label>
                                 <input 
                                     type="text" 
@@ -170,7 +170,7 @@ const FormArticle = (props) => {
                                     </div>
                             }
 
-                            <div className="">
+                            <div >
                                 <label className="block font-bold mb-1 mr-10" >Category Id</label>
                                 <select 
                                     className="w-full" 
