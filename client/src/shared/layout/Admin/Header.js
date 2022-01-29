@@ -35,7 +35,7 @@ const Header = (props) => {
             <div className="flex flex-row justify-between mt-5 mx-10 basis-1/5 " >
                 <div className="flex items-center h-14 basis-1/3 relative">
                     <button className="h-1/2 mx-4 absolute">
-                        <img src={searchIcon} alt="" className=""/>
+                        <img src={searchIcon} alt="" />
                     </button>
                     <input type="text" className="h-full w-full rounded-full px-14 font-semibold text-xl border border-indigo-500 focus:outline-violet-600" placeholder="Search here ..."></input>
                 </div>

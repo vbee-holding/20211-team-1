@@ -13,7 +13,6 @@ export const getCategoryByIdAPI= async(id)=>{
 
 export const updateArticleByIdAPI= async(id,data)=>{
     const result = await axios.put(`api/v1/articles/${id}`, data);
-    console.log(id)
     return result.data;
 }
 

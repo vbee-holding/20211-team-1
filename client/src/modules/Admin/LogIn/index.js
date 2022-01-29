@@ -57,7 +57,7 @@ const LogIn = (props) => {
                 </section>   
                 <section className="mt-10"> 
                     <div className="space-y-4">
-                        <div className="">
+                        <div >
                             <label className="block font-bold mb-1" >Email</label>
                             <input 
                                 type="email" 
@@ -67,7 +67,7 @@ const LogIn = (props) => {
                                 className="font-semibold px-4 py-2 w-full rounded-xl border border-purple-700 focus:outline-violet-500"  >
                             </input>
                         </div>
-                        <div className="">
+                        <div >
                             <label className="block font-bold mb-1" >Password</label>
                             <input 
                                 type="password" 
@@ -80,7 +80,7 @@ const LogIn = (props) => {
                         {
                             !isCorrect && <p className="text-red-600 pt-2 font-semibold">Email hoặc mật khẩu không đúng </p>
                         }
-                        <div className="">
+                        <div >
                             <NavLink className="text-sm font-bold text-purple-600 hover:text-purple-700 hover:underline mb-6 " to="/admin/reset-password" >Fogot your Password ?</NavLink>
                         </div>
                         <button className="bg-purple-600 hover:bg-purple-700 rounded-2xl text-white py-2 w-full shadow-lg hover:shadow-xl" onClick={onSubmit} type="submit">Sign in</button>

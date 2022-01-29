@@ -70,7 +70,7 @@ const ResetPassword = (props) => {
                     <div className="space-y-4">
                         {
                             isLogIn &&  
-                                <div className="">
+                                <div >
                                     <label className="block font-bold mb-1" >Mật khẩu</label>
                                     <input 
                                         type="password"
@@ -84,7 +84,7 @@ const ResetPassword = (props) => {
                                     }
                                 </div>
                         }
-                        <div className="">
+                        <div >
                             <label className="block font-bold mb-1" >Mật khẩu mới</label>
                             <input 
                                 type="password"
@@ -97,7 +97,7 @@ const ResetPassword = (props) => {
                                 !isCorrectLenth && <label className=" font-semibold mb-1 text-red-500" >Mật khẩu phải ít nhất 6 ký tự</label>
                             }
                         </div>
-                        <div className="">
+                        <div >
                             <label className="block font-bold mb-1" >Xác nhận lại mật khẩu</label>
                             <input 
                                 type="password" 
