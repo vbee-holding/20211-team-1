@@ -3,11 +3,11 @@ const Article = require("../models/Article");
 class ArticleRouter {
   async getArticles(req, res, next) {
     try {
-      const article = await Article.find();
+      const articles = await Article.find();
       res.json({
         success: true,
-        count: article.length,
-        data: article,
+        count: articles.length,
+        data: articles,
       });
     } catch (err) {
       res.json({
@@ -36,13 +36,13 @@ class ArticleRouter {
   async postArticle(req, res, next) {
     try {
       const article = req.body;
-      if(!article.category || !article.source) {
+      if(!article.category || !article.source || !article.thumbnail || !article.link || !article.title ) {
         res.json({
           success : false,
           message : "category or source is null",
         });
       }
-      if(await Article.findOne({ link : article.link })) {
+      else if(await Article.findOne({ link : article.link })) {
         res.json({
           success : false,
           message : "Article exists"

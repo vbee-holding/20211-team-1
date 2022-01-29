@@ -32,10 +32,10 @@ const FormCategory= (props) => {
         {
             if(props.purpose === "Add") {
                 const res = await CategoryAPI.postCategory(category);
-                if(res.success) {
-                    alert("Sửa đổi thành công"); 
+                if(res) {
+                    alert("Thêm chuyên mục thành công"); 
                 }
-                else alert("Có lỗi xảy ra hãy thử lại");
+                else alert("Chuyên mục đã tồn tại");
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){

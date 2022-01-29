@@ -42,7 +42,8 @@ class CategoryRouter {
           success: false,
           message: "categories exists",
         });
-      } else {
+      } 
+      else {
         await Category.create(category);
 
         res.json({
