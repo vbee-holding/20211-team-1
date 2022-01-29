@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 const List = (props) => {
     const [sources, setSources] = useState([]); 
+    const [update, setUpdate] = useState(true);
     const mounted = useRef(false); 
 
     const SourceAPI = useSourceAPI();
@@ -12,11 +13,15 @@ const List = (props) => {
         mounted.current = true;
         loadData();
         return () => { mounted.current = false; }
-    }, [props])
+    }, [props, update])
 
     const loadData = async () => {
         const response = await SourceAPI.getSources();
         if(mounted.current) setSources(response.data);
+    }
+
+    const updateFromChild  = () => {
+        setUpdate(!update);
     }
 
     return (
@@ -27,7 +32,10 @@ const List = (props) => {
                         <SourceItem 
                             item={source} 
                             key={index}  
+                            index={index}
                             setFormState={props.setFormState} 
+                            setFormPurpose={props.setFormPurpose}
+                            updateFromChild={updateFromChild}
                             setFormOriginalData={props.setFormOriginalData}>
                         </SourceItem>
                     )
