@@ -37,7 +37,10 @@ const FormSource= (props) => {
                 if(res.success) {
                     alert("Thêm mới nguồn báo thành công"); 
                 }
-                else alert(res.message);
+                else {
+                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                    return;
+                }
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
@@ -45,7 +48,10 @@ const FormSource= (props) => {
                     if(res.success) {
                         alert("Sửa đổi thành công"); 
                     }
-                    else alert("Có lỗi xảy ra hãy thử lại");
+                    else {
+                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                        return;
+                    }
                 }
                 else return;
             }

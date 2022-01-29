@@ -17,10 +17,10 @@ const Item = (props) => {
         else updatedField.isShow = true;
 
         const res = await ArticleAPI.putArticle(updatedField._id, updatedField);
-        if(res.success) {
-            alert("Xóa nguồn báo thành công"); 
+        if(res && !res.success) {
+            alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+            return;
         }
-        else alert("Có lỗi xảy ra hãy thử lại");
         if(mounted.current) props.updateFromChild();
     } 
 
