@@ -37,8 +37,16 @@ class SourceRouter   {
 
     async postSource (req, res, next) {
         const source = req.body;
+
         try {
-            await Source.create(source);
+            if(await Source.findOne({ url : source.url })) {
+                res.json({
+                  success : false,
+                  message : "Source exists"
+                });
+                return;
+            }
+            else await Source.create(source);
             res.json({
                 success : true,
                 data : source,

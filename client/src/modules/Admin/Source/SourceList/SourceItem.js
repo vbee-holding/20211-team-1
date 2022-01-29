@@ -14,9 +14,9 @@ const Item = (props) => {
         if(window.confirm("Bạn có chắc chắn muốn xóa nguồn báo này")) {
             const res = await SourceAPI.deleteSource(props.item._id);
             if(res.success) {
-                alert("You delete successfully"); 
+                alert("Xóa nguồn báo thành công"); 
             }
-            else alert("Something wrong please try again");
+            else alert("Có lỗi xảy ra hãy thử lại");
             props.updateFromChild();
         }
     }

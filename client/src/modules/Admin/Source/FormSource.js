@@ -35,17 +35,17 @@ const FormSource= (props) => {
             if(props.purpose === "Add") {
                 const res = await SourceAPI.postSource(source);
                 if(res.success) {
-                    alert("New source is added successfully"); 
+                    alert("Thêm mới nguồn báo thành công"); 
                 }
-                else alert("Something wrong please try again");
+                else alert(res.message);
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
                     const res = await SourceAPI.putSource(source._id, source);
                     if(res.success) {
-                        alert("You update successfully"); 
+                        alert("Sửa đổi thành công"); 
                     }
-                    else alert("Something wrong please try again");
+                    else alert("Có lỗi xảy ra hãy thử lại");
                 }
                 else return;
             }
