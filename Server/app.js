@@ -11,7 +11,6 @@ const articlesRouter = require('./routes/Articles');
 const categoriesRouter = require('./routes/Categories');
 const sourcesRouter = require('./routes/Sources');
 const adminRouter = require('./routes/Admin');
-const userRouter = require('./routes/User');
 const cors = require("cors");
 
 const specs = swaggerJsDoc(swaggerOptions);
@@ -35,7 +34,6 @@ app.use('/api/v1/articles', articlesRouter);
 app.use('/api/v1/categories', categoriesRouter);
 app.use('/api/v1/sources', sourcesRouter);
 app.use('/api/v1/admin', adminRouter);
-app.use('/api/v1/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

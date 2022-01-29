@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FE_CATEGORY_CONSTANT_ROUTES } from "../../../routes/FEConstantRoutes";
-import { getArticlesByCategoryId } from "../../../services/User/HomeServices";
+import { getCategoryDetailsByID } from "../../../services/User/HomeServices";
 import Loading from "../../../shared/components/Loading";
 import MainNewsV3 from "../../../shared/components/MainNewsV3";
 import SeeMore from "../../../shared/components/SeeMore";
@@ -12,7 +12,7 @@ export default function Sports() {
     const [needReload, setNeedReload] = useState(1)
     useEffect(() => {
         window.scrollTo({ behavior: 'smooth', top: '0px' });
-        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.sport.id)
+        getCategoryDetailsByID(FE_CATEGORY_CONSTANT_ROUTES.sport.id)
             .then((result) => {
                 setArticles(result);
             })

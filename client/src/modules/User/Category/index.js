@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticlesByCategoryId } from "../../../services/User/HomeServices";
+import { getCategoryDetailsByID } from "../../../services/User/HomeServices";
 import Loading from "../../../shared/components/Loading";
 import MainNews from "../../../shared/components/MainNews";
 import TopTitle from "../../../shared/components/TopTitle";
@@ -21,7 +21,7 @@ export default function CategoryContainer({ id }) {
     }
     useEffect(() => {
         window.scrollTo({ behavior: 'smooth', top: '0px' });
-        getArticlesByCategoryId(id)
+        getCategoryDetailsByID(id)
             .then((result) => {
                 setArticles(result);
                 pagination(result);
