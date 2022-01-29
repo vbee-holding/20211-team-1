@@ -149,7 +149,7 @@ const FormArticle = (props) => {
                                     type="datetime-local" 
                                     className="px-4 py-2 w-full rounded-xl border border-gray-400" 
                                     onChange={handleInputChange}
-                                    // value={article.releaseTime}
+                                    value={article.releaseTime}
                                     name="releaseTime">
                                 </input>
                             </div>

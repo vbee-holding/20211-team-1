@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { FE_CATEGORY_CONSTANT_ROUTES } from "../../routes/FEConstantRoutes"
-import { getArticlesByCategoryId } from "../../services/User/HomeServices"
+import { getCategoryDetailsByID } from "../../services/User/HomeServices"
 import Loading from "../components/Loading"
 import SeeMore from "../components/SeeMore"
 import SubNew from "../components/SubNews"
@@ -10,7 +10,7 @@ export default function Top() {
     const [needReload, setNeedReload] = useState(0)
     useEffect(() => {
         window.scrollTo({ behavior: 'smooth', top: '0px' });
-        getArticlesByCategoryId(FE_CATEGORY_CONSTANT_ROUTES.new.id)
+        getCategoryDetailsByID(FE_CATEGORY_CONSTANT_ROUTES.new.id)
             .then((result) => {
                 setArticles(result);
             })
@@ -20,7 +20,7 @@ export default function Top() {
     }, [needReload])
     if (articles == null) {
         return (
-            <Loading/>
+            <Loading />
         )
     }
     return (
