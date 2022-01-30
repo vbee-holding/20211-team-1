@@ -23,7 +23,7 @@ const Article = () => {
                 formState && <FormArticle setFormState={setFormState} purpose={formPurpose} formOriginalData={formOriginalData} setFormOriginalData={setFormOriginalData}/>
             }
             <div className="flex flex-col bg-slate-200 basis-5/6">
-                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách bài báo" canCrawl = {true} updateFromChild={updateFromChild}/>
+                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách bài báo" isArticle = {true} updateFromChild={updateFromChild}/>
                 <ArticleTableHeader/>
                 <ArticleList formState={formState}  setFormState={setFormState} setFormPurpose={setFormPurpose} setFormOriginalData={setFormOriginalData} />
             </div>  

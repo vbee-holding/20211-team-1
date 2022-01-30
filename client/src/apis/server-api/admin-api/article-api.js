@@ -53,12 +53,24 @@ const useArticleAPI = () => {
         }
     }
 
+    
+    const hideData = async () => {
+        try {
+            const res = await privateAxois.get('articles/hide');
+            return res.data;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+
     return {
         getArticles : getArticles,
         getArticle : getArticle,
         postArticle : postArticle,
         putArticle : putArticle,
         deleteArticle : deleteArticle,
+        hideData : hideData,
     }
 }
 
