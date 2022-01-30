@@ -4,8 +4,15 @@ import categoryIcon from "../../../assets/images/category-icon.png";
 import sourceIcon from "../../../assets/images/source-icon.png";
 import logo from "../../../assets/images/logo-admin.png";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 const NavBar = () => {
+
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem("userEmail");
+        }
+    })
 
 
     return (
