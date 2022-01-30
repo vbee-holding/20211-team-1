@@ -16,7 +16,7 @@ const Source = () => {
                 formState && <FormSource setFormState={setFormState} purpose={formPurpose} formOriginalData={formOriginalData} setFormOriginalData={setFormOriginalData}/>
             }
             <div className="flex flex-col bg-slate-200 basis-5/6 " >
-                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách các nguồn báo"/>
+                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách các nguồn báo" canCrawl = {false}/>
                 <SourceTableHeader/>
                 <SourceList formState={formState} setFormState={setFormState} setFormPurpose={setFormPurpose} setFormOriginalData={setFormOriginalData}/>
             </div>  

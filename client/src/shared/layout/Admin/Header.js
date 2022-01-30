@@ -30,6 +30,21 @@ const Header = (props) => {
 
     }
 
+    const onClickCrawl = async () => {
+        try{
+            const res = await AdminAPI.crawlData(); 
+            if (res.success && res.success) {
+                alert ((res.msg ? res.msg : "Thành công" ) + " vui lòng đợi một vài phút để danh sách cập nhật các bài báo đã có sẽ không được thêm lại");
+            }
+            else alert ((res.msg ? res.msg : "Có lỗi xảy ra" ) + " vui lòng thử lại");
+        }
+        catch (err) {
+            console.log(err);
+            alert ("Có lỗi xảy ra vui lòng thử lại");
+        }
+        props.updateFromChild();
+    }
+
     return (
         <div>
             <div className="flex flex-row justify-between mt-5 mx-10 basis-1/5 " >
@@ -59,8 +74,14 @@ const Header = (props) => {
                 <div className="flex items-center h-16">
                     <h1 className="text-4xl font-mono font-bold h-8">{props.title}</h1>
                 </div>
-                <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-40 h-16 text-2xl mr-10" onClick={onClickAdd} >Thêm mới</button>
-            </div>
+                <div className="flex flex-row">
+                    {
+                        props.canCrawl && <button className="bg-violet-500 hover:bg-violet-600 rounded-2xl font-semibold text-white w-40 h-16 text-2xl mr-10" onClick={onClickCrawl} >Crawl báo</button>
+                    }
+                    <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-40 h-16 text-2xl mr-10" onClick={onClickAdd} >Thêm mới</button>
+            
+                </div>
+               </div>
            
         </div>
     )
