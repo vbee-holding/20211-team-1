@@ -36,16 +36,16 @@ class ArticleRouter {
   async postArticle(req, res, next) {
     try {
       const article = req.body;
-      if(!article.category || !article.source || !article.thumbnail || !article.link || !article.title ) {
+      if (!article.category || !article.source || !article.thumbnail || !article.link || !article.title) {
         res.json({
-          success : false,
-          message : "category và source là bắt buộc",
+          success: false,
+          message: "category và source là bắt buộc",
         });
       }
-      else if(await Article.findOne({ link : article.link })) {
+      else if (await Article.findOne({ link: article.link })) {
         res.json({
-          success : false,
-          message : "Bài báo đã tồn tại"
+          success: false,
+          message: "Bài báo đã tồn tại"
         });
       }
       else {
@@ -59,7 +59,39 @@ class ArticleRouter {
       res.status(400).json({
         success: false,
         error: err,
-        message : "Đã có lỗi xảy ra",
+        message: "Đã có lỗi xảy ra",
+      });
+      console.log(err);
+    }
+  }
+
+
+  async postArticleWithoutAuth(req, res, next) {
+    try {
+      const article = req.body;
+      Article.findOne({ link: article.link }).then((result) => {
+        if (!result) {
+          const newArticle = new Article(article)
+          newArticle.save();
+          res.json({
+            success: true,
+            data: newArticle,
+          });
+        } else {
+          res.json({
+            success: false,
+            message: "This article has existed"
+          });
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        error: err,
+        message: "Đã có lỗi xảy ra",
       });
       console.log(err);
     }
@@ -69,15 +101,15 @@ class ArticleRouter {
     const updatedFields = req.body;
     const { articleId } = req.params;
     try {
-      const check = await Article.findOne({ link : updatedFields.link })
-      if(check && (check._id.toString() !== articleId)){
-          res.json({
-              success : false,
-              message : "Link bài báo đã tồn tại"
-          });
-          return;
+      const check = await Article.findOne({ link: updatedFields.link })
+      if (check && (check._id.toString() !== articleId)) {
+        res.json({
+          success: false,
+          message: "Link bài báo đã tồn tại"
+        });
+        return;
       }
-      else{
+      else {
         const updatedArticle = await Article.findByIdAndUpdate(
           articleId,
           updatedFields,
@@ -109,6 +141,31 @@ class ArticleRouter {
         success: false,
         error: err,
       });
+    }
+  }
+
+  async hideArticle(req, res, next) {
+    try {
+      const time = Date.now() - 1800000
+      console.log(time)
+      Article.updateMany({ isShow: true, releaseTime: { $lt: time } }, { isShow: false })
+        .then((result) => {
+          console.log(result)
+          res.json({
+            success: true,
+            message: "Hide articles successfully",
+          })
+        }).catch(error => {
+          res.json({
+            success: false,
+            error: error
+          });
+        })
+    } catch (error) {
+      res.json({
+        success: false,
+        error: error
+      })
     }
   }
 
