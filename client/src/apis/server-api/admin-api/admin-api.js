@@ -63,6 +63,16 @@ class AdminAPI {
         }
     }
 
+    crawlData = async () => {
+        try {
+            const res = await axios.get(this.url + "crawl");
+            return res.data;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+
 }
 
 export default new AdminAPI();

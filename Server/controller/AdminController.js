@@ -588,13 +588,16 @@ class AdminRouter {
                 .catch(function (err) {
                     res.json({
                         status: "false",
+                        msg: "Có lỗi xảy ra",
+                        err: err,
+                        success: false,
                     });
                     console.log(err);
                 });
             if (i == SOURCE.length - 1) {
                 res.json({
                     success: true,
-                    msg: "Crawl successful",
+                    msg: "Crawl thành công",
                 });
             }
         }

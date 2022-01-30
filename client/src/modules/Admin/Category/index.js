@@ -17,7 +17,7 @@ const Category = () => {
                 formState && <FormCategory setFormState={setFormState} purpose={formPurpose} formOriginalData={formOriginalData} setFormOriginalData={setFormOriginalData}/>
             }
             <div className="flex flex-col bg-slate-200 basis-5/6 " >
-                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách các chuyên mục"/>
+                <Header setFormState={setFormState} setFormPurpose={setFormPurpose} title="Danh sách các chuyên mục" canCrawl = {false}/>
                 <CategoryTableHeader/>
                 <CategoryList formState={formState} setFormState={setFormState} setFormPurpose={setFormPurpose} setFormOriginalData={setFormOriginalData}/>
             </div>  
