@@ -16,6 +16,7 @@ const LogIn = (props) => {
     useEffect(() => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userEmail");
         logOut();
     }, [])
 
