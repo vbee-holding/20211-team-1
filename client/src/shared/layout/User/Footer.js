@@ -1,5 +1,5 @@
-import FooterLogo from '../../assets/images/LogoFooter.png'
-import Image from '../../assets/images/image-gallery.png'
+import FooterLogo from '../../../assets/images/LogoFooter.png'
+import Image from '../../../assets/images/image-gallery.png'
 
 export default function Footer() {
     return (

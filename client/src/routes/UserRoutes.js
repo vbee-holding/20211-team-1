@@ -1,6 +1,6 @@
 import Category from "../pages/User/Category";
 import Home from "../pages/User/Home";
-import Layout from "../shared/layout/Layout";
+import Layout from "../shared/layout/User/Layout";
 import LogIn from "../pages/Admin/Login"
 import Articles from "../pages/Admin/Articles"
 import Categories from "../pages/Admin/Categories";
@@ -29,7 +29,7 @@ export const routes = [
         children: [
           { path: FE_CATEGORY_CONSTANT_ROUTES.hot.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.hot.id} /> },
           { path: FE_CATEGORY_CONSTANT_ROUTES.new.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.new.id} /> },
-          { path: FE_CATEGORY_CONSTANT_ROUTES.covid_19.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.covid_19.id} /> },
+          { path: FE_CATEGORY_CONSTANT_ROUTES.health.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.health.id} /> },
           { path: FE_CATEGORY_CONSTANT_ROUTES.entertainment.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.entertainment.id} /> },
           { path: FE_CATEGORY_CONSTANT_ROUTES.sport.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.sport.id} /> },
           { path: FE_CATEGORY_CONSTANT_ROUTES.technology.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.technology.id} /> },

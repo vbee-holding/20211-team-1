@@ -1,5 +1,5 @@
-import Ad from '../../assets/images/Ad.png'
-import Logo from '../../assets/images/Logo.png'
+import Ad from '../../../assets/images/Ad.png'
+import Logo from '../../../assets/images/Logo.png'
 export default function Header() {
     return (
             <div className="grid grid-cols-4 justify-self-center gap-5">

@@ -9,10 +9,10 @@ export const FE_CATEGORY_CONSTANT_ROUTES = {
         "name": "Tin mới",
         "path": "/category/new"
     },
-    "covid_19": {
+    "health": {
         "id": "61ecba34f22c945535177975",
-        "name": "Covid 19",
-        "path":"/category/covid-19"
+        "name": "Sức khỏe",
+        "path":"/category/health"
     },
     "entertainment": {
         "id": "61ecba4ff22c945535177979",

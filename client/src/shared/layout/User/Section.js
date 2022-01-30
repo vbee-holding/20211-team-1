@@ -1,8 +1,8 @@
-import Section1 from '../../assets/images/section-1.png'
-import Section2 from '../../assets/images/section-2.png'
-import Section3 from '../../assets/images/section-3.png'
-import Section4 from '../../assets/images/section-4.png'
-import Section5 from '../../assets/images/section-5.png'
+import Section1 from '../../../assets/images/section-1.png'
+import Section2 from '../../../assets/images/section-2.png'
+import Section3 from '../../../assets/images/section-3.png'
+import Section4 from '../../../assets/images/section-4.png'
+import Section5 from '../../../assets/images/section-5.png'
 export default function Section() {
     return (
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-20'>

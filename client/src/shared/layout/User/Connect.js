@@ -1,4 +1,4 @@
-import TopTitle from "../components/TopTitle";
+import TopTitle from "../../components/TopTitle";
 
 export default function Connect() {
     return (
