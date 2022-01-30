@@ -1,6 +1,6 @@
 // Dùng để xử lý logic ở đây, nó chỉ bao gồm các hàm 
-import { updateArticleByIdAPI } from "../../apis/server-api/user-api/article-api";
-import { getCategoryDetailsByIdAPI } from "../../apis/server-api/user-api/category-api";
+import {  updateArticleByIdAPI } from "../../apis/server-api/user-api/article-api";
+import { getAllCategoryAPI, getCategoryDetailsByIdAPI } from "../../apis/server-api/user-api/category-api";
 
 export async function getAllArticle() {
     try {
@@ -40,6 +40,22 @@ export async function updateArticles(id, data){
         }
     }catch(error){
         console.log(error);
+        return null;
+    }
+}
+
+export async function getAllCategory(){
+    try{
+        const category = await getAllCategoryAPI();
+        if(category.success==true){
+            return category.data;
+        }else{
+            console.log("Failed to fetch data");
+            return null;
+        }
+
+    }catch(error){
+        console.log(error)
         return null;
     }
 }

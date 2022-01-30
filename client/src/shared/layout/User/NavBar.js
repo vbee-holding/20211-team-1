@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FE_CATEGORY_CONSTANT_ROUTES } from "../../routes/FEConstantRoutes";
+import { FE_CATEGORY_CONSTANT_ROUTES } from "../../../routes/FEConstantRoutes";
 
 export default function Navbar({ action }) {
     const [showSubMenu, setShowSubMenu] = useState(false)
@@ -47,33 +47,13 @@ export default function Navbar({ action }) {
                     <div className="w-full absolute top-10 left-0 bg-black border-t rounded-md border-gray-200 block p-2" onClick={() => { setShowSubMenu(!showSubMenu) }}>
                         <ul className="text-white text-sm font-text">
                             <li className="hover:bg-red-500 px-2 py-2 hidden sm:block">
-                                <Link to="/" >
-                                    <span className="hover:border-b-2 border-white ">Trang chủ</span>
+                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.health.path} >
+                                    <span className="hover:border-b-2 border-white ">Sức khỏe</span>
                                 </Link>
                             </li>
                             <li className="hover:bg-red-500 px-3 py-2 hidden sm:block">
-                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.hot.path}>
-                                    <span className="hover:border-b-2 border-white x">Tin nóng</span>
-                                </Link>
-                            </li>
-                            <li className="hover:bg-red-500 px-2 py-2 hidden sm:block">
-                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.new.path}>
-                                    <span className="hover:border-b-2 border-white ">Tin mới</span>
-                                </Link>
-                            </li>
-                            <li className="hover:bg-red-500 px-2 py-2 hidden md:block">
-                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.world_travel.path}>
-                                    <span className="hover:border-b-2 border-white ">Thế giới</span>
-                                </Link>
-                            </li>
-                            <li className="hover:bg-red-500 px-2 py-2 hidden md:block">
-                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.sport.path}>
-                                    <span className="hover:border-b-2 border-white ">Thể thao</span>
-                                </Link>
-                            </li>
-                            <li className="hover:bg-red-500 px-2 py-2  hidden sm:block">
-                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.technology.path}>
-                                    <span className="hover:border-b-2 border-white ">Công nghệ</span>
+                                <Link to={FE_CATEGORY_CONSTANT_ROUTES.vietnam_travel.path}>
+                                    <span className="hover:border-b-2 border-white x">Khám phá Việt Nam</span>
                                 </Link>
                             </li>
                         </ul>

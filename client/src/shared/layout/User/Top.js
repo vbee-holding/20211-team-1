@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { FE_CATEGORY_CONSTANT_ROUTES } from "../../routes/FEConstantRoutes"
-import { getCategoryDetailsByID } from "../../services/User/HomeServices"
-import LoadingV2 from "../components/LoadingV2"
-import SeeMore from "../components/SeeMore"
-import SubNew from "../components/SubNews"
+import { FE_CATEGORY_CONSTANT_ROUTES } from "../../../routes/FEConstantRoutes"
+import { getCategoryDetailsByID } from "../../../services/User/HomeServices"
+import LoadingV2 from "../../components/LoadingV2"
 import LazyLoad from 'react-lazyload'
+import SubNews from "../../components/SubNews"
+import SeeMore from "../../components/SeeMore"
 export default function Top() {
     const [articles, setArticles] = useState(null)
     const [needReload, setNeedReload] = useState(0)
@@ -38,7 +38,7 @@ export default function Top() {
                     articles.slice(0, 7).map((article) => (
                         article &&
                         <LazyLoad placeholder={<LoadingV2 />} key={article._id}>
-                            <SubNew data={article} reload={() => setNeedReload(needReload + 1)} />
+                            <SubNews data={article} reload={() => setNeedReload(needReload + 1)} />
                         </LazyLoad>
                     ))
                 }

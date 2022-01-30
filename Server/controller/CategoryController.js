@@ -6,9 +6,18 @@ class CategoryRouter {
   async getCategories(req, res, next) {
     try {
       const categories = await Category.find();
+      const result =[];
+      for(let i=0;i<categories.length;i++){
+        const articles = await Article.find({category: categories[i]._id});
+        result.push({
+          _id: categories[i]._id,
+          name:categories[i].name,
+          count: articles.length
+        })
+      }
       res.json({
         success: true,
-        data: categories,
+        data: result,
       });
     } catch (err) {
       res.json({
