@@ -97,6 +97,29 @@ class ArticleRouter {
     }
   }
 
+
+  async searchArticle(req, res, next) {
+    try {
+      const { text } = req.query;
+      const articles = await Article.find({ isShow: true })
+      const result =[];
+      for(let i=0;i<articles.length;i++){
+        if(articles[i].title.includes(text)){
+          result.push(articles[i]);
+        }
+      }
+      res.json({
+        success: true,
+        data: result
+      })
+    } catch (error) {
+      res.json({
+        success: false,
+        error: error
+      })
+    }
+  }
+
   async putArticle(req, res, next) {
     const updatedFields = req.body;
     const { articleId } = req.params;

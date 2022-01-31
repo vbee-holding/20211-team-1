@@ -10,7 +10,7 @@ export default function Category() {
         getAllCategory()
             .then((result) => {
                 setCategories(result);
-                console.log(result)
+
             })
             .catch(error => {
                 console.log(error)

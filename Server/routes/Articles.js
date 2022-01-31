@@ -3,6 +3,7 @@ const ArticleController = require('../controller/ArticleController');
 const router = express.Router();
 const Verify = require('../util/Verify');
 
+router.get('/search', ArticleController.searchArticle);
 router.get('/', ArticleController.getArticles);
 router.post('/', Verify.verify, ArticleController.postArticle);
 router.post('/crawl', ArticleController.postArticleWithoutAuth);
