@@ -37,7 +37,7 @@ export const routes = [
           { path: FE_CATEGORY_CONSTANT_ROUTES.world_travel.path, element: <Category id={FE_CATEGORY_CONSTANT_ROUTES.world_travel.id} /> },
         ],
       },
-      { path: "*", element: <Home /> },
+      { path: "*", element: (<div>This url is incorrect</div>) },
     ],
   },
 ];
