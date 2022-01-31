@@ -12,6 +12,5 @@ export const getCategoryByIdAPI= async(id)=>{
 
 export const getCategoryDetailsByIdAPI= async (id) => {
   const result = await axios.get( `api/v1/categories/details/${id}`);
-  console.log(result)
   return result.data;
 }

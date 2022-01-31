@@ -8,7 +8,7 @@ class CategoryRouter {
       const categories = await Category.find();
       const result =[];
       for(let i=0;i<categories.length;i++){
-        const articles = await Article.find({category: categories[i]._id});
+        const articles = await Article.find({category: categories[i]._id, isShow:true});
         result.push({
           _id: categories[i]._id,
           name:categories[i].name,
