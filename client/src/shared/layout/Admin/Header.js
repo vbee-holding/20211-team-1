@@ -1,13 +1,14 @@
 import searchIcon from '../../../assets/images/search-icon.png'
 import AdminAPI from '../../../apis/server-api/admin-api/admin-api';
 import useArticleAPI from '../../../apis/server-api/admin-api/article-api';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 
 const Header = (props) => {
 
     const [isOptionMenu, setIsOptionMenu] = useState(false);
     const [isOptionArticleMenu, setIsOptionArticleMenu] = useState(false);
+    const [query, setQuery] = useState("");
     const navigate = useNavigate();
     const ArticleAPI = useArticleAPI();
 
@@ -33,8 +34,14 @@ const Header = (props) => {
         navigate("/admin/login");
     }
 
-    const onSubmitSearch = () => {
+    const onInputChange = (e) => {
+        const { value } = e.target;
+        setQuery(value);
+    }
 
+    const onSubmitSearch = () => {
+        props.setIsInQuery(true);
+        props.setQuery(query);
     }
 
     const onClickCrawl = async () => {
@@ -73,10 +80,15 @@ const Header = (props) => {
         <div>
             <div className="flex flex-row justify-between mt-5 mx-10 basis-1/5 " >
                 <div className="flex items-center h-14 basis-1/3 relative">
-                    <button className="h-1/2 mx-4 absolute">
+                    <input 
+                        type="text" 
+                        placeholder={`Search by ${props.searchProperty} ...`} 
+                        onChange={onInputChange}
+                        value={query}
+                        className="h-full w-full rounded-full pr-14 pl-8 font-semibold text-xl border border-indigo-500 focus:outline-violet-600"></input>
+                    <button className="h-1/2 mx-4 right-0 absolute" onClick={onSubmitSearch}>
                         <img src={searchIcon} alt="" />
                     </button>
-                    <input type="text" className="h-full w-full rounded-full px-14 font-semibold text-xl border border-indigo-500 focus:outline-violet-600" placeholder="Search here ..."></input>
                 </div>
                 <div className="flex flex-col relative basis-1/4">
                     <div className="absolute right-0 flex items-center ">

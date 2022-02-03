@@ -18,8 +18,16 @@ const List = (props) => {
 
     const loadData = async () => {
         const response = await CategoryAPI.getCategories();
-        if(mounted.current) setCategories(response.data);
+
+        const afterFiltering = [];
+        response.data.map((category, index) => {
+            if(category.name.includes(props.query)) {
+                afterFiltering.push(category);
+            }
+        })  
+        if(mounted.current) setCategories(afterFiltering);
     }
+
     const updateFromChild  = () => {
         setUpdate(!update);
     }
