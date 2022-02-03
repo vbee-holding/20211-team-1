@@ -151,7 +151,7 @@ router.get('/', AdminController.getAdmins);
 router.get('/crawl', AdminController.crawlData);
 
 router.post('/login', AdminController.logIn);
-router.post('/logout', Verify.verify, AdminController.logOut);
+router.post('/logout', AdminController.logOut);
 router.post('/refresh', AdminController.refreshToken);
 router.post('/reset-password', Verify.verify, AdminController.resetPassword);
 // router.delete('/:adminId', Verify.verify, AdminController.deleteAdmin);
