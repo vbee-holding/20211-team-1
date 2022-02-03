@@ -44,6 +44,10 @@ const Header = (props) => {
         props.setQuery(query);
     }
 
+    const isEnter = (event) => {
+        if(event.key == 'Enter') onSubmitSearch();
+    }
+    
     const onClickCrawl = async () => {
         try{
             const res = await AdminAPI.crawlData(); 
@@ -85,6 +89,7 @@ const Header = (props) => {
                         placeholder={`Search by ${props.searchProperty} ...`} 
                         onChange={onInputChange}
                         value={query}
+                        onKeyPress={isEnter}
                         className="h-full w-full rounded-full pr-14 pl-8 font-semibold text-xl border border-indigo-500 focus:outline-violet-600"></input>
                     <button className="h-1/2 mx-4 right-0 absolute" onClick={onSubmitSearch}>
                         <img src={searchIcon} alt="" />
