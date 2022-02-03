@@ -11,6 +11,7 @@ const Item = (props) => {
     }
     
     const onClickDelete = async () => {
+        props.setLoading(true);
         if(window.confirm("Bạn có chắc chắn muốn xóa nguồn báo này")) {
             const res = await SourceAPI.deleteSource(props.item._id);
             if(res.success) {
@@ -19,6 +20,7 @@ const Item = (props) => {
             else alert("Có lỗi xảy ra hãy thử lại");
             props.updateFromChild();
         }
+        props.setLoading(false);
     }
     return (
         <div className="flex flex-row justify-start border-b-2 h-24">

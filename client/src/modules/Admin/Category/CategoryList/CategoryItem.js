@@ -1,29 +1,7 @@
 import useCategoryAPI from "../../../../apis/server-api/admin-api/category-api"; 
-import useArticleAPI from "../../../../apis/server-api/admin-api/article-api"
-import { useEffect, useState, useRef } from "react";
 const Item = (props) => {
     
     const CategoryAPI = useCategoryAPI();
-    const ArticleAPI = useArticleAPI ();
-    const [numberArrticle , setNumberArrticle] = useState(0);
-    const mounted = useRef(false);
-
-    useEffect(() => {
-        mounted.current = true;
-        loadData();
-        return () => {mounted.current = false; }
-    }, [props])
-
-    const loadData = async () => {
-        const res = await ArticleAPI.getArticles();
-        let count = 0;
-        if(res.success) {
-            res.data.map((article, index) => {
-                if(article.category === props.item._id) count ++;
-            })
-        }
-        if(mounted.current) setNumberArrticle(count);
-    }
 
     const onClickUpdate = () => {
         props.setFormState(true);
@@ -32,6 +10,7 @@ const Item = (props) => {
     }
     
     const onClickDelete = async () => {
+        props.setLoading(true);
         if(window.confirm("Bạn có chắc chắn muốn xóa nguồn báo này")) {
             const res = await CategoryAPI.deleteCategory(props.item._id);
             if(res.success) {
@@ -40,6 +19,7 @@ const Item = (props) => {
             else alert("Có lỗi xảy ra xin thử lại");
             props.updateFromChild();
         }
+        props.setLoading(false);
     }
    
     return (
@@ -54,7 +34,7 @@ const Item = (props) => {
                 <p className="my-auto text-lg font-semibold ">{props.item._id}</p>
             </div>
             <div className="flex flex-col my-auto basis-2/12 mx-12 h-14 overflow-hidden ">
-                <p className="my-auto text-lg font-semibold ">{numberArrticle}</p>
+                <p className="my-auto text-lg font-semibold ">{props.item.count}</p>
             </div>
             <div className="my-auto basis-1/12 mx-10 text-center">
                 <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-20 h-10 text-sm inline-block" onClick={onClickUpdate}>Sửa đổi</button>

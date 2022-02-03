@@ -1,10 +1,12 @@
 import SourceItem from "./SourceItem"
 import useSourceAPI from "../../../../apis/server-api/admin-api/source-api"
+import loadingGif from "../../../../assets/images/Loading.gif"
 import { useEffect, useState, useRef } from "react";
 
 const List = (props) => {
     const [sources, setSources] = useState([]); 
     const [update, setUpdate] = useState(true);
+    const [Loading, setLoading] = useState(false);
     const mounted = useRef(false); 
 
     const SourceAPI = useSourceAPI();
@@ -16,6 +18,7 @@ const List = (props) => {
     }, [props, update])
 
     const loadData = async () => {
+        setLoading(true);
         const response = await SourceAPI.getSources();
 
         const afterFiltering = [];
@@ -25,6 +28,7 @@ const List = (props) => {
             }
         })  
         if(mounted.current) setSources(afterFiltering);
+        setLoading(false);
     }
 
     const updateFromChild  = () => {
@@ -33,7 +37,10 @@ const List = (props) => {
 
     return (
         <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
-           {
+            {
+                Loading && (<img src={loadingGif} alt="" className="h-20 absolute right-12 top-56 mt-1"></img>)
+            }  
+            {
                 sources && sources.map((source, index) => {
                     return (
                         <SourceItem 
@@ -43,7 +50,8 @@ const List = (props) => {
                             setFormState={props.setFormState} 
                             setFormPurpose={props.setFormPurpose}
                             updateFromChild={updateFromChild}
-                            setFormOriginalData={props.setFormOriginalData}>
+                            setFormOriginalData={props.setFormOriginalData}
+                            setLoading={setLoading}>
                         </SourceItem>
                     )
                 })

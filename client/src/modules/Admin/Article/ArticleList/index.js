@@ -3,11 +3,13 @@ import { useEffect, useState, useRef } from "react";
 
 import useArticleAPI from "../../../../apis/server-api/admin-api/article-api"
 import useSourceAPI from "../../../../apis/server-api/admin-api/source-api"
+import loadingGif from "../../../../assets/images/Loading.gif"
 
 const List = (props) => { 
     const [articles, setArticles] = useState([]); 
     const [sources, setSources] = useState([]);
     const [updateArrticles, setUpdateArrticles] = useState(true);
+    const [Loading, setLoading] = useState(false);
     const mounted = useRef(false);
 
     const ArticleAPI = useArticleAPI();
@@ -20,6 +22,7 @@ const List = (props) => {
     },[props, updateArrticles])
 
     const loadData = async () => {
+        setLoading(true);
         const articleResponse = await ArticleAPI.getArticles();
         const sourcesResponse = await SourceAPI.getSources();
         const articleAfterFiltering = [];
@@ -33,6 +36,7 @@ const List = (props) => {
             setSources(sourcesResponse.data);
             setArticles(articleAfterFiltering);
         }
+        setLoading(false);
     }
 
     const updateFromChild = () => {
@@ -42,8 +46,10 @@ const List = (props) => {
     return (
         <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
             {
-                articles ? 
-                    articles.map((article, index) => {
+                Loading && (<img src={loadingGif} alt="" className="h-20 absolute right-12 top-56 mt-1"></img>)
+            }   
+            {
+                articles && articles.map((article, index) => {
                     const source = sources.find(source => source._id === article.source);
                     return (
                         <ArticleItem 
@@ -54,11 +60,11 @@ const List = (props) => {
                             updateFromChild={updateFromChild} 
                             setFormState={props.setFormState} 
                             setFormPurpose={props.setFormPurpose}
-                            setFormOriginalData={props.setFormOriginalData}>
+                            setFormOriginalData={props.setFormOriginalData}
+                            setLoading={setLoading}>
                         </ArticleItem>
                     )
                 })
-                : <h1>Sever is not respons</h1>
             }
         </div>
       
