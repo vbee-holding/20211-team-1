@@ -3,7 +3,6 @@ import Header from "../../../shared/layout/Admin/Header"
 import ArticleList from "./ArticleList"
 import ArticleTableHeader from "./ArticleTableHeader"
 import FormArticle from "./FormArticle";
-import useSourceAPI from "../../../apis/server-api/admin-api/source-api";
 import { useState } from "react";
 
 const Article = () => {
@@ -19,7 +18,7 @@ const Article = () => {
     }
 
     return (
-        <div className="flex h-screen max-w-full" >
+        <div className="flex h-screen max-w-full relative" >
             <SideBar/>
             {
                 formState && 
@@ -47,6 +46,8 @@ const Article = () => {
                     setFormOriginalData={setFormOriginalData} 
                     isInQuery={isInQuery}
                     query={query}/>
+            
+                
             </div>  
         </div>      
     )

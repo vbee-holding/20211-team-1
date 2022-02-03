@@ -12,6 +12,7 @@ const Item = (props) => {
     }, [props])
 
     const onClickChangeVisible = async () => {
+        props.setLoading(true);
         const updatedField = props.item;
         if(props.item.isShow) updatedField.isShow = false;
         else updatedField.isShow = true;
@@ -22,6 +23,7 @@ const Item = (props) => {
             return;
         }
         if(mounted.current) props.updateFromChild();
+        props.setLoading(true);
     } 
 
     const onClickUpdate = () => {
@@ -32,8 +34,10 @@ const Item = (props) => {
     }
 
     const onClickDelete = async () => {
+        props.setLoading(true);
         if(window.confirm("Bạn có chắc chắn muốn xóa bài báo này")) {
             const res = await ArticleAPI.deleteArticle(props.item._id);
+            props.setLoading(true);
             if(res.success) {
                 alert("Xóa bài báo thành công"); 
             }

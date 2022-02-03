@@ -5,7 +5,7 @@ const useCategoryAPI = () => {
     
     const getCategories = async () => {
         try {
-            const res = await privateAxois.get('categories/');
+            const res = await privateAxois.get('categories/admin');
             return res.data;
         }
         catch (err) {
