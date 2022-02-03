@@ -17,7 +17,14 @@ const List = (props) => {
 
     const loadData = async () => {
         const response = await SourceAPI.getSources();
-        if(mounted.current) setSources(response.data);
+
+        const afterFiltering = [];
+        response.data.map((source, index) => {
+            if(source.name.includes(props.query)) {
+                afterFiltering.push(source);
+            }
+        })  
+        if(mounted.current) setSources(afterFiltering);
     }
 
     const updateFromChild  = () => {

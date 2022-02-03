@@ -22,9 +22,16 @@ const List = (props) => {
     const loadData = async () => {
         const articleResponse = await ArticleAPI.getArticles();
         const sourcesResponse = await SourceAPI.getSources();
+        const articleAfterFiltering = [];
+        articleResponse.data.map((article, index) => {
+            if(article.title.includes(props.query)) {
+                articleAfterFiltering.push(article);
+            }
+        })
+
         if(mounted.current) {
             setSources(sourcesResponse.data);
-            setArticles(articleResponse.data);
+            setArticles(articleAfterFiltering);
         }
     }
 
