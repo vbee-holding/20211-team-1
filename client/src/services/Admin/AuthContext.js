@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
         isLogIn : isLogIn,
         logIn : logIn,
         logOut : logOut,
+        setIsLogIn : setIsLogIn,
     }
 
     return (

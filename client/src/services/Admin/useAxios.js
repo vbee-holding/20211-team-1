@@ -8,7 +8,7 @@ const baseURL = process.env.REACT_APP_BE_HOST + 'api/v1/';
     
 const useAxios= () => {
 
-    const { accessToken, setToken} = useContext(AuthContext);  
+    const { accessToken, setToken, setIsLogIn} = useContext(AuthContext);  
 
     const PrivateAxios = axios.create({
         baseURL,
@@ -21,8 +21,13 @@ const useAxios= () => {
             const decodedToken = jwt_decode(config.headers.authentication.split(" ")[1]);
             if(decodedToken.exp *1000 < currentDate.getTime()) {
                 const res = await AdminAPI.refreshToken();
-                setToken(res.data.accessToken, res.data.refreshToken);
-                config.headers.authentication = `Bearer ${res.data.accessToken}`;
+                if(res && res.success) {
+                    setToken(res.data.accessToken, res.data.refreshToken);
+                    config.headers.authentication = `Bearer ${res.data.accessToken}`;
+                }
+                else {
+                    setIsLogIn(false);
+                }
 
             }
         }
