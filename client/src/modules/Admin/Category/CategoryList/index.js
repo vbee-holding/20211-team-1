@@ -23,11 +23,17 @@ const List = (props) => {
         const response = await CategoryAPI.getCategories();
 
         const afterFiltering = [];
-        response.data.map((category, index) => {
-            if(category.name.includes(props.query)) {
-                afterFiltering.push(category);
-            }
-        })  
+        if(response && response.data) {
+            response.data.map((category, index) => {
+                if(category.name.includes(props.query)) {
+                    afterFiltering.push(category);
+                }
+            })  
+        }
+
+        if(afterFiltering.length === 0) {
+            alert('Không tìm thấy chủ đề nào phù hợp');
+        }
 
         if(mounted.current) setCategories(afterFiltering);
         setLoading(false);

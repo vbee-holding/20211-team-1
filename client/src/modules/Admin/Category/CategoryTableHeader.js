@@ -5,7 +5,7 @@ const CategoryTableHeader = (props) => {
             <div className="font-bold text-xl text-start m-10 mb-6 basis-1/12" >STT</div>
             <div className="font-bold text-xl text-start m-10 mb-6 basis-2/12" >Tên chuyên mục</div>
             <div className="font-bold text-xl text-start m-10 mb-6 basis-3/12" >Id</div>
-            <div className="font-bold text-xl text-start m-10 mb-6 basis-2/12" >Số lượng bài báo</div>
+            <div className="font-bold text-xl text-start m-10 mb-6 basis-2/12" >Bài báo đang hiển thị</div>
             <div className="font-bold text-xl text-start m-10 mb-6 basis-1/12" ></div>
             <div className="font-bold text-xl text-start m-10 mb-6 basis-1/12" ></div>
             

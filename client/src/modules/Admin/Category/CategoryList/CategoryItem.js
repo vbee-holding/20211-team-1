@@ -34,7 +34,7 @@ const Item = (props) => {
                 <p className="my-auto text-lg font-semibold ">{props.item._id}</p>
             </div>
             <div className="flex flex-col my-auto basis-2/12 mx-12 h-14 overflow-hidden ">
-                <p className="my-auto text-lg font-semibold ">{props.item.count}</p>
+                <p className="my-auto text-lg font-semibold ">{`${props.item.countShowed}/${props.item.count}`}</p>
             </div>
             <div className="my-auto basis-1/12 mx-10 text-center">
                 <button className="bg-indigo-500 hover:bg-indigo-600 rounded-2xl font-semibold text-white w-20 h-10 text-sm inline-block" onClick={onClickUpdate}>Sửa đổi</button>

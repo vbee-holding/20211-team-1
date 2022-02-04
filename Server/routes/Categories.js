@@ -22,6 +22,7 @@ const Verify = require("../util/Verify");
  */
 
 router.get("/", CategoryController.getCategories);
+router.get("/admin", CategoryController.getCategoriesAdmin);
 router.get("/:categoryId", CategoryController.getCategory);
 router.post("/", Verify.verify, CategoryController.postCategory);
 router.put("/:categoryId", Verify.verify, CategoryController.putCategory);
