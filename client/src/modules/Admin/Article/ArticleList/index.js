@@ -26,11 +26,18 @@ const List = (props) => {
         const articleResponse = await ArticleAPI.getArticles();
         const sourcesResponse = await SourceAPI.getSources();
         const articleAfterFiltering = [];
-        articleResponse.data.map((article, index) => {
-            if(article.title.includes(props.query)) {
-                articleAfterFiltering.push(article);
-            }
-        })
+        
+        if(articleResponse && articleResponse.data){
+            articleResponse.data.map((article, index) => {
+                if(article.title.includes(props.query)) {
+                    articleAfterFiltering.push(article);
+                }
+            })
+        }
+
+        if(articleAfterFiltering.length === 0) {
+            alert('Không tìm thấy bài báo nào phù hợp');
+        }
 
         if(mounted.current) {
             setSources(sourcesResponse.data);

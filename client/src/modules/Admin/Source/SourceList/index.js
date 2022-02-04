@@ -22,11 +22,19 @@ const List = (props) => {
         const response = await SourceAPI.getSources();
 
         const afterFiltering = [];
-        response.data.map((source, index) => {
-            if(source.name.includes(props.query)) {
-                afterFiltering.push(source);
-            }
-        })  
+
+        if(response && response.data){
+            response.data.map((source, index) => {
+                if(source.name.includes(props.query)) {
+                    afterFiltering.push(source);
+                }
+            })  
+        }
+
+        if(afterFiltering.length === 0) {
+            alert('Không tìm thấy nguồn báo nào phù hợp');
+        }
+
         if(mounted.current) setSources(afterFiltering);
         setLoading(false);
     }

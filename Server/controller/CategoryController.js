@@ -27,6 +27,32 @@ class CategoryRouter {
     }
   }
 
+  async getCategoriesAdmin(req, res, next) {
+    try {
+      const categories = await Category.find();
+      const result =[];
+      for(let i=0;i<categories.length;i++){
+        const articles = await Article.find({category: categories[i]._id});
+        const articlesShowed =  await Article.find({category: categories[i]._id, isShow:true});
+        result.push({
+          _id: categories[i]._id,
+          name:categories[i].name,
+          count: articles.length,
+          countShowed: articlesShowed.length,
+        })
+      }
+      res.json({
+        success: true,
+        data: result,
+      });
+    } catch (err) {
+      res.json({
+        success: false,
+        error: err,
+      });
+    }
+  }
+
   async getCategory(req, res, next) {
     const { categoryId } = req.params;
     try {
