@@ -23,8 +23,8 @@ const List = (props) => {
         const response = await CategoryAPI.getCategories();
 
         const afterFiltering = [];
-        if(response && response.data) {
-            response.data.map((category, index) => {
+        if(response.status === 200) {
+            response.data.data.map((category, index) => {
                 if(category.name.includes(props.query)) {
                     afterFiltering.push(category);
                 }

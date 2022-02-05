@@ -6,50 +6,55 @@ const useCategoryAPI = () => {
     const getCategories = async () => {
         try {
             const res = await privateAxois.get('categories/admin');
-            return res.data;
+            return res;
         }
         catch (err) {
             console.error(err);
+            return err.response;
         }
     }
 
     const getCategory = async (categoryId) => {
         try {
             const res = await privateAxois.get('categories/' + categoryId);
-            return res.data;
+            return res;
         }
         catch (err) {
             console.error(err);
+            return err.response;
         }
     }
 
     const postCategory = async (category) => {
         try {
             const res = await privateAxois.post('categories/', category);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error);
+            return error.response;
         }
     }
 
     const putCategory = async (categoryId, category) => {
         try {
             const res = await privateAxois.put('categories/' + categoryId, category);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error);
+            return error.response;
         }
     }
 
     const deleteCategory = async (categoryId) => {
         try {
             const res = await privateAxois.delete('categories/' + categoryId);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error);
+            return error.response;
         }
     }
 
