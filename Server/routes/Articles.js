@@ -43,8 +43,60 @@ const Verify = require('../util/Verify');
  *         numOfViews:
  *           type: number
  *           description: Number of views
+ *         __v: 
+ *           type: number
  *       example:
  *          _id: "61f69f7a07c170ca63a989f2"
+ *          thumbnail: "https://img.nhandan.com.vn/resize/320x-/Files/Images/2022/01/28/anhdt-1643364422870.jpg"
+ *          link: "https://nhandan.vn/tin-tuc-giao-duc/bo-giao-duc-va-dao-tao-thong-tin-ve-viec-mo-cua-truong-hoc-sau-tet-684254/"
+ *          title: "Bộ Giáo dục và Đào tạo thông tin về việc mở cửa trường học sau Tết"
+ *          releaseTime: 1643552634529
+ *          isShow: false
+ *          category: "61f00169804821068b64f1a8"
+ *          source: "61ecbcf7f22c945535177992"
+ *          numOfViews: 0
+ *          __v: 0
+ */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ArticleRequest:
+ *       type: object
+ *       required:
+ *         - thumbnail
+ *         - link
+ *         - title
+ *         - category
+ *         - source
+ *       properties:
+ *         thumbnail:
+ *           type: string
+ *           description: Thumbnail of this article
+ *         link:
+ *           type: string
+ *           description: Url of this article
+ *         title:
+ *           type: string
+ *           description: Title of this article
+ *         releaseTime:
+ *           type: number
+ *           description: Release time of this article
+ *         isShow:
+ *           type: boolean
+ *           description: true if this article is show
+ *         category:
+ *           type: string
+ *           description: Category of this article
+ *         source:
+ *           type: string
+ *           description: Source of this article
+ *         numOfViews:
+ *           type: number
+ *           description: Number of views
+ *       example:
  *          thumbnail: "https://img.nhandan.com.vn/resize/320x-/Files/Images/2022/01/28/anhdt-1643364422870.jpg"
  *          link: "https://nhandan.vn/tin-tuc-giao-duc/bo-giao-duc-va-dao-tao-thong-tin-ve-viec-mo-cua-truong-hoc-sau-tet-684254/"
  *          title: "Bộ Giáo dục và Đào tạo thông tin về việc mở cửa trường học sau Tết"
@@ -174,7 +226,7 @@ const Verify = require('../util/Verify');
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Article'
+ *              $ref: '#/components/schemas/ArticleRequest'
  *      responses: 
  *        '200': 
  *          description: request false if success is false else return an article created 
@@ -217,7 +269,7 @@ const Verify = require('../util/Verify');
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Article'
+ *              $ref: '#/components/schemas/ArticleRequest'
  *      responses: 
  *        '200': 
  *          description: return new article
@@ -231,7 +283,7 @@ const Verify = require('../util/Verify');
  *                    description: true if request success
  *                  data:
  *                    type: object
- *                    "$ref": "#/components/schemas/Article"
+ *                    "$ref": "#/components/schemas/ArticleRequest"
  *        '400': 
  *          description: bad request
  *          content: 
@@ -341,8 +393,42 @@ const Verify = require('../util/Verify');
  */
 
 
+/**
+ * @swagger
+ * /api/v1/articles/crawl:
+ *   post:
+ *      summary: Post article without auth 
+ *      tags: [Article]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ArticleRequest'
+ *      responses: 
+ *        '200': 
+ *          description: request false if success is false else return an article created 
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                    description: true if request success
+ *                  data:
+ *                    type: object
+ *                    "$ref": "#/components/schemas/Article"
+ *                  err:
+ *                    type: object
+ *                    description: error if success false 
+ *                  message:
+ *                    type: string
+ *                    description: description of error if success false
+ */
+
 router.get('/search', ArticleController.searchArticle);
-router.get('/', Verify.verify, ArticleController.getArticles);
+router.get('/', ArticleController.getArticles);
 router.post('/', Verify.verify, ArticleController.postArticle);
 router.post('/crawl', ArticleController.postArticleWithoutAuth);
 router.get('/hide', ArticleController.hideArticle);

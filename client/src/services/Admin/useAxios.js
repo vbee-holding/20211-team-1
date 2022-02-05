@@ -12,18 +12,18 @@ const useAxios= () => {
 
     const PrivateAxios = axios.create({
         baseURL,
-        headers : {authentication : "Bearer " + accessToken},
+        headers : {authorization : "Bearer " + accessToken},
     });
 
     PrivateAxios.interceptors.request.use(async (config) => {
         const currentDate = new Date();
-        if(config.headers.authentication){
-            const decodedToken = jwt_decode(config.headers.authentication.split(" ")[1]);
+        if(config.headers.authorization){
+            const decodedToken = jwt_decode(config.headers.authorization.split(" ")[1]);
             if(decodedToken.exp *1000 < currentDate.getTime()) {
                 const res = await AdminAPI.refreshToken();
                 if(res && res.success) {
                     setToken(res.data.accessToken, res.data.refreshToken);
-                    config.headers.authentication = `Bearer ${res.data.accessToken}`;
+                    config.headers.authorization = `Bearer ${res.data.accessToken}`;
                 }
                 else {
                     setIsLogIn(false);
