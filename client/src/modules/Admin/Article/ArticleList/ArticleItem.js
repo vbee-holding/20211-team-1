@@ -45,13 +45,10 @@ const Item = (props) => {
         if(window.confirm("Bạn có chắc chắn muốn xóa bài báo này")) {
             const res = await ArticleAPI.deleteArticle(props.item._id);
             props.setLoading(true);
-            if(res.status === 200) {
-                alert("xóa thành công"); 
+            if(res.success) {
+                alert("Xóa bài báo thành công"); 
             }
-            else if (res.status === 500) {
-                alert("Có lỗi xảy ra vui lòng thử lại"); 
-                return;
-            }
+            else alert("Có lỗi xảy ra hãy thử lại");
             props.updateFromChild();
         }
     }
