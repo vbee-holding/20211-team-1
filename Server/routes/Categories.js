@@ -23,6 +23,23 @@ const Verify = require("../util/Verify");
  *          name: "Sức khỏe"
  */
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CategoryRequest:
+ *       type: object
+ *       required:
+ *         - name
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Name of this category
+ *       example:
+ *          name: "Sức khỏe"
+ */
+
 /**
  * @swagger
  * components:
@@ -210,7 +227,7 @@ const Verify = require("../util/Verify");
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Category'
+ *              $ref: '#/components/schemas/CategoryRequest'
  *      responses: 
  *        '200': 
  *          description: return new category
@@ -224,7 +241,7 @@ const Verify = require("../util/Verify");
  *                    description: true if request success
  *                  data:
  *                    type: object
- *                    "$ref": "#/components/schemas/Category"
+ *                    "$ref": "#/components/schemas/CategoryRequest"
  *        '400': 
  *          description: bad request
  *          content: 
@@ -274,7 +291,7 @@ const Verify = require("../util/Verify");
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Category'
+ *              $ref: '#/components/schemas/CategoryRequest'
  *      responses: 
  *        '200': 
  *          description: return new category
@@ -288,7 +305,7 @@ const Verify = require("../util/Verify");
  *                    description: true if request success
  *                  data:
  *                    type: object
- *                    "$ref": "#/components/schemas/Category"
+ *                    "$ref": "#/components/schemas/CategoryRequest"
  *        '400': 
  *          description: bad request
  *          content: 
@@ -363,16 +380,6 @@ const Verify = require("../util/Verify");
  */
 
 
-router.get("/", CategoryController.getCategories);
-router.get("/admin", CategoryController.getCategoriesAdmin);
-router.get("/:categoryId", CategoryController.getCategory);
-router.post("/", Verify.verify, CategoryController.postCategory);
-router.put("/:categoryId", Verify.verify, CategoryController.putCategory);
-router.delete("/:categoryId", Verify.verify, CategoryController.deleteCategory);
-router.get("/details", CategoryController.getAllCategoryDetail)
-router.get("/details/:categoryId", CategoryController.getCategoryDetailByID)
-
-
 
 /**
  * @swagger
@@ -397,4 +404,15 @@ router.get("/details/:categoryId", CategoryController.getCategoryDetailByID)
  *       404:
  *         description: The category was not found
  */
+
+router.get("/", CategoryController.getCategories);
+router.get("/admin", CategoryController.getCategoriesAdmin);
+router.get("/:categoryId", CategoryController.getCategory);
+router.post("/", Verify.verify, CategoryController.postCategory);
+router.put("/:categoryId", Verify.verify, CategoryController.putCategory);
+router.delete("/:categoryId", Verify.verify, CategoryController.deleteCategory);
+router.get("/details", CategoryController.getAllCategoryDetail)
+router.get("/details/:categoryId", CategoryController.getCategoryDetailByID)
+
+
 module.exports = router;

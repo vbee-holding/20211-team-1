@@ -51,7 +51,7 @@ class AdminAPI {
             }
             const res = await axios.post(this.url + "reset-password", body, {
                 headers : {
-                    authentication : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
+                    authorization : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
                 }
             });
             return res;
