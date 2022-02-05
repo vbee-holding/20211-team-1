@@ -26,7 +26,7 @@ class ArticleRouter {
         data: article,
       });
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -126,7 +126,7 @@ class ArticleRouter {
     try {
       const check = await Article.findOne({ link: updatedFields.link })
       if (check && (check._id.toString() !== articleId)) {
-        res.json({
+        res.status(400).json({
           success: false,
           message: "Link bài báo đã tồn tại"
         });
@@ -144,7 +144,7 @@ class ArticleRouter {
         });
       }
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -160,7 +160,7 @@ class ArticleRouter {
         message: "Delete successfully",
       });
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -179,13 +179,13 @@ class ArticleRouter {
             message: "Hide articles successfully",
           })
         }).catch(error => {
-          res.json({
+          res.status(500).json({
             success: false,
             error: error
           });
         })
     } catch (error) {
-      res.json({
+      res.status(500).json({
         success: false,
         error: error
       })

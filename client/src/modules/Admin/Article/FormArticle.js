@@ -60,10 +60,6 @@ const FormArticle = (props) => {
     }
 
     const onSubmit = async () => {
-        // if(article.releaseTime !== releaseTime) {
-        //     article.releaseTime = Date.parse(article.releaseTime);
-        // }
-        // else article.releaseTime = releaseTime;
         if(props.purpose === "Add"){
             article.releaseTime = Date.parse(new Date());
         }
@@ -81,11 +77,15 @@ const FormArticle = (props) => {
             else if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
                     const res = await ArticleAPI.putArticle(article._id, article);
-                    if(res.success) {
+                    if(res.status === 200) {
                         alert("Sửa đổi thành công"); 
                     }
-                    else {
-                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                    else if(res.status === 400) {
+                        alert(res.data.message + " vui lòng thử lại"); 
+                        return;
+                    }
+                    else if (res.status === 500) {
+                        alert("Có lỗi xảy ra vui lòng thử lại"); 
                         return;
                     }
                 }

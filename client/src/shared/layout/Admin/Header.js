@@ -30,7 +30,7 @@ const Header = (props) => {
     }
 
     const onClickLogOut = async () => {
-        const res = await AdminAPI.logOut();
+        await AdminAPI.logOut();
         navigate("/admin/login");
     }
 
@@ -45,37 +45,28 @@ const Header = (props) => {
     }
 
     const isEnter = (event) => {
-        if(event.key == 'Enter') onSubmitSearch();
+        if(event.key === 'Enter') onSubmitSearch();
     }
     
     const onClickCrawl = async () => {
-        try{
             const res = await AdminAPI.crawlData(); 
-            if (res.success && res.success) {
+            if (res && res.success) {
                 alert ((res.msg ? res.msg : "Thực hiện Thành công" ) + " vui lòng đợi một vài phút để danh sách cập nhật các bài báo đã có sẽ không được thêm lại");
             }
-            else alert ((res.msg ? res.msg : "Có lỗi xảy ra" ) + " vui lòng thử lại");
-        }
-        catch (err) {
-            console.log(err);
-            alert ("Có lỗi xảy ra vui lòng thử lại");
-        }
+            else alert ("Có lỗi xảy ra vui lòng thử lại");
         setIsOptionArticleMenu(!isOptionArticleMenu);
         props.updateFromChild();
     }
 
     const onClickHide = async () => {
-        try{
             const res = await ArticleAPI.hideData(); 
-            if (res.success && res.success) {
+            if(res.status === 200) {
                 alert ((res.msg ? res.msg : "Thực hiện hành công" ) + " vui lòng đợi một vài phút để danh sách cập nhật");
             }
-            else alert ((res.msg ? res.msg : "Có lỗi xảy ra" ) + " vui lòng thử lại");
-        }
-        catch (err) {
-            console.log(err);
-            alert ("Có lỗi xảy ra vui lòng thử lại");
-        }
+            else if (res.status === 500) {
+                alert ((res.msg ? res.msg : "Có lỗi xảy ra" ) + " vui lòng thử lại");
+                return;
+            }
         setIsOptionArticleMenu(!isOptionArticleMenu);
         props.updateFromChild();
     }
