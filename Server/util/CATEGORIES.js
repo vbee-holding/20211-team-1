@@ -4,7 +4,7 @@ const CATEGORIES={
         "name":"Tin nóng",
     },
     "new":{
-        "id":"61f0017e804821068b64f1ac",
+        "id":"61fe9ae7446e87a8dd94ae3b",
         "name": "Tin mới",
     },
     "covid_19": {
