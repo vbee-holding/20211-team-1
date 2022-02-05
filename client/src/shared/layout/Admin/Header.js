@@ -30,8 +30,10 @@ const Header = (props) => {
     }
 
     const onClickLogOut = async () => {
-        await AdminAPI.logOut();
-        navigate("/admin/login");
+        const res = await AdminAPI.logOut();
+        if(res.status === 200) {
+            navigate("/admin/login");
+        }
     }
 
     const onInputChange = (e) => {
@@ -88,12 +90,12 @@ const Header = (props) => {
                 </div>
                 <div className="flex flex-col relative basis-1/4">
                     <div className="absolute right-0 flex items-center ">
-                        <button className="m-4 font-bold text-2xl underline underline-offset-8" onClick={onClickOption}>{localStorage.getItem('userEmail') ? JSON.parse(localStorage.getItem('userEmail')) : "User name"} </button>    
+                        <button className="m-4 font-bold text-2xl underline underline-offset-8" onClick={onClickOption}>{localStorage.getItem('Email') ? JSON.parse(localStorage.getItem('Email')) : "User name"} </button>    
                     </div>
                     {
                         isOptionMenu && 
                         <div className="flex flex-col bg-white rounded-xl absolute mt-16 mr-16 right-0 border-2 z-10 drop-shadow-2xl">
-                            <p className="font-bold text-xl border-b-2 m-4 text-left pb-2">Email : {localStorage.getItem('userEmail') ? JSON.parse(localStorage.getItem('userEmail')) : "Không nhận diện email vui lòng đăng nhập lại để đảm bảo an toàn"}</p>
+                            <p className="font-bold text-xl border-b-2 m-4 text-left pb-2">Email : {localStorage.getItem('Email') ? JSON.parse(localStorage.getItem('Email')) : "Không nhận diện email vui lòng đăng nhập lại để đảm bảo an toàn"}</p>
                             <button className="font-bold text-xl text-left mx-4 my-2" onClick={onClickChangePassWord}>Đổi mật khẩu</button>
                             <button className="font-bold text-xl text-left mx-4 my-2" onClick={onClickLogOut}>Đăng xuất</button>
                         </div>  

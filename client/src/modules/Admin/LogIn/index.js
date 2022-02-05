@@ -33,13 +33,17 @@ const LogIn = (props) => {
         e.preventDefault();
         setIsCorrect(true);
         const res = await AdminAPI.logIn(admin);
-        if(res.success) {
-            logIn(res);
+        if(res.status === 200) {
+            logIn(res.data);
             localStorage.setItem('userEmail', JSON.stringify(admin.email));
+            localStorage.setItem('Email', JSON.stringify(admin.email));
             navigate("/admin/articles");
         }
-        else {
+        else if(res.status === 400) {
             setIsCorrect(false);
+        }
+        else if(res.status === 500) {
+            alert ("Có lỗi máy chủ vui lòng thử lái au vài phút");
         }
     }
 

@@ -35,20 +35,18 @@ const ResetPassword = (props) => {
     const onSubmit = async () => {
         if(isLogIn) {
             if(password.newPassword.length >= passwordMinSize && password.newPassword === password.retypePassword) {
-                try {
-                    setIsError(false);
-                    const res = await AdminAPI.ressetPassword(password);
-                        if(res.success) {
-                        navigate("/admin/login");
-                    }
-                    else {
-                        setIsError(true);
-                        setMessage(res.message);
-                        return;
-                    }
+                setIsError(false);
+                const res = await AdminAPI.ressetPassword(password);
+                if(res.status === 200) {
+                    navigate("/admin/login");
                 }
-                catch (err) {
-                    console.log(err);
+                else if(res.status === 400) {
+                    setIsError(true);
+                    setMessage(res.data.message);
+                    return;
+                }
+                else if(res.status === 500) {
+                    alert("Có lỗi máy chủ vui lòng thử lại sau")
                 }
                 
             }
