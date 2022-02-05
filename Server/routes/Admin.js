@@ -11,8 +11,8 @@ const Verify = require('../util/Verify');
  *     Admin:
  *       type: object
  *       required:
- *         - title
- *         - author
+ *         - email
+ *         - password
  *       properties:
  *         id:
  *           type: string
@@ -30,8 +30,52 @@ const Verify = require('../util/Verify');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     ResetForm:
+ *       type: object
+ *       required:
+ *         - password
+ *         - newPassword
+ *         - email
+ *       properties:
+ *          password:
+ *            type: string
+ *          newPassword:
+ *            type: string
+ *          email:
+ *            type: string
+ *       example:
+ *         email: admin@gmail.com
+ *         password: "123456"
+ *         newPassword: "admin123"
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Token:
+ *       type: object
+ *       required:
+ *         - accessToken
+ *         - refreshToken
+ *       properties:
+ *         accessToken:
+ *           type: string
+ *           description: Access token
+ *         refreshToken:
+ *           type: string
+ *           description: Refresh token
+ *       example:
+ *         accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWYyYzkyMjFiZWFjNzc0MDdhNDk1MDEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20iLCJpYXQiOjE2NDQwNzk1OTksImV4cCI6MTY0NDA4MDQ5OX0.-9xpyRSSEjpkSDr7st9QSjCiGFsDYOahcHc9KJXvbk4"
+ *         refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWYyYzkyMjFiZWFjNzc0MDdhNDk1MDEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20iLCJpYXQiOjE2NDQwNzk1OTksImV4cCI6MTY0NjY3MTU5OX0.yJVdBAOJctu3136aHrYIVNdY_ikL5MdIdXNIJN4oJbU"
+ */
+
+/**
+ * @swagger
  * tags:
- *   name: Admins
+ *   name: Admin
  *   description: The admin managing API
  */
 
@@ -40,7 +84,7 @@ const Verify = require('../util/Verify');
  * /api/v1/admin:
  *   get:
  *      summary: Returns the list of all admin
- *      tags: [Admins]
+ *      tags: [Admin]
  *      responses: 
  *          200: 
  *              description: The list of the admins
@@ -52,104 +96,227 @@ const Verify = require('../util/Verify');
  *                            $ref: '#/components/schemas/Admin'
  */
 
-router.get('/', AdminController.getAdmins);
-
-/**
- * @swagger
- * /api/v1/admin/{id}:
- *   get:
- *     summary: Get the admin by id
- *     tags: [Admins]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The admin id
- *     responses:
- *       200:
- *         description: The admin description by id
- *         contents:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Admin'
- *       404:
- *         description: The admin was not found
- */
-
-//router.get('/:adminId', AdminController.getAdmin);
-
-/**
- * @swagger
- * /api/v1/admin:
- *   post:
- *     summary: Create a new admin
- *     tags: [Admins]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Admin'
- *     responses:
- *       200:
- *         description: The book was successfully created
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Admin'
- *       500:
- *         description: Some server error
- */
-
-//router.post('/', AdminController.postAdmin);
-
-/**
- * @swagger
- * /api/v1/admin/{id}:
- *  put:
- *    summary: Update the admin by the id
- *    tags: [Admins]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The admin id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Admin'
- *    responses:
- *      200:
- *        description: The admin was updated
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Admin'
- *      404:
- *        description: The admin was not found
- *      500:
- *        description: Some error happened
- */
-
-//router.put('/:adminId', AdminController.putAdmin);
 
 /**
  * @swagger
  * /api/v1/admin/crawl:
  *   get:
- *     summary: Crawl the article
- *     tags: [Admins]
- *   
+ *      summary: Make sever crawl data
+ *      tags: [Admin]
+ *      responses: 
+ *          200: 
+ *              description: The list of the admins
+ *              content: 
+ *                application/json:
+ *                  schema:
+ *                    type: object
+ *                    properties:
+ *                      success: 
+ *                        type: boolean
+ *                      msg:
+ *                        type: string
+ *                      err:
+ *                        type: object
+ *                        description: error
+ *                      status:
+ *                        type: boolean
  */
 
-router.get('/crawl', AdminController.crawlData);
 
+/**
+ * @swagger
+ * /api/v1/admin/login:
+ *   post:
+ *      summary: login for admin 
+ *      tags: [Admin]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Admin'
+ *      responses: 
+ *        '200': 
+ *          description: return accessToken and refreshToken 
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                    description: true if request success
+ *                  data:
+ *                    type: object
+ *                    "$ref": "#/components/schemas/Token"
+ *        '400': 
+ *          description: bad request
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  message:
+ *                    type: string
+ *                    description: description of error
+ *        '500': 
+ *          description: sever error
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  error:
+ *                    type: object
+ *                    description: description of error
+ */
+
+/**
+ * @swagger
+ * /api/v1/admin/logout:
+ *   post:
+ *      summary: logout for admin 
+ *      tags: [Admin]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Token'
+ *      responses: 
+ *        '200': 
+ *          description: return true if logout success
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  message:
+ *                    type: string
+ *                    description: description of logout
+ */
+
+/**
+ * @swagger
+ * /api/v1/admin/refresh:
+ *   post:
+ *      summary: Get new access token
+ *      tags: [Admin]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Token'
+ *      responses: 
+ *        '200': 
+ *          description: return new Token
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  data:
+ *                    type: object
+ *                    "$ref": "#/components/schemas/Token"
+ *        '400': 
+ *          description: bad request
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  message:
+ *                    type: string
+ *                    description: description of error
+ *        '500': 
+ *          description: sever error
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  error:
+ *                    type: object
+ *                    description: description of error
+ */
+
+/**
+ * @swagger
+ * /api/v1/admin/reset-password:
+ *   post:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Reset password
+ *      tags: [Admin]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ResetForm'
+ *      responses: 
+ *        '200': 
+ *          description: return new category
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  message:
+ *                    type: string
+ *        '400': 
+ *          description: bad request
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  message:
+ *                    type: string
+ *                    description: description of error
+ *        '500': 
+ *          description: sever error
+ *          content: 
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  success: 
+ *                    type: boolean
+ *                    description: true if request success
+ *                  error:
+ *                    type: object
+ *                    description: description of error
+ */
+
+
+router.get('/', AdminController.getAdmins);
+router.get('/crawl', AdminController.crawlData);
 router.post('/login', AdminController.logIn);
 router.post('/logout', AdminController.logOut);
 router.post('/refresh', AdminController.refreshToken);

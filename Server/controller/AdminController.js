@@ -65,14 +65,14 @@ class AdminRouter {
                     });
                 }
                 else {
-                    res.json({
+                    res.status(400).json({
                         success: false,
                         message: "Password is incorrect",
                     });
                 }
             }
             else {
-                res.json({
+                res.status(400).json({
                     success: false,
                     message: "Email is incorrect",
                 });
@@ -81,7 +81,7 @@ class AdminRouter {
         }
         catch (err) {
             console.log(err);
-            res.status(400).json({
+            res.status(500).json({
                 success: false,
                 error: err,
             })
@@ -103,14 +103,14 @@ class AdminRouter {
     refreshToken = async (req, res, next) => {
         try {
             const { refreshToken } = req.body;
-            if (!refreshToken) return res.status(401).json({
+            if (!refreshToken) return res.status(400).json({
                 success: false,
                 data: {
                     message: "you are not authenticated ",
                 }
             });
 
-            if (!this.refreshTokens.includes(refreshToken)) return res.status(403).json({
+            if (!this.refreshTokens.includes(refreshToken)) return res.status(400).json({
                 success: false,
                 data: {
                     message: "Refresh token is not valid",
@@ -119,7 +119,7 @@ class AdminRouter {
 
             jwt.verify(refreshToken, "myRefreshSecretKey", (err, admin) => {
                 if (err) {
-                    res.status(400).json({
+                    res.status(500).json({
                         success: false,
                         error: err,
                     })
@@ -141,7 +141,7 @@ class AdminRouter {
         }
         catch (err) {
             console.log(err);
-            res.status(400).json({
+            res.status(500).json({
                 success: false,
                 err: err,
             })
@@ -155,16 +155,16 @@ class AdminRouter {
             if (admin) {
                 if (password === admin.password) {
 
-                    const admin = await Admin.findOneAndUpdate(email, {
+                    await Admin.findOneAndUpdate(email, {
                         email: email,
                         password: newPassword,
                     });
                     res.json({
                         success: true,
-                        data: admin,
+                        message: "Thành công",
                     });
                 }
-                else res.json({
+                else res.status(400).json({
                     success: false,
                     message: "Sai mật khẩu"
                 })
@@ -173,7 +173,7 @@ class AdminRouter {
         catch (err) {
 
             console.log(err);
-            res.status(400).json({
+            res.status(500).json({
                 success: false,
                 error: err,
             })
@@ -351,7 +351,7 @@ class AdminRouter {
                 link_attr: "href",
                 title_tag: ".box-img a",
                 title_attr: "title",
-                category: "61f0017e804821068b64f1ac",
+                category: "61fe9ae7446e87a8dd94ae3b",
                 source: "61ecbcf7f22c945535177992",
             },
             {
@@ -364,7 +364,7 @@ class AdminRouter {
                 link_attr: "href",
                 title_tag: "img",
                 title_attr: "alt",
-                category: "61f0017e804821068b64f1ac",
+                category: "61fe9ae7446e87a8dd94ae3b",
                 source: "61ecbd40f22c945535177994",
             },
             {
@@ -377,7 +377,7 @@ class AdminRouter {
                 link_attr: "href",
                 title_tag: "img",
                 title_attr: "alt",
-                category: "61f0017e804821068b64f1ac",
+                category: "61fe9ae7446e87a8dd94ae3b",
                 source: "61ecbdd6f22c945535177996",
             },
             //The thao

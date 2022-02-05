@@ -7,10 +7,11 @@ class AdminAPI {
     logIn = async (admin) => {
         try {
             const res = await axios.post(this.url + "login", admin);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error)
+            return error.response;
         }
     }
 
@@ -20,15 +21,12 @@ class AdminAPI {
             const body = {
                 refreshToken : JSON.parse(localStorage.getItem("refreshToken")),
             }
-            const res = await axios.post(this.url + "logout", body, {
-                headers : {
-                    authentication : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
-                }
-            });
-            return res.data;
+            const res = await axios.post(this.url + "logout", body);
+            return res;
         }
         catch (err) {
             console.error(err);
+            return err.response;
         }
     }
 
@@ -49,17 +47,18 @@ class AdminAPI {
             const body = {
                 password : password.password,
                 newPassword : password.newPassword,
-                email : JSON.parse(localStorage.getItem('userEmail')),
+                email : JSON.parse(localStorage.getItem('Email')),
             }
             const res = await axios.post(this.url + "reset-password", body, {
                 headers : {
                     authentication : "Bearer " + JSON.parse(localStorage.getItem('accessToken')),
                 }
             });
-            return res.data;
+            return res;
         }
         catch (err) {
             console.error(err);
+            return err.response;
         }
     }
 

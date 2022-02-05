@@ -39,9 +39,11 @@ const FormSource= (props) => {
                 }
                 else if(res.status === 400) {
                     alert (res.data.message);
+                    return;
                 }
                 else if(res.status === 500) {
                     alert ("Có lỗi máy chủ vui lòng thử lại sau ít phút");
+                    return;
                 }
             }
             if(props.purpose === "Update") {
@@ -52,9 +54,11 @@ const FormSource= (props) => {
                     }
                     else if(res.status === 400) {
                         alert (res.data.message);
+                        return;
                     }
                     else if(res.status === 500) {
                         alert ("Có lỗi máy chủ vui lòng thử lại sau ít phút");
+                        return;
                     }
                 }
                 else return;
