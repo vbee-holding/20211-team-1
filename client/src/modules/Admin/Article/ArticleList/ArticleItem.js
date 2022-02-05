@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import useArticleAPI from "../../../../apis/server-api/admin-api/article-api"
 
 const Item = (props) => {
@@ -18,8 +18,15 @@ const Item = (props) => {
         else updatedField.isShow = true;
 
         const res = await ArticleAPI.putArticle(updatedField._id, updatedField);
-        if(res && !res.success) {
-            alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+        if(res.status === 200) {
+            alert("Sửa đổi thành công"); 
+        }
+        else if(res.status === 400) {
+            alert(res.data.message + " vui lòng thử lại"); 
+            return;
+        }
+        else if (res.status === 500) {
+            alert("Có lỗi xảy ra vui lòng thử lại"); 
             return;
         }
         if(mounted.current) props.updateFromChild();
@@ -38,10 +45,13 @@ const Item = (props) => {
         if(window.confirm("Bạn có chắc chắn muốn xóa bài báo này")) {
             const res = await ArticleAPI.deleteArticle(props.item._id);
             props.setLoading(true);
-            if(res.success) {
-                alert("Xóa bài báo thành công"); 
+            if(res.status === 200) {
+                alert("xóa thành công"); 
             }
-            else alert("Có lỗi xảy ra hãy thử lại");
+            else if (res.status === 500) {
+                alert("Có lỗi xảy ra vui lòng thử lại"); 
+                return;
+            }
             props.updateFromChild();
         }
     }

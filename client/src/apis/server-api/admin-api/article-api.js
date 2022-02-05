@@ -10,6 +10,7 @@ const useArticleAPI = () => {
         }
         catch (err) {
             console.error(err);
+            return err;
         }
     }
 
@@ -36,20 +37,22 @@ const useArticleAPI = () => {
     const putArticle = async (articleId, article) => {
         try {
             const res = await privateAxois.put('articles/' + articleId, article);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error);
+            return error.response;
         }
     }
 
     const deleteArticle = async (articleId) => {
         try {
             const res = await privateAxois.delete('articles/' + articleId);
-            return res.data;
+            return res;
         }
         catch (error) {
             console.error(error);
+            return error.response;
         }
     }
 
@@ -57,10 +60,11 @@ const useArticleAPI = () => {
     const hideData = async () => {
         try {
             const res = await privateAxois.get('articles/hide');
-            return res.data;
+            return res;
         }
         catch (err) {
             console.error(err);
+            return err.response;
         }
     }
 
