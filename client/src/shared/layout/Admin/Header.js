@@ -1,7 +1,7 @@
 import searchIcon from '../../../assets/images/search-icon.png'
 import AdminAPI from '../../../apis/server-api/admin-api/admin-api';
 import useArticleAPI from '../../../apis/server-api/admin-api/article-api';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 
 const Header = (props) => {
