@@ -45,7 +45,7 @@ const Header = (props) => {
     }
 
     const isEnter = (event) => {
-        if(event.key === 'Enter') onSubmitSearch();
+        if(event.key == 'Enter') onSubmitSearch();
     }
     
     const onClickCrawl = async () => {
