@@ -23,12 +23,15 @@ const List = (props) => {
 
         const afterFiltering = [];
 
-        if(response && response.data){
-            response.data.map((source, index) => {
+        if(response.status === 200){
+            response.data.data.map((source, index) => {
                 if(source.name.includes(props.query)) {
                     afterFiltering.push(source);
                 }
             })  
+        }
+        else {
+            alert ("Có lỗi máy chủ vui lòng thử lại sau");
         }
 
         if(afterFiltering.length === 0) {

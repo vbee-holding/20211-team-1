@@ -20,7 +20,7 @@ const Item = (props) => {
                 alert (res.data.message);
             }
             else if(res.status === 500) {
-                alert ("Có lỗi phía máy chủ vui lòng thử lại sau vài phút");
+                alert ("Có lỗi máy chủ vui lòng thử lại sau ít phút");
             }
             props.updateFromChild();
         }

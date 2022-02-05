@@ -40,13 +40,13 @@ const FormArticle = (props) => {
     const loadData = async () => {
         const categoriesRes = await CategoryAPI.getCategories();
         const sourcesRes = await SourceAPI.getSources();
-        if(categoriesRes.status === 500) {
+        if(categoriesRes.status === 500 || sourcesRes.status === 500) {
             alert("Có lỗi máy chủ vui lòng thử lại sau ít phút");
             return;
         }
         else if(mounted.current) {
             setCategories(categoriesRes.data.data);
-            setSources(sourcesRes.data);
+            setSources(sourcesRes.data.data);
         }
     }  
 

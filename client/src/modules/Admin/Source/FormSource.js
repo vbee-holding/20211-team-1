@@ -34,23 +34,27 @@ const FormSource= (props) => {
         {
             if(props.purpose === "Add") {
                 const res = await SourceAPI.postSource(source);
-                if(res.success) {
-                    alert("Thêm mới nguồn báo thành công"); 
+                if(res.status === 200) {
+                    alert ("Thêm mới thành công vui lòng đợi vài giây để danh sách cập nhật");
                 }
-                else {
-                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
-                    return;
+                else if(res.status === 400) {
+                    alert (res.data.message);
+                }
+                else if(res.status === 500) {
+                    alert ("Có lỗi máy chủ vui lòng thử lại sau ít phút");
                 }
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
                     const res = await SourceAPI.putSource(source._id, source);
-                    if(res.success) {
-                        alert("Sửa đổi thành công"); 
+                    if(res.status === 200) {
+                        alert ("Sửa đổi thành công vui lòng đợi vài giây để danh sách cập nhật");
                     }
-                    else {
-                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
-                        return;
+                    else if(res.status === 400) {
+                        alert (res.data.message);
+                    }
+                    else if(res.status === 500) {
+                        alert ("Có lỗi máy chủ vui lòng thử lại sau ít phút");
                     }
                 }
                 else return;
