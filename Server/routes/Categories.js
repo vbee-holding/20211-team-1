@@ -170,7 +170,7 @@ const Verify = require("../util/Verify");
  *          description: The category id
  *      responses: 
  *        '200': 
- *          description: return an article have the id in path
+ *          description: return an category have the id in path
  *          content: 
  *            application/json:
  *              schema:

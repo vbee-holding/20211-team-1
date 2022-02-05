@@ -40,7 +40,9 @@ const List = (props) => {
         }
 
         if(mounted.current) {
-            setSources(sourcesResponse.data);
+            if( sourcesResponse.status === 200 ) {
+                setSources(sourcesResponse.data.data);
+            }
             setArticles(articleAfterFiltering);
         }
         setLoading(false);

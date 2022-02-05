@@ -342,7 +342,7 @@ const Verify = require('../util/Verify');
 
 
 router.get('/search', ArticleController.searchArticle);
-router.get('/', ArticleController.getArticles);
+router.get('/', Verify.verify, ArticleController.getArticles);
 router.post('/', Verify.verify, ArticleController.postArticle);
 router.post('/crawl', ArticleController.postArticleWithoutAuth);
 router.get('/hide', ArticleController.hideArticle);
