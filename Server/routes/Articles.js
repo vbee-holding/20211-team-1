@@ -18,7 +18,7 @@ const Verify = require('../util/Verify');
  *       properties:
  *         _id:
  *           type: string
- *           description: The auto-generated id of the admin
+ *           description: The auto-generated id of the article
  *         thumbnail:
  *           type: string
  *           description: Thumbnail of this article
@@ -121,13 +121,13 @@ const Verify = require('../util/Verify');
 
 /**
  * @swagger
- * /api/v1/articles/{_id}:
+ * /api/v1/articles/{articleId}:
  *   get:
  *      summary: get an article have id in path
  *      tags: [Article]
  *      parameters:
  *        - in: path
- *          name: id
+ *          name: articleId
  *          schema:
  *            type: string
  *          required: true
@@ -165,6 +165,8 @@ const Verify = require('../util/Verify');
  * @swagger
  * /api/v1/articles/:
  *   post:
+ *      security:
+ *        - bearerAuth: []
  *      summary: create an article  
  *      tags: [Article]
  *      requestBody:
@@ -197,7 +199,7 @@ const Verify = require('../util/Verify');
 
 /**
  * @swagger
- * /api/v1/articles/{_id}:
+ * /api/v1/articles/{articleId}:
  *   put:
  *      security:
  *        - bearerAuth: []
@@ -205,7 +207,7 @@ const Verify = require('../util/Verify');
  *      tags: [Article]
  *      parameters:
  *        - in: path
- *          name: id
+ *          name: articleId
  *          schema:
  *            type: string
  *          required: true
@@ -296,49 +298,15 @@ const Verify = require('../util/Verify');
 
 /**
  * @swagger
- * /api/v1/articles/hide:
- *   get:
- *      summary: make sever hide old article
- *      tags: [Article]
- *      responses: 
- *        '200': 
- *          description: return message
- *          content: 
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  success: 
- *                    type: boolean
- *                    description: true if request success
- *                  message:
- *                    type: string
- *                    description: description of success
- *        '500': 
- *          description: bad request
- *          content: 
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  success: 
- *                    type: boolean
- *                    description: true if request success
- *                  error:
- *                    type: object
- *                    description: description of error
- */
-
-
-/**
- * @swagger
- * /api/v1/articles/{_id}:
+ * /api/v1/articles/{articleId}:
  *   delete:
+ *      security:
+ *        - bearerAuth: []
  *      summary: delete one article
  *      tags: [Article]
  *      parameters:
  *        - in: path
- *          name: id
+ *          name: articleId
  *          schema:
  *            type: string
  *          required: true

@@ -20,7 +20,7 @@ class CategoryRouter {
         data: result,
       });
     } catch (err) {
-      res.json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -46,7 +46,7 @@ class CategoryRouter {
         data: result,
       });
     } catch (err) {
-      res.json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -62,7 +62,7 @@ class CategoryRouter {
         data: category,
       });
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -75,7 +75,7 @@ class CategoryRouter {
     try {
       let check = await Category.findOne({ name: category.name });
       if (check) {
-        res.json({
+        res.status(400).json({
           success: false,
           message: "Tồn tại chuyên mục khác có cùng tên",
         });
@@ -89,7 +89,7 @@ class CategoryRouter {
         });
       }
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -104,7 +104,7 @@ class CategoryRouter {
     try {
       const check = await Category.findOne({ name : updatedFields.name })
       if(check && (check._id.toString() !== categoryId)){
-          res.json({
+          res.status(400).json({
               success : false,
               message : "Tồn tại chuyên mục khác có cùng tên"
           });
@@ -122,7 +122,7 @@ class CategoryRouter {
         });
       }
     } catch (err) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -132,13 +132,23 @@ class CategoryRouter {
   async deleteCategory(req, res, next) {
     const { categoryId } = req.params;
     try {
-      await Category.findByIdAndDelete(categoryId);
-      res.json({
-        success: true,
-        message: "Delete successfully",
-      });
+      const articles = await Article.find({ category : categoryId });
+      if(articles.length !== 0) {
+        res.status(400).json({
+          success: false,
+          message: "Vui lòng xóa hết các bài báo thuộc chuyên mục trước khi xóa chuyên mục này",
+        });
+      }
+      else {
+        await Category.findByIdAndDelete(categoryId);
+        res.json({
+          success: true,
+          message: "Delete successfully",
+        });
+      }
     } catch (err) {
-      res.status(400).json({
+      console.log(err);
+      res.status(500).json({
         success: false,
         error: err,
       });
@@ -175,6 +185,7 @@ class CategoryRouter {
         data: { ...articles },
       });
     } catch (err) {
+      console.log(err)
       res.json({
         success: false,
         error: err,

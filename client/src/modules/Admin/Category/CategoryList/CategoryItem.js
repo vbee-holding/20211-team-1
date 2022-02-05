@@ -13,10 +13,15 @@ const Item = (props) => {
         props.setLoading(true);
         if(window.confirm("Bạn có chắc chắn muốn xóa nguồn báo này")) {
             const res = await CategoryAPI.deleteCategory(props.item._id);
-            if(res.success) {
-                alert("Xóa thành công"); 
+            if(res.status === 200) {
+                alert ("Xóa thành công vui lòng đợi vài giây để danh sách cập nhật");
             }
-            else alert("Có lỗi xảy ra xin thử lại");
+            else if(res.status === 400) {
+                alert (res.data.message);
+            }
+            else if(res.status === 500) {
+                alert ("Có lỗi phía máy chủ vui lòng thử lại sau vài phút");
+            }
             props.updateFromChild();
         }
         props.setLoading(false);

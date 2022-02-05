@@ -32,22 +32,30 @@ const FormCategory= (props) => {
         {
             if(props.purpose === "Add") {
                 const res = await CategoryAPI.postCategory(category);
-                if(res.success) {
-                    alert("Thêm chuyên mục thành công"); 
+                if(res.status === 200) {
+                    alert("thêm mới thành công"); 
                 }
-                else {
-                    alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                else if(res.status === 400) {
+                    alert(res.data.message + " vui lòng thử lại"); 
+                    return;
+                }
+                else if (res.status === 500) {
+                    alert("Có lỗi xảy ra vui lòng thử lại"); 
                     return;
                 }
             }
             if(props.purpose === "Update") {
                 if(window.confirm('Bạn chắc chắn với thay đổi này chứ')){
                     const res = await CategoryAPI.putCategory(category._id, category);
-                    if(res.success) {
+                    if(res.status === 200) {
                         alert("Sửa đổi thành công"); 
                     }
-                    else {
-                        alert((res.message ? res.message : "Có lỗi xảy ra") + " vui lòng thử lại");
+                    else if(res.status === 400) {
+                        alert(res.data.message + " vui lòng thử lại"); 
+                        return;
+                    }
+                    else if (res.status === 500) {
+                        alert("Có lỗi xảy ra vui lòng thử lại"); 
                         return;
                     }
                 }
@@ -56,7 +64,7 @@ const FormCategory= (props) => {
             props.setFormOriginalData({});  
             props.setFormState(false);
         }
-        else alert ("Cả 3 trường url, name, logo đều không thể để trống"); 
+        else alert ("Trường name không thể để trống"); 
 
     }
 
