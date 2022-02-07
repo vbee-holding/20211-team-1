@@ -81,24 +81,6 @@ const Verify = require('../util/Verify');
 
 /**
  * @swagger
- * /api/v1/admin:
- *   get:
- *      summary: Returns the list of all admin
- *      tags: [Admin]
- *      responses: 
- *          200: 
- *              description: The list of the admins
- *              content: 
- *                application/json:
- *                      schema:
- *                         type: array
- *                         items:
- *                            $ref: '#/components/schemas/Admin'
- */
-
-
-/**
- * @swagger
  * /api/v1/admin/crawl:
  *   get:
  *      summary: Make sever crawl data
