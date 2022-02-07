@@ -121,6 +121,13 @@ const Verify = require('../util/Verify');
  *   get:
  *     summary: Returns the list of all article have text in title
  *     tags: [Article]
+ *     parameters:
+ *       - in: query
+ *         name: text
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The article query
  *     responses: 
  *       '200': 
  *         description: The list of all article

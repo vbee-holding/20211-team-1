@@ -107,13 +107,13 @@ const Verify = require ('../util/Verify');
 
 /**
  * @swagger
- * /api/v1/sources/{sourcesId}:
+ * /api/v1/sources/{sourceId}:
  *   get:
  *      summary: get an source have the id in path
  *      tags: [Source]
  *      parameters:
  *        - in: path
- *          name: sourcesId
+ *          name: sourceId
  *          schema:
  *            type: string
  *          required: true
