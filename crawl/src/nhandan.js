@@ -55,7 +55,7 @@ for (let i = 0; i < CATEGORY_DETAILS.length; i++) {
             const link1= SOURCES.nhan_dan.url + $(el).find('.box-img a').attr('href');
             const title = $(el).find('.box-img a').attr('title');
             if (thumbnail && link && title && (!thumbnail.includes('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9JREFUeNpiuHHjBkCAAQAFFAKJ7S6GgQAAAABJRU5ErkJggg=='))) {
-                axios.post("http://localhost:4000/api/v1/articles/crawl", {
+                axios.post(process.env.HOST+"api/v1/articles/crawl", {
                     thumbnail: thumbnail,
                     link: link1,
                     title: title,
