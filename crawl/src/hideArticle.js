@@ -3,7 +3,7 @@ const axios  = require("axios");
 
 
 const hideArticle = async () => {
-    axios.get("http://localhost:4000/api/v1/articles/hide")
+    axios.get(process.env.HOST+"api/v1/articles/hide")
         .then((result) => {
             console.log(result)
             if (result.data.success == true) {
