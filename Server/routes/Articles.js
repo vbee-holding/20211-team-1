@@ -440,7 +440,7 @@ router.post('/', Verify.verify, ArticleController.postArticle);
 router.post('/crawl', ArticleController.postArticleWithoutAuth);
 router.get('/hide', ArticleController.hideArticle);
 router.get('/:articleId', ArticleController.getArticle);
-router.put('/:articleId', Verify.verify, ArticleController.putArticle);
+router.put('/:articleId', ArticleController.putArticle);
 router.delete('/:articleId', Verify.verify, ArticleController.deleteArticle);
 // router.delete('/delete/all', ArticleController.deleteAllArticles);
 
