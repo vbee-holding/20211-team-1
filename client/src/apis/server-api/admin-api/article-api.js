@@ -14,6 +14,21 @@ const useArticleAPI = () => {
         }
     }
 
+    const getNumsArticles = async (start, nums, query) => {
+        try {
+            const res = await privateAxois.post(`articles/nums`, {
+                start : start,
+                nums : nums,
+                query : query
+            });
+            return res.data;
+        }
+        catch (err) {
+            console.error(err);
+            return err.response;
+        }
+    }
+
     const getArticle = async (articleId) => {
         try {
             const res = await privateAxois.get('articles/' + articleId);
@@ -70,6 +85,7 @@ const useArticleAPI = () => {
 
     return {
         getArticles : getArticles,
+        getNumsArticles : getNumsArticles,
         getArticle : getArticle,
         postArticle : postArticle,
         putArticle : putArticle,

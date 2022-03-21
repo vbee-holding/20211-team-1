@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router';
 
 const Header = (props) => {
-
+    console.log(1);
     const [isOptionMenu, setIsOptionMenu] = useState(false);
     const [isOptionArticleMenu, setIsOptionArticleMenu] = useState(false);
     const [query, setQuery] = useState("");

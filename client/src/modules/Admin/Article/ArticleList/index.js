@@ -6,6 +6,7 @@ import useSourceAPI from "../../../../apis/server-api/admin-api/source-api"
 import loadingGif from "../../../../assets/images/Loading.gif"
 
 const List = (props) => { 
+    const newsPerPage = 7;
     const [articles, setArticles] = useState([]); 
     const [sources, setSources] = useState([]);
     const [updateArrticles, setUpdateArrticles] = useState(true);
@@ -23,19 +24,23 @@ const List = (props) => {
 
     const loadData = async () => {
         setLoading(true);
-        const articleResponse = await ArticleAPI.getArticles();
+        const articleResponse = await ArticleAPI.getNumsArticles(props.page * newsPerPage, newsPerPage , props.query);
         const sourcesResponse = await SourceAPI.getSources();
-        const articleAfterFiltering = [];
         
-        if(articleResponse && articleResponse.data){
-            articleResponse.data.map((article, index) => {
-                if(article.title.includes(props.query)) {
-                    articleAfterFiltering.push(article);
-                }
-            })
+        if(articleResponse.status === 400) {
+            alert(articleResponse.data.message ); 
+            props.setPage(props.prePage);
+            setLoading(false);
+            return;
+        }
+        else if (articleResponse.status === 500) {
+            alert("Có lỗi xảy ra vui lòng thử lại"); 
+            props.setPage(props.prePage);
+            setLoading(false);
+            return;
         }
 
-        if(articleAfterFiltering.length === 0) {
+        if(articleResponse.data.length === 0) {
             alert('Không tìm thấy bài báo nào phù hợp');
         }
 
@@ -43,7 +48,8 @@ const List = (props) => {
             if( sourcesResponse.status === 200 ) {
                 setSources(sourcesResponse.data.data);
             }
-            setArticles(articleAfterFiltering);
+            props.setNumsPage(articleResponse.numsPage);
+            setArticles(articleResponse.data);
         }
         setLoading(false);
     }
@@ -53,7 +59,7 @@ const List = (props) => {
     }
 
     return (
-        <div className=" rounded-b-3xl bg-white m-8 mt-0 overflow-y-scroll">
+        <div className=" rounded-b-3xl bg-white m-8 mt-0 mb-4 overflow-y-scroll">
             {
                 Loading && (<img src={loadingGif} alt="" className="h-20 absolute right-12 top-56 mt-1"></img>)
             }   
@@ -64,7 +70,9 @@ const List = (props) => {
                         <ArticleItem 
                             item={article} 
                             key={index}
-                            index={index} 
+                            index={index}
+                            page={props.page}
+                            newsPerPage={newsPerPage} 
                             source={source}
                             updateFromChild={updateFromChild} 
                             setFormState={props.setFormState} 

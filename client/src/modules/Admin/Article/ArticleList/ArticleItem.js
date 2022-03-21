@@ -58,7 +58,7 @@ const Item = (props) => {
     return (
         <div className="flex flex-row border-b-2 h-24 " key={props.index}>
             <div className="flex my-auto mx-7 h-24 overflow-hidden w-24">
-                <p className="m-auto text-xl font-bold w-full text-center">{props.index + 1 + "."}</p>
+                <p className="m-auto text-xl font-bold w-full text-center">{props.page * props.newsPerPage + props.index + 1 + "."}</p>
             </div>
             <div className="flex flex-col my-auto basis-1/12 mx-7 h-24 overflow-hidden">
                 {
