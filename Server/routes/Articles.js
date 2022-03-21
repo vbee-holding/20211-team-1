@@ -436,6 +436,7 @@ const Verify = require('../util/Verify');
 
 router.get('/search', ArticleController.searchArticle);
 router.get('/', ArticleController.getArticles);
+router.get('/nums/:start&:nums', ArticleController.getNumsArticles);
 router.post('/', Verify.verify, ArticleController.postArticle);
 router.post('/crawl', ArticleController.postArticleWithoutAuth);
 router.get('/hide', ArticleController.hideArticle);
