@@ -33,6 +33,23 @@ class ArticleRouter {
     }
   }
 
+  async getNumsArticles (req, res, next) {
+    const { start, nums } = req.params;
+    try {
+      let articles = await Article.find();
+      articles = articles.slice(start, parseInt(start) + parseInt(nums));
+      res.json({
+        success: true,
+        data: articles,
+      });
+    } catch (err) {
+      res.status(500).json({
+        success: false,
+        error: err,
+      });
+    }
+  }
+
   async postArticle(req, res, next) {
     try {
       const article = req.body;
