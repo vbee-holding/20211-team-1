@@ -34,14 +34,31 @@ class ArticleRouter {
   }
 
   async getNumsArticles (req, res, next) {
-    const { start, nums } = req.params;
+    const { start, nums, query } = req.body;
     try {
       let articles = await Article.find();
-      articles = articles.slice(start, parseInt(start) + parseInt(nums));
-      res.json({
-        success: true,
-        data: articles,
-      });
+      if(start < 0 || start >= articles.length ) {
+        res.status(400).json({
+          success: false,
+          message: "page not found",
+        });  
+      }
+      else {  
+        let articleAfterFiltering = [];
+        articles.map((article, index) => {
+          if(article.title.includes(query)) {
+              articleAfterFiltering.push(article);
+          }
+        })
+        const numsPage = articleAfterFiltering.length;
+        articles = articleAfterFiltering.slice(start, parseInt(start) + parseInt(nums));
+        res.json({
+          success: true,
+          data: articles,
+          numsPage: parseInt(numsPage / nums + 1) 
+        });
+      }
+      
     } catch (err) {
       res.status(500).json({
         success: false,
